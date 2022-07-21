@@ -16,19 +16,19 @@ export const ResourcesOverview = () => {
             <StyledRescourceParagraphNumber>1.000</StyledRescourceParagraphNumber>
         </StyledRescourceSection>
         <StyledRescourceSection>
-            <img alt="Iron" src={rescources_icon_iron}></img>
+            <StyledRescourceIcon alt="Iron" src={rescources_icon_iron}></StyledRescourceIcon>
             <StyledRescourceParagraphNumber>500</StyledRescourceParagraphNumber>
         </StyledRescourceSection>
         <StyledRescourceSection>
-            <img alt="Fuel" src={rescources_icon_fuel}></img>
+            <StyledRescourceIcon alt="Fuel" src={rescources_icon_fuel}></StyledRescourceIcon>
             <StyledRescourceParagraphNumber>0</StyledRescourceParagraphNumber>
         </StyledRescourceSection>
         <StyledRescourceSection>
-            <img alt="Gold" src={rescources_icon_gold}></img>
+            <StyledRescourceIcon alt="Gold" src={rescources_icon_gold}></StyledRescourceIcon>
             <StyledRescourceParagraphNumber>0</StyledRescourceParagraphNumber>
         </StyledRescourceSection>
         <StyledRescourceSection>
-            <img alt="Energy" src={rescources_icon_energy}></img>
+            <StyledRescourceIcon alt="Energy" src={rescources_icon_energy}></StyledRescourceIcon>
             <StyledRescourceParagraphNumber>0</StyledRescourceParagraphNumber>
         </StyledRescourceSection>
 
