@@ -1,37 +1,37 @@
 import {useState} from 'react';
 import {ResourcesOverview} from './components/resources/ResourcesOverview';
 
-const GameSpeed = 1000;
+const gameSpeed = 1000;
 
-const StartResourceMoney = 1000;
-const StartResourceIron = 500;
-const StartResourceFuel = 0;
-const StartResourceGold = 0;
-const StartResourceEnergy = 0;
+const startResourceMoney = 1000;
+const startResourceIron = 500;
+const startResourceFuel = 0;
+const startResourceGold = 0;
+const startResourceEnergy = 0;
 
-const BasicProductionMoney = 20;
-const BasicProductionIron = 10;
+const basicProductionMoney = 20;
+const basicProductionIron = 10;
 
 function productionMoney(currentLevel) {
-  return Math.floor((30 * currentLevel * Math.pow(currentLevel, 1.1) + BasicProductionMoney) * GameSpeed);
+  return Math.floor((30 * currentLevel * Math.pow(currentLevel, 1.1) + basicProductionMoney) * gameSpeed);
 }
 
 function productionIron(currentLevel) {
-  return Math.floor((20 * currentLevel * Math.pow(currentLevel, 1.1) + BasicProductionIron) * GameSpeed);
+  return Math.floor((20 * currentLevel * Math.pow(currentLevel, 1.1) + basicProductionIron) * gameSpeed);
 }
 
 function productionFuel(currentLevel) {
-  return Math.floor(10 * currentLevel * Math.pow(currentLevel, 1.1) * GameSpeed);
+  return Math.floor(10 * currentLevel * Math.pow(currentLevel, 1.1) * gameSpeed);
 }
 
 export default function App() {
-  const [currentMoney, setCurrentMoney] = useState(StartResourceMoney);
-  const [currentIron, setCurrentIron] = useState(StartResourceIron);
-  const [currentFuel, setCurrentFuel] = useState(StartResourceFuel);
-  const [currentGold, setCurrentGold] = useState(StartResourceGold);
-  const [currentEnergy, setCurrentEnergy] = useState(StartResourceEnergy);
+  const [currentMoney, setCurrentMoney] = useState(startResourceMoney);
+  const [currentIron, setCurrentIron] = useState(startResourceIron);
+  const [currentFuel, setCurrentFuel] = useState(startResourceFuel);
+  const [currentGold, setCurrentGold] = useState(startResourceGold);
+  const [currentEnergy, setCurrentEnergy] = useState(startResourceEnergy);
 
-  setTimeout(async () => {
+  setTimeout(() => {
     const productionEachSecondMoney = productionMoney(0) / 3600;
     const productionEachSecondIron = productionIron(0) / 3600;
     const productionEachSecondFuel = productionFuel(0) / 3600;
@@ -41,7 +41,7 @@ export default function App() {
     setCurrentFuel(currentFuel + productionEachSecondFuel);
   }, 1000);
 
-  const MainResoures = [
+  const mainResoures = [
     {id: 1, name: 'Money', value: currentMoney},
     {id: 2, name: 'Iron', value: currentIron},
     {id: 3, name: 'Fuel', value: currentFuel},
@@ -51,7 +51,7 @@ export default function App() {
 
   return (
     <>
-      <ResourcesOverview currentResource={MainResoures} />
+      <ResourcesOverview currentResource={mainResoures} />
     </>
   );
 }
