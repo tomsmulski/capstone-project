@@ -6,17 +6,16 @@ const styled = {createGlobalStyle};
 export default styled.createGlobalStyle`
   * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
 
   body {
-    margin: 0;
-    font-size: 1.125rem;
-    font-family: sans-serif;
+
+    max-width: 375px;
+    max-height: 667px;
+
   }
 
-  button,
-  input,
-  textarea {
-    font: inherit;
-  }
+
 `;
