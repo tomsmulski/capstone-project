@@ -1,36 +1,26 @@
 
 import styled from "styled-components";
+
 import rescources_icon_money from '../../images/icons/icon_money.jpg';
 import rescources_icon_iron from '../../images/icons/icon_iron.jpg';
 import rescources_icon_fuel from '../../images/icons/icon_fuel.jpg';
 import rescources_icon_gold from '../../images/icons/icon_gold.jpg';
 import rescources_icon_energy from '../../images/icons/icon_energy.jpg';
 
-export const ResourcesOverview = () => {
+export const ResourcesOverview = ({currentResource}) => {
 
+    const IconArray = [rescources_icon_money,rescources_icon_iron,rescources_icon_fuel,rescources_icon_gold,rescources_icon_energy];
 
     return (
       <StyledRescourceContainer>
-        <StyledRescourceSection>
-            <StyledRescourceIcon alt="Money" src={rescources_icon_money}></StyledRescourceIcon>
-            <StyledRescourceParagraphNumber>1.000</StyledRescourceParagraphNumber>
-        </StyledRescourceSection>
-        <StyledRescourceSection>
-            <StyledRescourceIcon alt="Iron" src={rescources_icon_iron}></StyledRescourceIcon>
-            <StyledRescourceParagraphNumber>500</StyledRescourceParagraphNumber>
-        </StyledRescourceSection>
-        <StyledRescourceSection>
-            <StyledRescourceIcon alt="Fuel" src={rescources_icon_fuel}></StyledRescourceIcon>
-            <StyledRescourceParagraphNumber>0</StyledRescourceParagraphNumber>
-        </StyledRescourceSection>
-        <StyledRescourceSection>
-            <StyledRescourceIcon alt="Gold" src={rescources_icon_gold}></StyledRescourceIcon>
-            <StyledRescourceParagraphNumber>0</StyledRescourceParagraphNumber>
-        </StyledRescourceSection>
-        <StyledRescourceSection>
-            <StyledRescourceIcon alt="Energy" src={rescources_icon_energy}></StyledRescourceIcon>
-            <StyledRescourceParagraphNumber>0</StyledRescourceParagraphNumber>
-        </StyledRescourceSection>
+
+        {currentResource.map((currentRes, index)=>(
+        <StyledRescourceSection key={currentRes.id}>
+          <StyledRescourceIcon alt={currentRes.name} src={IconArray[index]}></StyledRescourceIcon>
+          <StyledRescourceParagraphNumber>{Math.floor(currentRes.value)}</StyledRescourceParagraphNumber>
+      </StyledRescourceSection>
+        ))}
+
 
       </StyledRescourceContainer>
     );
