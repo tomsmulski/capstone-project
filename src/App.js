@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {ResourcesOverview} from './components/resources/ResourcesOverview';
+import {Building} from './components/buildings/building';
 
 const gameSpeed = 1000;
 
@@ -52,6 +53,7 @@ export default function App() {
   return (
     <>
       <ResourcesOverview currentResource={mainResoures} />
+      <Building />
     </>
   );
 }

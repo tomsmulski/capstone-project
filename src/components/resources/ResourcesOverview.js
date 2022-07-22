@@ -5,7 +5,7 @@ export const ResourcesOverview = ({currentResource}) => {
   return (
     <StyledRescourceContainer>
       {currentResource.map(currentRes => (
-        <Resource key={currentRes.id} currentRes={currentRes}></Resource>
+        <Resource key={currentRes.id} displayValue={true} currentRes={currentRes}></Resource>
       ))}
     </StyledRescourceContainer>
   );
