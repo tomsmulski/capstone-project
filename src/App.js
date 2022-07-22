@@ -13,6 +13,9 @@ const startResourceEnergy = 0;
 const basicProductionMoney = 20;
 const basicProductionIron = 10;
 
+const buildings = [{id:1, name:"Windpower Plant",type:1, staticBuildPrice:[{name:"Money",price:70},{name:"Iron",price:35}], description:"you need this to have energy"}];
+
+
 function productionMoney(currentLevel) {
   return Math.floor((30 * currentLevel * Math.pow(currentLevel, 1.1) + basicProductionMoney) * gameSpeed);
 }
@@ -26,11 +29,15 @@ function productionFuel(currentLevel) {
 }
 
 export default function App() {
+
   const [currentMoney, setCurrentMoney] = useState(startResourceMoney);
   const [currentIron, setCurrentIron] = useState(startResourceIron);
   const [currentFuel, setCurrentFuel] = useState(startResourceFuel);
   const [currentGold, setCurrentGold] = useState(startResourceGold);
   const [currentEnergy, setCurrentEnergy] = useState(startResourceEnergy);
+
+
+
 
   setTimeout(() => {
     const productionEachSecondMoney = productionMoney(0) / 3600;
@@ -42,6 +49,7 @@ export default function App() {
     setCurrentFuel(currentFuel + productionEachSecondFuel);
   }, 1000);
 
+
   const mainResoures = [
     {id: 1, name: 'Money', value: currentMoney},
     {id: 2, name: 'Iron', value: currentIron},
@@ -50,10 +58,13 @@ export default function App() {
     {id: 5, name: 'Energy', value: currentEnergy},
   ];
 
+
+
   return (
     <>
       <ResourcesOverview currentResource={mainResoures} />
-      <Building />
+
+      <Building buildings={buildings}/>
     </>
   );
 }

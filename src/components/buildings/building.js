@@ -1,35 +1,35 @@
 import styled from 'styled-components';
 import {Resource} from '../resources/Resource';
 
-export const Building = () => {
-  return (
-    <StyledBuildingSection>
-      <StyledBuildingArticle>
-        <StyledBuildingH1>Building Name (0)</StyledBuildingH1>
-        <StyledBuildingParagraph>
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l
-        </StyledBuildingParagraph>
-      </StyledBuildingArticle>
-      <StyledBuildingArticle>
-        <StyledBuildingSpan>
-          <StyledBuildingBuildTime>1m 30s</StyledBuildingBuildTime>
-          <StyledBuildingSpanUpgradeText>To upgrade to level 1 you need</StyledBuildingSpanUpgradeText>
-        </StyledBuildingSpan>
+export const Building = ({buildings}) => {
+  return buildings.map((building) => {
+  return <StyledBuildingSection key={building.id}>
+        <StyledBuildingArticle>
+          <StyledBuildingH1>Building Name (0)</StyledBuildingH1>
+          <StyledBuildingParagraph>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l
+          </StyledBuildingParagraph>
+        </StyledBuildingArticle>
+        <StyledBuildingArticle>
+          <StyledBuildingSpan>
+            <StyledBuildingBuildTime>1m 30s</StyledBuildingBuildTime>
+            <StyledBuildingSpanUpgradeText>To upgrade to level 1 you need</StyledBuildingSpanUpgradeText>
+          </StyledBuildingSpan>
 
-        <StyledBuildingDiv>
-          <Resource displayValuePosition="right" iconSize="small" currentRes={{id: 2, name: 'Energy', value: 22}} />
-          <StyledBuildingSpanRes>
-            <Resource iconSize="small" currentRes={{id: 1, name: 'Money', value: 75}} />
-            <Resource iconSize="small" currentRes={{id: 2, name: 'Iron', value: 30}} />
-          </StyledBuildingSpanRes>
-        </StyledBuildingDiv>
+          <StyledBuildingDiv>
+            <Resource displayValuePosition="right" iconSize="small" currentRes={{id: 2, name: 'Energy', value: 22}} />
+            <StyledBuildingSpanRes>
+              <Resource iconSize="small" currentRes={{id: 1, name: 'Money', value: 75}} />
+              <Resource iconSize="small" currentRes={{id: 2, name: 'Iron', value: 30}} />
+            </StyledBuildingSpanRes>
+          </StyledBuildingDiv>
 
-        <StyledBuildingButtonDiv>
-          <StyledBuildingButton>Build</StyledBuildingButton>
-        </StyledBuildingButtonDiv>
-      </StyledBuildingArticle>
-    </StyledBuildingSection>
-  );
+          <StyledBuildingButtonDiv>
+            <StyledBuildingButton>Build</StyledBuildingButton>
+          </StyledBuildingButtonDiv>
+        </StyledBuildingArticle>
+      </StyledBuildingSection>
+  });
 };
 
 const StyledBuildingSection = styled.section`
