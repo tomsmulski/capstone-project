@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Resource = ({currentRes}) => {
-
   const lowercaseName = currentRes.name.charAt(0).toLowerCase() + currentRes.name.slice(1);
 
   return (
@@ -18,7 +17,7 @@ export const Resource = ({currentRes}) => {
 const StyledResourceSection = styled.section`
   position: relative;
   display: flex;
-  flex-direction: ${props => props.displayValuePosition === "right" ? "row" : "column"};
+  flex-direction: ${props => (props.displayValuePosition === 'right' ? 'row' : 'column')};
   align-items: center;
 `;
 
@@ -29,5 +28,5 @@ const StyledResourceSpanNumber = styled.span`
 const StyledResourceIcon = styled.img`
   width: 34px;
   height: 34px;
-  ${props => props.iconSize !== "small" || 'padding:4px'};
+  ${props => props.iconSize !== 'small' || 'padding:4px'};
 `;

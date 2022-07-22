@@ -1,59 +1,37 @@
 import {useState, useEffect} from 'react';
 import {ResourcesOverview} from './components/resources/ResourcesOverview';
 import {Building} from './components/buildings/building';
+import {gameConfig} from './util/GameConfig';
+import {productionMoney, productionIron, productionFuel, productionEnergy} from './util/ResourcenProduction';
 
-const gameSpeed = 1000;
-
-const startResourceMoney = 1000;
-const startResourceIron = 500;
-const startResourceFuel = 0;
-const startResourceGold = 0;
-const startResourceEnergy = 0;
-
-const basicProductionMoney = 20;
-const basicProductionIron = 10;
-
-const buildings = [
+const allBuildings = [
   {
     id: 1,
     name: 'Windpower Plant',
     type: 1,
-    staticBuildPrice: [
-      {name: 'Money', price: 70},
-      {name: 'Iron', price: 35},
+    buildMaterials: [
+      {id: 1, name: 'Money'},
+      {id: 2, name: 'Iron'},
     ],
     description: 'you need this to have energy',
   },
 ];
 
-function productionMoney(currentLevel) {
-  return Math.floor((30 * currentLevel * Math.pow(currentLevel, 1.1) + basicProductionMoney) * gameSpeed);
-}
-
-function productionIron(currentLevel) {
-  return Math.floor((20 * currentLevel * Math.pow(currentLevel, 1.1) + basicProductionIron) * gameSpeed);
-}
-
-function productionFuel(currentLevel) {
-  return Math.floor(10 * currentLevel * Math.pow(currentLevel, 1.1) * gameSpeed);
-}
+const userBuildingDatas = [{id: 1, name: 'Windpower Plant', currentLevel: 0}];
 
 export default function App() {
-  const [currentMoney, setCurrentMoney] = useState(startResourceMoney);
-  const [currentIron, setCurrentIron] = useState(startResourceIron);
-  const [currentFuel, setCurrentFuel] = useState(startResourceFuel);
-  const [currentGold] = useState(startResourceGold);
-  const [currentEnergy] = useState(startResourceEnergy);
+  const [currentMoney, setCurrentMoney] = useState(gameConfig.startResources.money.value);
+  const [currentIron, setCurrentIron] = useState(gameConfig.startResources.iron.value);
+  const [currentFuel, setCurrentFuel] = useState(gameConfig.startResources.fuel.value);
+  const [currentGold] = useState(gameConfig.startResources.gold.value);
+  const [currentEnergy] = useState(gameConfig.startResources.energy.value);
+  const [currentBuildingData] = useState(userBuildingDatas);
 
   useEffect(() => {
     setTimeout(() => {
-      const productionEachSecondMoney = productionMoney(0) / 3600;
-      const productionEachSecondIron = productionIron(0) / 3600;
-      const productionEachSecondFuel = productionFuel(0) / 3600;
-
-      setCurrentMoney(currentMoney + productionEachSecondMoney);
-      setCurrentIron(currentIron + productionEachSecondIron);
-      setCurrentFuel(currentFuel + productionEachSecondFuel);
+      setCurrentMoney(currentMoney + productionMoney(0));
+      setCurrentIron(currentIron + productionIron(0));
+      setCurrentFuel(currentFuel + productionFuel(0));
     }, 1000);
   }, [currentMoney, currentIron, currentFuel]);
 
@@ -68,8 +46,11 @@ export default function App() {
   return (
     <>
       <ResourcesOverview currentResource={mainResoures} />
-
-      <Building buildings={buildings} />
+      <Building
+        allBuildings={allBuildings}
+        productionEnergy={productionEnergy}
+        currentBuildingData={currentBuildingData}
+      />
     </>
   );
 }

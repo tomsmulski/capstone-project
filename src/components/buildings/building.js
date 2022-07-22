@@ -1,35 +1,57 @@
 import styled from 'styled-components';
 import {Resource} from '../resources/Resource';
+import {buildingPrice} from '../../util/BuildingPrice';
 
-export const Building = ({buildings}) => {
-  return buildings.map((building) => {
-  return <StyledBuildingSection key={building.id}>
-        <StyledBuildingArticle>
-          <StyledBuildingH1>Building Name (0)</StyledBuildingH1>
-          <StyledBuildingParagraph>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l
-          </StyledBuildingParagraph>
-        </StyledBuildingArticle>
-        <StyledBuildingArticle>
-          <StyledBuildingSpan>
-            <StyledBuildingBuildTime>1m 30s</StyledBuildingBuildTime>
-            <StyledBuildingSpanUpgradeText>To upgrade to level 1 you need</StyledBuildingSpanUpgradeText>
-          </StyledBuildingSpan>
+export const Building = ({allBuildings, productionEnergy, currentBuildingData}) => {
+  return allBuildings.map(building =>
+    currentBuildingData.map(currentBuilding => {
+      if (building.id === currentBuilding.id) {
+        const nextLevel = currentBuilding.currentLevel + 1;
+        return (
+          <StyledBuildingSection key={building.id}>
+            <StyledBuildingArticle>
+              <StyledBuildingH1>
+                {building.name} ({building.currentLevel})
+              </StyledBuildingH1>
+              <StyledBuildingParagraph>{building.description}</StyledBuildingParagraph>
+            </StyledBuildingArticle>
+            <StyledBuildingArticle>
+              <StyledBuildingSpan>
+                <StyledBuildingBuildTime>1m 30s</StyledBuildingBuildTime>
+                <StyledBuildingSpanUpgradeText>To upgrade to level {nextLevel} you need</StyledBuildingSpanUpgradeText>
+              </StyledBuildingSpan>
 
-          <StyledBuildingDiv>
-            <Resource displayValuePosition="right" iconSize="small" currentRes={{id: 2, name: 'Energy', value: 22}} />
-            <StyledBuildingSpanRes>
-              <Resource iconSize="small" currentRes={{id: 1, name: 'Money', value: 75}} />
-              <Resource iconSize="small" currentRes={{id: 2, name: 'Iron', value: 30}} />
-            </StyledBuildingSpanRes>
-          </StyledBuildingDiv>
+              <StyledBuildingDiv>
+                <Resource
+                  displayValuePosition="right"
+                  iconSize="small"
+                  currentRes={{name: 'Energy', value: productionEnergy(nextLevel)}}
+                />
+                <StyledBuildingSpanRes>
+                  {building.buildMaterials.map(buildMaterial => {
+                    return (
+                      <Resource
+                        key={buildMaterial.id}
+                        iconSize="small"
+                        currentRes={{
+                          name: buildMaterial.name,
+                          value: buildingPrice(nextLevel, building.type, buildMaterial.name),
+                        }}
+                      />
+                    );
+                  })}
+                </StyledBuildingSpanRes>
+              </StyledBuildingDiv>
 
-          <StyledBuildingButtonDiv>
-            <StyledBuildingButton>Build</StyledBuildingButton>
-          </StyledBuildingButtonDiv>
-        </StyledBuildingArticle>
-      </StyledBuildingSection>
-  });
+              <StyledBuildingButtonDiv>
+                <StyledBuildingButton>{currentBuilding.currentLevel > 0 ? 'Upgrade' : 'Build'}</StyledBuildingButton>
+              </StyledBuildingButtonDiv>
+            </StyledBuildingArticle>
+          </StyledBuildingSection>
+        );
+      }
+    })
+  );
 };
 
 const StyledBuildingSection = styled.section`
