@@ -1,29 +1,32 @@
 import styled from 'styled-components';
 
 export const Resource = ({currentRes}) => {
+
+  const lowercaseName = currentRes.name.charAt(0).toLowerCase() + currentRes.name.slice(1);
+
   return (
-    <StyledRescourceSection>
-      <StyledRescourceIcon
+    <StyledResourceSection>
+      <StyledResourceIcon
         alt={currentRes.name}
-        src={'../images/icons/icon_' + currentRes.name.charAt(0).toLowerCase() + currentRes.name.slice(1) + '.jpg'}
-      ></StyledRescourceIcon>
-      <StyledRescourceParagraphNumber>{Math.floor(currentRes.value)}</StyledRescourceParagraphNumber>
-    </StyledRescourceSection>
+        src={'../images/icons/icon_' + lowercaseName + '.jpg'}
+      ></StyledResourceIcon>
+      <StyledResourceSpanNumber>{Math.floor(currentRes.value)}</StyledResourceSpanNumber>
+    </StyledResourceSection>
   );
 };
 
-const StyledRescourceSection = styled.section`
+const StyledResourceSection = styled.section`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const StyledRescourceParagraphNumber = styled.p`
+const StyledResourceSpanNumber = styled.span`
   font-size: larger;
 `;
 
-const StyledRescourceIcon = styled.img`
+const StyledResourceIcon = styled.img`
   width: 34px;
   height: 34px;
 `;

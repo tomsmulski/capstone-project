@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {ResourcesOverview} from './components/resources/ResourcesOverview';
 
 const gameSpeed = 1000;
@@ -25,21 +25,27 @@ function productionFuel(currentLevel) {
 }
 
 export default function App() {
+  
   const [currentMoney, setCurrentMoney] = useState(startResourceMoney);
   const [currentIron, setCurrentIron] = useState(startResourceIron);
   const [currentFuel, setCurrentFuel] = useState(startResourceFuel);
-  const [currentGold, setCurrentGold] = useState(startResourceGold);
-  const [currentEnergy, setCurrentEnergy] = useState(startResourceEnergy);
+  const [currentGold] = useState(startResourceGold);
+  const [currentEnergy] = useState(startResourceEnergy);
 
-  setTimeout(() => {
-    const productionEachSecondMoney = productionMoney(0) / 3600;
-    const productionEachSecondIron = productionIron(0) / 3600;
-    const productionEachSecondFuel = productionFuel(0) / 3600;
+  useEffect(()=>{
+    setTimeout(() => {
+      const productionEachSecondMoney = productionMoney(0) / 3600;
+      const productionEachSecondIron = productionIron(0) / 3600;
+      const productionEachSecondFuel = productionFuel(0) / 3600;
+  
+      setCurrentMoney(currentMoney + productionEachSecondMoney);
+      setCurrentIron(currentIron + productionEachSecondIron);
+      setCurrentFuel(currentFuel + productionEachSecondFuel);
+    }, 1000);
+  },[currentMoney,currentIron,currentFuel])
 
-    setCurrentMoney(currentMoney + productionEachSecondMoney);
-    setCurrentIron(currentIron + productionEachSecondIron);
-    setCurrentFuel(currentFuel + productionEachSecondFuel);
-  }, 1000);
+
+
 
   const mainResoures = [
     {id: 1, name: 'Money', value: currentMoney},
