@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {ResourcesOverview} from './components/resources/ResourcesOverview';
 import {Building} from './components/buildings/building';
 
@@ -13,8 +13,18 @@ const startResourceEnergy = 0;
 const basicProductionMoney = 20;
 const basicProductionIron = 10;
 
-const buildings = [{id:1, name:"Windpower Plant",type:1, staticBuildPrice:[{name:"Money",price:70},{name:"Iron",price:35}], description:"you need this to have energy"}];
-
+const buildings = [
+  {
+    id: 1,
+    name: 'Windpower Plant',
+    type: 1,
+    staticBuildPrice: [
+      {name: 'Money', price: 70},
+      {name: 'Iron', price: 35},
+    ],
+    description: 'you need this to have energy',
+  },
+];
 
 function productionMoney(currentLevel) {
   return Math.floor((30 * currentLevel * Math.pow(currentLevel, 1.1) + basicProductionMoney) * gameSpeed);
@@ -29,26 +39,23 @@ function productionFuel(currentLevel) {
 }
 
 export default function App() {
-
   const [currentMoney, setCurrentMoney] = useState(startResourceMoney);
   const [currentIron, setCurrentIron] = useState(startResourceIron);
   const [currentFuel, setCurrentFuel] = useState(startResourceFuel);
-  const [currentGold, setCurrentGold] = useState(startResourceGold);
-  const [currentEnergy, setCurrentEnergy] = useState(startResourceEnergy);
+  const [currentGold] = useState(startResourceGold);
+  const [currentEnergy] = useState(startResourceEnergy);
 
+  useEffect(() => {
+    setTimeout(() => {
+      const productionEachSecondMoney = productionMoney(0) / 3600;
+      const productionEachSecondIron = productionIron(0) / 3600;
+      const productionEachSecondFuel = productionFuel(0) / 3600;
 
-
-
-  setTimeout(() => {
-    const productionEachSecondMoney = productionMoney(0) / 3600;
-    const productionEachSecondIron = productionIron(0) / 3600;
-    const productionEachSecondFuel = productionFuel(0) / 3600;
-
-    setCurrentMoney(currentMoney + productionEachSecondMoney);
-    setCurrentIron(currentIron + productionEachSecondIron);
-    setCurrentFuel(currentFuel + productionEachSecondFuel);
-  }, 1000);
-
+      setCurrentMoney(currentMoney + productionEachSecondMoney);
+      setCurrentIron(currentIron + productionEachSecondIron);
+      setCurrentFuel(currentFuel + productionEachSecondFuel);
+    }, 1000);
+  }, [currentMoney, currentIron, currentFuel]);
 
   const mainResoures = [
     {id: 1, name: 'Money', value: currentMoney},
@@ -58,13 +65,11 @@ export default function App() {
     {id: 5, name: 'Energy', value: currentEnergy},
   ];
 
-
-
   return (
     <>
       <ResourcesOverview currentResource={mainResoures} />
 
-      <Building buildings={buildings}/>
+      <Building buildings={buildings} />
     </>
   );
 }

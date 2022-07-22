@@ -3,15 +3,15 @@ import {Resource} from './Resource';
 
 export const ResourcesOverview = ({currentResource}) => {
   return (
-    <StyledRescourceContainer>
+    <StyledResourcesContainer>
       {currentResource.map(currentRes => (
         <Resource key={currentRes.id} displayValue={true} currentRes={currentRes}></Resource>
       ))}
-    </StyledRescourceContainer>
+    </StyledResourcesContainer>
   );
 };
 
-const StyledRescourceContainer = styled.div`
+const StyledResourcesContainer = styled.div`
   margin-top: 80px;
   border: 1px solid black;
   display: flex;
