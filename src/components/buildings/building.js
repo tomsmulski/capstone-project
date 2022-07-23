@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import {Resource} from '../resources/Resource';
 import {buildingPrice} from '../../util/BuildingPrice';
+import { productionResources } from '../../util/ResourcenProduction';
 
-export const Building = ({allBuildings, productionEnergy, currentBuildingData}) => {
+export const Building = ({allBuildings, currentBuildingData}) => {
   return allBuildings.map(building =>
     currentBuildingData.map(currentBuilding => {
       if (building.id === currentBuilding.id) {
@@ -25,7 +26,7 @@ export const Building = ({allBuildings, productionEnergy, currentBuildingData}) 
                 <Resource
                   displayValuePosition="right"
                   iconSize="small"
-                  currentRess={{name: 'Energy', value: productionEnergy(nextLevel)}}
+                  currentRess={{name: 'Energy', value: productionResources("Energy",nextLevel)}}
                 />
                 <StyledBuildingSpanRes>
                   {building.buildMaterials.map(buildMaterial => {

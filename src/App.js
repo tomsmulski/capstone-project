@@ -2,7 +2,16 @@ import {useState, useEffect} from 'react';
 import {ResourcesOverview} from './components/resources/ResourcesOverview';
 import {Building} from './components/buildings/building';
 import {gameConfig} from './util/GameConfig';
-import {productionMoney, productionIron, productionFuel, productionEnergy} from './util/ResourcenProduction';
+import {productionResources} from './util/ResourcenProduction';
+
+
+const userResources = [
+  {id: 1, name: 'Money', value: gameConfig.resourcesTypes.money.startResources},
+  {id: 2, name: 'Iron', value: gameConfig.resourcesTypes.iron.startResources},
+  {id: 3, name: 'Fuel', value: gameConfig.resourcesTypes.fuel.startResources},
+  {id: 4, name: 'Gold', value: gameConfig.resourcesTypes.gold.startResources},
+  {id: 5, name: 'Energy', value: gameConfig.resourcesTypes.energy.startResources},
+];
 
 const allBuildings = [
   {
@@ -17,38 +26,40 @@ const allBuildings = [
   },
 ];
 
-const userBuildingDatas = [{id: 1, name: 'Windpower Plant', currentLevel: 2}];
+const userBuildingDatas = [{id: 1, name: 'Windpower Plant', currentLevel: 0}];
+
 
 export default function App() {
-  const [currentMoney, setCurrentMoney] = useState(gameConfig.resourcesTypes[0].startResources);
-  const [currentIron, setCurrentIron] = useState(gameConfig.resourcesTypes[1].startResources);
-  const [currentFuel, setCurrentFuel] = useState(gameConfig.resourcesTypes[2].startResources);
-  const [currentGold] = useState(gameConfig.resourcesTypes[3].startResources);
-  const [currentEnergy] = useState(gameConfig.resourcesTypes[4].startResources);
+  const [currentResources, setCurrentResources] = useState(userResources);
   const [currentBuildingData] = useState(userBuildingDatas);
 
   useEffect(() => {
     setTimeout(() => {
-      setCurrentMoney(currentMoney + productionMoney(0));
-      setCurrentIron(currentIron + productionIron(0));
-      setCurrentFuel(currentFuel + productionFuel(0));
+      
+      setCurrentResources(current =>
+        current.map(obj => {
+          if (obj.name === "Money") {
+            return {...obj, value: obj.value + productionResources(obj.name, 0) };
+          }
+          if (obj.name === "Iron") {
+            return {...obj, value: obj.value + productionResources(obj.name, 0) };
+          }
+          if (obj.name === "Fuel") {
+            return {...obj, value: obj.value + productionResources(obj.name, 0) };
+          }
+  
+          return obj;
+        }),
+      ); 
+ 
     }, 1000);
-  }, [currentMoney, currentIron, currentFuel]);
-
-  const mainResoures = [
-    {id: 1, name: 'Money', value: currentMoney},
-    {id: 2, name: 'Iron', value: currentIron},
-    {id: 3, name: 'Fuel', value: currentFuel},
-    {id: 4, name: 'Gold', value: currentGold},
-    {id: 5, name: 'Energy', value: currentEnergy},
-  ];
+  }, [currentResources]);
 
   return (
     <>
-      <ResourcesOverview currentResources={mainResoures} />
+      <ResourcesOverview currentResources={currentResources} />
       <Building
         allBuildings={allBuildings}
-        productionEnergy={productionEnergy}
         currentBuildingData={currentBuildingData}
       />
     </>
