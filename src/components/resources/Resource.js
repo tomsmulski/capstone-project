@@ -22,7 +22,7 @@ const StyledResourceSection = styled.section`
 `;
 
 const StyledResourceSpanNumber = styled.span`
-  font-size: larger;
+  font-size: large;
 `;
 
 const StyledResourceIcon = styled.img`

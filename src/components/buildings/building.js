@@ -1,18 +1,24 @@
 import styled from 'styled-components';
 import {Resource} from '../resources/Resource';
 import {buildingPrice} from '../../util/BuildingPrice';
-import { productionResources } from '../../util/ResourcenProduction';
+import {productionResources} from '../../util/ResourcenProduction';
 
-export const Building = ({allBuildings, currentBuildingData}) => {
+export const Building = ({allBuildings, currentBuildings, addBuildingLevel}) => {
+  function onHandleClickUpgrade(e) {
+    const buildingId = e.target.name;
+    addBuildingLevel(buildingId);
+  }
+
   return allBuildings.map(building =>
-    currentBuildingData.map(currentBuilding => {
+    currentBuildings.map(currentBuilding => {
       if (building.id === currentBuilding.id) {
-        const nextLevel = currentBuilding.currentLevel + 1;
+        const nextLevel = currentBuilding.level + 1;
+
         return (
           <StyledBuildingSection key={building.id}>
             <StyledBuildingArticle>
               <StyledBuildingH1>
-                {building.name} ({building.currentLevel})
+                {building.name} ({currentBuilding.level})
               </StyledBuildingH1>
               <StyledBuildingParagraph>{building.description}</StyledBuildingParagraph>
             </StyledBuildingArticle>
@@ -26,7 +32,7 @@ export const Building = ({allBuildings, currentBuildingData}) => {
                 <Resource
                   displayValuePosition="right"
                   iconSize="small"
-                  currentRess={{name: 'Energy', value: productionResources("Energy",nextLevel)}}
+                  currentRess={{name: 'Energy', value: productionResources('Energy', nextLevel)}}
                 />
                 <StyledBuildingSpanRes>
                   {building.buildMaterials.map(buildMaterial => {
@@ -45,12 +51,15 @@ export const Building = ({allBuildings, currentBuildingData}) => {
               </StyledBuildingDiv>
 
               <StyledBuildingButtonDiv>
-                <StyledBuildingButton>{currentBuilding.currentLevel > 0 ? 'Upgrade' : 'Build'}</StyledBuildingButton>
+                <StyledBuildingButton name={building.id} onClick={onHandleClickUpgrade}>
+                  {currentBuilding.currentLevel > 0 ? 'Upgrade' : 'Build'}
+                </StyledBuildingButton>
               </StyledBuildingButtonDiv>
             </StyledBuildingArticle>
           </StyledBuildingSection>
         );
       }
+      return currentBuilding;
     })
   );
 };
@@ -76,6 +85,13 @@ const StyledBuildingH1 = styled.h1`
 `;
 
 const StyledBuildingParagraph = styled.p`
+  max-height: 40px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
   padding: 5px;
 `;
 
@@ -91,10 +107,12 @@ const StyledBuildingDiv = styled.div`
 `;
 
 const StyledBuildingSpanRes = styled.span`
+  width: 30%;
   display: flex;
-  justify-content: right;
+  justify-content: space-evenly;
   position: relative;
   top: 5px;
+  margin-right: 10px;
 `;
 
 const StyledBuildingBuildTime = styled.p`

@@ -5,7 +5,11 @@ const productionsInterval = 3600;
 function productionResources(name, level) {
   switch (name) {
     case 'Money':
-      return (Math.floor((30 * level * Math.pow(1.1, level) + gameConfig.resourcesTypes.money.basicProduction) *gameConfig.speed.resourcesSpeed) / productionsInterval
+      return (
+        Math.floor(
+          (30 * level * Math.pow(1.1, level) + gameConfig.resourcesTypes.money.basicProduction) *
+            gameConfig.speed.resourcesSpeed
+        ) / productionsInterval
       );
     case 'Iron':
       return (
@@ -24,6 +28,5 @@ function productionResources(name, level) {
       return 0;
   }
 }
-
 
 export {productionResources};
