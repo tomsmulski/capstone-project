@@ -52,7 +52,7 @@ export const Building = ({allBuildings, currentBuildings, addBuildingLevel}) => 
 
               <StyledBuildingButtonDiv>
                 <StyledBuildingButton name={building.id} onClick={onHandleClickUpgrade}>
-                  {currentBuilding.currentLevel > 0 ? 'Upgrade' : 'Build'}
+                  {currentBuilding.level > 0 ? 'Upgrade' : 'Build'}
                 </StyledBuildingButton>
               </StyledBuildingButtonDiv>
             </StyledBuildingArticle>

@@ -1,6 +1,6 @@
 import {gameConfig} from './GameConfig';
 
-const productionsInterval = 3600;
+const resourcenProductionsInterval = 1800;
 
 function productionResources(name, level) {
   switch (name) {
@@ -9,17 +9,19 @@ function productionResources(name, level) {
         Math.floor(
           (30 * level * Math.pow(1.1, level) + gameConfig.resourcesTypes.money.basicProduction) *
             gameConfig.speed.resourcesSpeed
-        ) / productionsInterval
+        ) / resourcenProductionsInterval
       );
     case 'Iron':
       return (
         Math.floor(
           (20 * level * Math.pow(1.1, level) + gameConfig.resourcesTypes.iron.basicProduction) *
             gameConfig.speed.resourcesSpeed
-        ) / productionsInterval
+        ) / resourcenProductionsInterval
       );
     case 'Fuel':
-      return Math.floor(10 * level * Math.pow(1.1, level) * gameConfig.speed.resourcesSpeed) / productionsInterval;
+      return (
+        Math.floor(10 * level * Math.pow(1.1, level) * gameConfig.speed.resourcesSpeed) / resourcenProductionsInterval
+      );
     case 'Gold':
       return 0;
     case 'Energy':

@@ -3,6 +3,7 @@ import {ResourcesOverview} from './components/resources/ResourcesOverview';
 import {Building} from './components/buildings/building';
 import {gameConfig} from './util/GameConfig';
 import {productionResources} from './util/ResourcenProduction';
+import {buildingPrice} from './util/BuildingPrice';
 
 const userResources = [
   {id: 1, name: 'Money', value: gameConfig.resourcesTypes.money.startResources},
@@ -33,37 +34,50 @@ export default function App() {
   const [currentBuildings, setCurrentBuildings] = useState(userBuildings);
 
   function addBuildingLevel(id) {
-    setCurrentBuildings(current =>
-      current.map(obj => {
-        if (obj.id === Number(id)) {
-          return {...obj, level: obj.level + 1};
+    let currentBuildLevel = 0;
+
+    setCurrentBuildings(currentBuilding =>
+      currentBuilding.map(objBuilding => {
+        if (objBuilding.id === Number(id)) {
+          currentBuildLevel = objBuilding.level + 1;
+          return {...objBuilding, level: currentBuildLevel};
         }
-        return obj;
+        return objBuilding;
       })
     );
+
+    allBuildings.map(building => {
+      if (building.id === Number(id)) {
+        building.buildMaterials.map(material => {
+          //
+          setCurrentResources(current =>
+            current.map(obj => {
+              if (obj.id === material.id) {
+                return {...obj, value: obj.value - buildingPrice(currentBuildLevel, building.type, material.name)};
+              }
+
+              if (obj.id === 5) {
+                return {...obj, value: productionResources(obj.name, currentBuildLevel)};
+              }
+
+              return obj;
+            })
+          );
+          return material;
+        });
+      }
+      return building;
+    });
   }
 
   useEffect(() => {
     setTimeout(() => {
       setCurrentResources(current =>
         current.map(obj => {
-          if (obj.name === 'Money') {
-            return {...obj, value: obj.value + productionResources(obj.name, 0)};
-          }
-          if (obj.name === 'Iron') {
-            return {...obj, value: obj.value + productionResources(obj.name, 0)};
-          }
-          if (obj.name === 'Fuel') {
-            return {...obj, value: obj.value + productionResources(obj.name, 0)};
-          }
-          if (obj.name === 'Energy') {
-            return {...obj, value: productionResources(obj.name, 0)};
-          }
-
-          return obj;
+          return {...obj, value: obj.value + productionResources(obj.name, 0)};
         })
       );
-    }, 1000);
+    }, 2000);
   }, [currentResources]);
 
   return (
