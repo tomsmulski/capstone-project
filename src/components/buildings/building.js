@@ -25,7 +25,7 @@ export const Building = ({allBuildings, productionEnergy, currentBuildingData}) 
                 <Resource
                   displayValuePosition="right"
                   iconSize="small"
-                  currentRes={{name: 'Energy', value: productionEnergy(nextLevel)}}
+                  currentRess={{name: 'Energy', value: productionEnergy(nextLevel)}}
                 />
                 <StyledBuildingSpanRes>
                   {building.buildMaterials.map(buildMaterial => {
@@ -33,7 +33,7 @@ export const Building = ({allBuildings, productionEnergy, currentBuildingData}) 
                       <Resource
                         key={buildMaterial.id}
                         iconSize="small"
-                        currentRes={{
+                        currentRess={{
                           name: buildMaterial.name,
                           value: buildingPrice(nextLevel, building.type, buildMaterial.name),
                         }}

@@ -17,14 +17,14 @@ const allBuildings = [
   },
 ];
 
-const userBuildingDatas = [{id: 1, name: 'Windpower Plant', currentLevel: 0}];
+const userBuildingDatas = [{id: 1, name: 'Windpower Plant', currentLevel: 2}];
 
 export default function App() {
-  const [currentMoney, setCurrentMoney] = useState(gameConfig.startResources.money.value);
-  const [currentIron, setCurrentIron] = useState(gameConfig.startResources.iron.value);
-  const [currentFuel, setCurrentFuel] = useState(gameConfig.startResources.fuel.value);
-  const [currentGold] = useState(gameConfig.startResources.gold.value);
-  const [currentEnergy] = useState(gameConfig.startResources.energy.value);
+  const [currentMoney, setCurrentMoney] = useState(gameConfig.resourcesTypes[0].startResources);
+  const [currentIron, setCurrentIron] = useState(gameConfig.resourcesTypes[1].startResources);
+  const [currentFuel, setCurrentFuel] = useState(gameConfig.resourcesTypes[2].startResources);
+  const [currentGold] = useState(gameConfig.resourcesTypes[3].startResources);
+  const [currentEnergy] = useState(gameConfig.resourcesTypes[4].startResources);
   const [currentBuildingData] = useState(userBuildingDatas);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function App() {
 
   return (
     <>
-      <ResourcesOverview currentResource={mainResoures} />
+      <ResourcesOverview currentResources={mainResoures} />
       <Building
         allBuildings={allBuildings}
         productionEnergy={productionEnergy}

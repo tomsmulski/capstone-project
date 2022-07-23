@@ -5,7 +5,7 @@ const productionsInterval = 3600;
 function productionMoney(level) {
   return (
     Math.floor(
-      (30 * level * Math.pow(1.1, level) + gameConfig.basicProduction.money.value) * gameConfig.speed.gameSpeed
+      (30 * level * Math.pow(1.05, level) + gameConfig.resourcesTypes[0].basicProduction) * gameConfig.speed.resourcesSpeed
     ) / productionsInterval
   );
 }
@@ -13,17 +13,17 @@ function productionMoney(level) {
 function productionIron(level) {
   return (
     Math.floor(
-      (20 * level * Math.pow(1.1, level) + gameConfig.basicProduction.iron.value) * gameConfig.speed.gameSpeed
+      (20 * level * Math.pow(1.05, level) + gameConfig.resourcesTypes[1].basicProduction) * gameConfig.speed.resourcesSpeed
     ) / productionsInterval
   );
 }
 
 function productionFuel(level) {
-  return Math.floor(10 * level * Math.pow(1.1, level) * gameConfig.speed.gameSpeed) / productionsInterval;
+  return Math.floor(10 * level * Math.pow(1.05, level) * gameConfig.speed.resourcesSpeed) / productionsInterval;
 }
 
 function productionEnergy(level) {
-  return Math.floor(20 * level * Math.pow(1.1, level));
+  return Math.floor(20 * level * Math.pow(1.05, level));
 }
 
 export {productionMoney, productionIron, productionFuel, productionEnergy};

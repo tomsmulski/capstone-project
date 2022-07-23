@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import {Resource} from './Resource';
 
-export const ResourcesOverview = ({currentResource}) => {
+export const ResourcesOverview = ({currentResources}) => {
   return (
     <StyledResourcesContainer>
-      {currentResource.map(currentRes => (
-        <Resource key={currentRes.id} displayValue={true} currentRes={currentRes}></Resource>
+      {currentResources.map(currentRess => (
+        <Resource key={currentRess.id} displayValue={true} currentRess={currentRess}></Resource>
       ))}
     </StyledResourcesContainer>
   );

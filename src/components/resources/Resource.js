@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
-export const Resource = ({currentRes}) => {
-  const lowercaseName = currentRes.name.charAt(0).toLowerCase() + currentRes.name.slice(1);
+export const Resource = ({currentRess}) => {
+  const lowercaseName = currentRess.name.charAt(0).toLowerCase() + currentRess.name.slice(1);
 
   return (
     <StyledResourceSection>
       <StyledResourceIcon
-        alt={currentRes.name}
+        alt={currentRess.name}
         src={'../images/icons/icon_' + lowercaseName + '.jpg'}
       ></StyledResourceIcon>
-      <StyledResourceSpanNumber>{Math.floor(currentRes.value)}</StyledResourceSpanNumber>
+      <StyledResourceSpanNumber>{Math.floor(currentRess.value)}</StyledResourceSpanNumber>
     </StyledResourceSection>
   );
 };
