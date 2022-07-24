@@ -11,5 +11,4 @@ function getCurrentDate() {
   return gameDate;
 }
 
-
 export {getCurrentDate};
