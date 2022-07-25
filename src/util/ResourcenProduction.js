@@ -1,6 +1,6 @@
 import {gameConfig} from './GameConfig';
 
-const resourcenProductionsInterval = 1800;
+const resourcenProductionsInterval = 3600;
 
 function productionResources(name, level) {
   switch (name) {

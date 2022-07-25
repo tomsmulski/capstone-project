@@ -30,6 +30,7 @@ const allBuildings = [
 const userBuildings = [{id: 4, name: 'Windpower Plant', level: 0}];
 
 export default function App() {
+  const [currentBuildingBuild, setCurrentBuildingBuild] = useState([]);
   const [currentResources, setCurrentResources] = useState(userResources);
   const [currentBuildings, setCurrentBuildings] = useState(userBuildings);
 
@@ -50,17 +51,20 @@ export default function App() {
       if (building.id === Number(id)) {
         building.buildMaterials.map(material => {
           //
-          setCurrentResources(current =>
-            current.map(obj => {
-              if (obj.id === material.id) {
-                return {...obj, value: obj.value - buildingPrice(currentBuildLevel, building.type, material.name)};
+          setCurrentResources(currentRess =>
+            currentRess.map(objRess => {
+              if (objRess.id === material.id) {
+                return {
+                  ...objRess,
+                  value: objRess.value - buildingPrice(currentBuildLevel, building.type, material.name),
+                };
               }
 
-              if (obj.id === 5) {
-                return {...obj, value: productionResources(obj.name, currentBuildLevel)};
+              if (objRess.id === 5) {
+                return {...objRess, value: productionResources(objRess.name, currentBuildLevel)};
               }
 
-              return obj;
+              return objRess;
             })
           );
           return material;
@@ -71,13 +75,19 @@ export default function App() {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      setCurrentResources(current =>
-        current.map(obj => {
-          return {...obj, value: obj.value + productionResources(obj.name, 0)};
-        })
-      );
-    }, 2000);
+    const interval = setInterval(
+      () =>
+        setCurrentResources(current =>
+          current.map(obj => {
+            return {...obj, value: obj.value + productionResources(obj.name, 0)};
+          })
+        ),
+      1000
+    );
+
+    return () => {
+      clearInterval(interval);
+    };
   }, [currentResources]);
 
   return (

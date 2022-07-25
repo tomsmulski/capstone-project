@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import {Resource} from '../resources/Resource';
 import {buildingPrice} from '../../util/BuildingPrice';
+import {buildingTime} from '../../util/BuildingTime';
 import {productionResources} from '../../util/ResourcenProduction';
 
 export const Building = ({allBuildings, currentBuildings, addBuildingLevel}) => {
@@ -14,6 +15,9 @@ export const Building = ({allBuildings, currentBuildings, addBuildingLevel}) => 
       if (building.id === currentBuilding.id) {
         const nextLevel = currentBuilding.level + 1;
 
+        const buildPriceMoney = buildingPrice(nextLevel, building.type, 'Money');
+        const buildPriceIron = buildingPrice(nextLevel, building.type, 'Iron');
+
         return (
           <StyledBuildingSection key={building.id}>
             <StyledBuildingArticle>
@@ -24,7 +28,7 @@ export const Building = ({allBuildings, currentBuildings, addBuildingLevel}) => 
             </StyledBuildingArticle>
             <StyledBuildingArticle>
               <StyledBuildingSpan>
-                <StyledBuildingBuildTime>1m 30s</StyledBuildingBuildTime>
+                <StyledBuildingBuildTime>{buildingTime(2, buildPriceMoney, buildPriceIron)}</StyledBuildingBuildTime>
                 <StyledBuildingSpanUpgradeText>To upgrade to level {nextLevel} you need</StyledBuildingSpanUpgradeText>
               </StyledBuildingSpan>
 
