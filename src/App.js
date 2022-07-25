@@ -66,11 +66,6 @@ export default function App() {
                     value: objRess.value - buildingPrice(currentBuildLevel, building.type, material.name),
                   };
                 }
-
-                //if (objRess.id === 5) {
-                //  return {...objRess, value: productionResources(objRess.name, currentBuildLevel)};
-                //}
-
                 return objRess;
               })
             );

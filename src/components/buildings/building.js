@@ -49,7 +49,7 @@ export const Building = ({allBuildings, currentBuildings, addBuildingLevel, curr
                     return (
                       <Resource
                         key={buildMaterial.id}
-                        iconSize="small"
+                        iconSize="small"                        
                         currentRess={{
                           name: buildMaterial.name,
                           value: buildingPrice(nextLevel, building.type, buildMaterial.name),
