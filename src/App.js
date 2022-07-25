@@ -30,49 +30,104 @@ const allBuildings = [
 const userBuildings = [{id: 4, name: 'Windpower Plant', level: 0}];
 
 export default function App() {
-  const [currentBuildingBuild, setCurrentBuildingBuild] = useState([]);
+  const [currentBuildingBuild, setCurrentBuildingBuild] = useState(null);
   const [currentResources, setCurrentResources] = useState(userResources);
   const [currentBuildings, setCurrentBuildings] = useState(userBuildings);
 
-  function addBuildingLevel(id) {
+  function addBuildingLevel(buildingId, buildingBuildTime) {
     let currentBuildLevel = 0;
 
-    setCurrentBuildings(currentBuilding =>
-      currentBuilding.map(objBuilding => {
-        if (objBuilding.id === Number(id)) {
-          currentBuildLevel = objBuilding.level + 1;
-          return {...objBuilding, level: currentBuildLevel};
+    if (currentBuildingBuild === null) {
+      currentBuildings.forEach(element => {
+        if (element.id === Number(buildingId)) {
+          currentBuildLevel = element.level + 1;
         }
-        return objBuilding;
-      })
-    );
+      });
 
-    allBuildings.map(building => {
-      if (building.id === Number(id)) {
-        building.buildMaterials.map(material => {
-          //
-          setCurrentResources(currentRess =>
-            currentRess.map(objRess => {
-              if (objRess.id === material.id) {
-                return {
-                  ...objRess,
-                  value: objRess.value - buildingPrice(currentBuildLevel, building.type, material.name),
-                };
-              }
+      const startBuildingTime = Date.now();
+      const endBuildingTime = Number(startBuildingTime) + Number(buildingBuildTime * 1000);
 
-              if (objRess.id === 5) {
-                return {...objRess, value: productionResources(objRess.name, currentBuildLevel)};
-              }
+      setCurrentBuildingBuild({
+        id: buildingId,
+        startTime: startBuildingTime,
+        endTime: endBuildingTime,
+        diffTime: Number(buildingBuildTime * 1000),
+        toLevel: Number(currentBuildLevel),
+      });
 
-              return objRess;
-            })
-          );
-          return material;
-        });
-      }
-      return building;
-    });
+      allBuildings.map(building => {
+        if (building.id === Number(buildingId)) {
+          building.buildMaterials.map(material => {
+            setCurrentResources(currentRess =>
+              currentRess.map(objRess => {
+                if (objRess.id === material.id) {
+                  return {
+                    ...objRess,
+                    value: objRess.value - buildingPrice(currentBuildLevel, building.type, material.name),
+                  };
+                }
+
+                //if (objRess.id === 5) {
+                //  return {...objRess, value: productionResources(objRess.name, currentBuildLevel)};
+                //}
+
+                return objRess;
+              })
+            );
+            return material;
+          });
+        }
+        return building;
+      });
+    }
   }
+
+  useEffect(() => {
+    if (currentBuildingBuild !== null) {
+      const interval = setInterval(
+        () =>
+          setCurrentBuildingBuild(current => {
+            const timeNow = Date.now();
+            const endBuildTime = Number(current.endTime);
+
+            const buildingDiffTime = endBuildTime - timeNow;
+
+            if (buildingDiffTime < 0) {
+              setCurrentBuildings(currentBuilding =>
+                currentBuilding.map(objBuilding => {
+                  if (objBuilding.id === Number(current.id)) {
+                    if (current.toLevel !== objBuilding.level) {
+                      const updateToLevel = objBuilding.level + 1;
+
+                      setCurrentResources(current =>
+                        current.map(obj => {
+                          if (obj.id === 5) {
+                            return {...obj, value: productionResources(obj.name, updateToLevel)};
+                          }
+                          return obj;
+                        })
+                      );
+
+                      return {...objBuilding, level: updateToLevel};
+                    }
+                  }
+                  return objBuilding;
+                })
+              );
+            } else {
+              return {...current, diffTime: Number(buildingDiffTime)};
+            }
+
+            return null;
+          }),
+        1000
+      );
+
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [currentBuildingBuild]);
 
   useEffect(() => {
     const interval = setInterval(
@@ -93,7 +148,12 @@ export default function App() {
   return (
     <>
       <ResourcesOverview currentResources={currentResources} />
-      <Building allBuildings={allBuildings} currentBuildings={currentBuildings} addBuildingLevel={addBuildingLevel} />
+      <Building
+        allBuildings={allBuildings}
+        currentBuildings={currentBuildings}
+        addBuildingLevel={addBuildingLevel}
+        currentBuildingBuild={currentBuildingBuild}
+      />
     </>
   );
 }

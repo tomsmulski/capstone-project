@@ -4,10 +4,12 @@ import {buildingPrice} from '../../util/BuildingPrice';
 import {buildingTime} from '../../util/BuildingTime';
 import {productionResources} from '../../util/ResourcenProduction';
 
-export const Building = ({allBuildings, currentBuildings, addBuildingLevel}) => {
+export const Building = ({allBuildings, currentBuildings, addBuildingLevel, currentBuildingBuild}) => {
   function onHandleClickUpgrade(e) {
-    const buildingId = e.target.name;
-    addBuildingLevel(buildingId);
+    const buildingId = e.target.dataset.buildid;
+    const buildingBuildTime = e.target.dataset.buildtime;
+
+    addBuildingLevel(buildingId, buildingBuildTime);
   }
 
   return allBuildings.map(building =>
@@ -17,6 +19,10 @@ export const Building = ({allBuildings, currentBuildings, addBuildingLevel}) => 
 
         const buildPriceMoney = buildingPrice(nextLevel, building.type, 'Money');
         const buildPriceIron = buildingPrice(nextLevel, building.type, 'Iron');
+        const buildTimeSeconds = buildingTime(1, buildPriceMoney, buildPriceIron);
+        const buildTimeFormated = buildingTime(2, buildPriceMoney, buildPriceIron);
+
+        const buildInProgressButtonDisable = currentBuildingBuild === null ? false : true;
 
         return (
           <StyledBuildingSection key={building.id}>
@@ -28,7 +34,7 @@ export const Building = ({allBuildings, currentBuildings, addBuildingLevel}) => 
             </StyledBuildingArticle>
             <StyledBuildingArticle>
               <StyledBuildingSpan>
-                <StyledBuildingBuildTime>{buildingTime(2, buildPriceMoney, buildPriceIron)}</StyledBuildingBuildTime>
+                <StyledBuildingBuildTime>{buildTimeFormated}</StyledBuildingBuildTime>
                 <StyledBuildingSpanUpgradeText>To upgrade to level {nextLevel} you need</StyledBuildingSpanUpgradeText>
               </StyledBuildingSpan>
 
@@ -55,7 +61,12 @@ export const Building = ({allBuildings, currentBuildings, addBuildingLevel}) => 
               </StyledBuildingDiv>
 
               <StyledBuildingButtonDiv>
-                <StyledBuildingButton name={building.id} onClick={onHandleClickUpgrade}>
+                <StyledBuildingButton
+                  disabled={buildInProgressButtonDisable}
+                  data-buildid={building.id}
+                  data-buildtime={buildTimeSeconds}
+                  onClick={onHandleClickUpgrade}
+                >
                   {currentBuilding.level > 0 ? 'Upgrade' : 'Build'}
                 </StyledBuildingButton>
               </StyledBuildingButtonDiv>
