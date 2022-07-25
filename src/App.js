@@ -13,11 +13,10 @@ const userResources = [
   {id: 5, name: 'Energy', value: gameConfig.resourcesTypes.energy.startResources},
 ];
 
-const allBuildings = [
+const buildingsTypes = [
   {
     id: 4,
     name: 'Windpower Plant',
-    type: 1,
     buildMaterials: [
       {id: 1, name: 'Money'},
       {id: 2, name: 'Iron'},
@@ -27,7 +26,7 @@ const allBuildings = [
   },
 ];
 
-const userBuildings = [{id: 4, name: 'Windpower Plant', level: 0}];
+const userBuildings = [{buildingId: 4, level: 0}];
 
 export default function App() {
   const [currentBuildingBuild, setCurrentBuildingBuild] = useState(null);
@@ -35,44 +34,38 @@ export default function App() {
   const [currentBuildings, setCurrentBuildings] = useState(userBuildings);
 
   function addBuildingLevel(buildingId, buildingBuildTime) {
-    let currentBuildLevel = 0;
-
     if (currentBuildingBuild === null) {
-      currentBuildings.forEach(element => {
-        if (element.id === Number(buildingId)) {
-          currentBuildLevel = element.level + 1;
-        }
-      });
+      const currentBuilding = currentBuildings.find(
+        currentBuilding => currentBuilding.buildingId === buildingId
+      );
+      const nextBuildingLevel = currentBuilding.level + 1;
+      const progressBuildingTime = buildingBuildTime * 1000;
 
       const startBuildingTime = Date.now();
-      const endBuildingTime = Number(startBuildingTime) + Number(buildingBuildTime * 1000);
+      const endBuildingTime = startBuildingTime + progressBuildingTime;
 
       setCurrentBuildingBuild({
         id: buildingId,
         startTime: startBuildingTime,
         endTime: endBuildingTime,
-        diffTime: Number(buildingBuildTime * 1000),
-        toLevel: Number(currentBuildLevel),
+        diffTime: progressBuildingTime,
+        toLevel: nextBuildingLevel,
       });
 
-      allBuildings.map(building => {
-        if (building.id === Number(buildingId)) {
-          building.buildMaterials.map(material => {
-            setCurrentResources(currentRess =>
-              currentRess.map(objRess => {
-                if (objRess.id === material.id) {
-                  return {
-                    ...objRess,
-                    value: objRess.value - buildingPrice(currentBuildLevel, building.type, material.name),
-                  };
-                }
-                return objRess;
-              })
-            );
-            return material;
-          });
-        }
-        return building;
+      const buildingType = buildingsTypes.find(buildingType => buildingType.id === buildingId);
+
+      buildingType.buildMaterials.forEach(material => {
+        setCurrentResources(currentRess =>
+          currentRess.map(objRess => {
+            if (objRess.id === material.id) {
+              return {
+                ...objRess,
+                value: objRess.value - buildingPrice(nextBuildingLevel, buildingType.id, material.name),
+              };
+            }
+            return objRess;
+          })
+        );
       });
     }
   }
@@ -83,14 +76,14 @@ export default function App() {
         () =>
           setCurrentBuildingBuild(current => {
             const timeNow = Date.now();
-            const endBuildTime = Number(current.endTime);
+            const endBuildTime = current.endTime;
 
             const buildingDiffTime = endBuildTime - timeNow;
 
             if (buildingDiffTime < 0) {
               setCurrentBuildings(currentBuilding =>
                 currentBuilding.map(objBuilding => {
-                  if (objBuilding.id === Number(current.id)) {
+                  if (objBuilding.buildingId === current.id) {
                     if (current.toLevel !== objBuilding.level) {
                       const updateToLevel = objBuilding.level + 1;
 
@@ -110,7 +103,7 @@ export default function App() {
                 })
               );
             } else {
-              return {...current, diffTime: Number(buildingDiffTime)};
+              return {...current, diffTime: buildingDiffTime};
             }
 
             return null;
@@ -144,7 +137,7 @@ export default function App() {
     <>
       <ResourcesOverview currentResources={currentResources} />
       <Building
-        allBuildings={allBuildings}
+        buildingsTypes={buildingsTypes}
         currentBuildings={currentBuildings}
         addBuildingLevel={addBuildingLevel}
         currentBuildingBuild={currentBuildingBuild}

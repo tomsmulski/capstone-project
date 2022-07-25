@@ -1,5 +1,5 @@
-function buildingPrice(level, buildingType, resourcesType) {
-  if (buildingType === 1) {
+function buildingPrice(level, buildingId, resourcesType) {
+  if (buildingId === 4) {
     if (resourcesType === 'Money') {
       return 50 * Math.pow(1.3, level);
     }

@@ -4,23 +4,22 @@ import {buildingPrice} from '../../util/BuildingPrice';
 import {buildingTime} from '../../util/BuildingTime';
 import {productionResources} from '../../util/ResourcenProduction';
 
-export const Building = ({allBuildings, currentBuildings, addBuildingLevel, currentBuildingBuild}) => {
+export const Building = ({buildingsTypes, currentBuildings, addBuildingLevel, currentBuildingBuild}) => {
   function onHandleClickUpgrade(e) {
     const buildingId = e.target.dataset.buildid;
     const buildingBuildTime = e.target.dataset.buildtime;
 
-    addBuildingLevel(buildingId, buildingBuildTime);
+    addBuildingLevel(Number(buildingId), Number(buildingBuildTime));
   }
 
-  return allBuildings.map(building =>
+  return buildingsTypes.map(building =>
     currentBuildings.map(currentBuilding => {
-      if (building.id === currentBuilding.id) {
-        const nextLevel = currentBuilding.level + 1;
+      if (building.id === currentBuilding.buildingId) {
 
-        const buildPriceMoney = buildingPrice(nextLevel, building.type, 'Money');
-        const buildPriceIron = buildingPrice(nextLevel, building.type, 'Iron');
-        const buildTimeSeconds = buildingTime(1, buildPriceMoney, buildPriceIron);
-        const buildTimeFormated = buildingTime(2, buildPriceMoney, buildPriceIron);
+        const nextLevel = currentBuilding.level + 1;
+        const buildPriceMoney = buildingPrice(nextLevel, building.id, 'Money');
+        const buildPriceIron = buildingPrice(nextLevel, building.id, 'Iron');
+        const buildTime = buildingTime(buildPriceMoney, buildPriceIron);
 
         const buildInProgressButtonDisable = currentBuildingBuild === null ? false : true;
 
@@ -34,7 +33,7 @@ export const Building = ({allBuildings, currentBuildings, addBuildingLevel, curr
             </StyledBuildingArticle>
             <StyledBuildingArticle>
               <StyledBuildingSpan>
-                <StyledBuildingBuildTime>{buildTimeFormated}</StyledBuildingBuildTime>
+                <StyledBuildingBuildTime>{buildTime.buildTimeDisplay}</StyledBuildingBuildTime>
                 <StyledBuildingSpanUpgradeText>To upgrade to level {nextLevel} you need</StyledBuildingSpanUpgradeText>
               </StyledBuildingSpan>
 
@@ -49,10 +48,10 @@ export const Building = ({allBuildings, currentBuildings, addBuildingLevel, curr
                     return (
                       <Resource
                         key={buildMaterial.id}
-                        iconSize="small"                        
+                        iconSize="small"
                         currentRess={{
                           name: buildMaterial.name,
-                          value: buildingPrice(nextLevel, building.type, buildMaterial.name),
+                          value: buildingPrice(nextLevel, building.id, buildMaterial.name),
                         }}
                       />
                     );
@@ -64,7 +63,7 @@ export const Building = ({allBuildings, currentBuildings, addBuildingLevel, curr
                 <StyledBuildingButton
                   disabled={buildInProgressButtonDisable}
                   data-buildid={building.id}
-                  data-buildtime={buildTimeSeconds}
+                  data-buildtime={buildTime.buildTimeSeconds}
                   onClick={onHandleClickUpgrade}
                 >
                   {currentBuilding.level > 0 ? 'Upgrade' : 'Build'}
