@@ -1,18 +1,18 @@
 import {gameConfig} from './GameConfig';
 
-function buildingTime(money, iron) {
-  const buildTime = Math.floor((money + iron) / gameConfig.speed.buildingSpeed);
 
-  const weeks = Math.floor(buildTime / 3600 / 24 / 7);
-  const days = weeks > 1 ? Math.floor((buildTime / 3600 / 24) % 7) : Math.floor(buildTime / 3600 / 24);
-  const hours = days > 1 ? Math.floor((buildTime / 3600) % 24) : Math.floor(buildTime / 3600);
+function timeBuilder(seconds, counter = false){
+
+  const weeks = Math.floor(seconds / 3600 / 24 / 7);
+  const days = weeks > 1 ? Math.floor((seconds / 3600 / 24) % 7) : Math.floor(seconds / 3600 / 24);
+  const hours = days > 1 ? Math.floor((seconds / 3600) % 24) : Math.floor(seconds / 3600);
 
   const newTimeObject = {
     weeks,
     days,
     hours,
-    minutes: Math.floor((buildTime % 3600) / 60),
-    seconds: Math.floor((buildTime % 3600) % 60),
+    minutes: Math.floor((seconds % 3600) / 60),
+    seconds: Math.floor((seconds % 3600) % 60),
   };
 
   let dateString = '';
@@ -22,11 +22,24 @@ function buildingTime(money, iron) {
     } else {
       if (key === 'seconds') {
         dateString = '1s';
+        if(counter){
+          dateString = '0s';
+        }
+        
       }
     }
   }
 
-  return {buildTimeSeconds: buildTime > 0 ? buildTime : 1, buildTimeDisplay: dateString.trim()};
+  return dateString.trim();
+
 }
 
-export {buildingTime};
+
+
+function buildingTime(money, iron) {
+  const buildTime = Math.floor((money + iron) / gameConfig.speed.buildingSpeed);
+
+  return {buildTimeSeconds: buildTime > 0 ? buildTime : 1, buildTimeDisplay: timeBuilder(buildTime)};
+}
+
+export {buildingTime,timeBuilder};

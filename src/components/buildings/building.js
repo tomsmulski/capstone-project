@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {Resource} from '../resources/Resource';
 import {buildingPrice} from '../../util/BuildingPrice';
-import {buildingTime} from '../../util/BuildingTime';
+import {buildingTime,timeBuilder} from '../../util/BuildingTime';
 import {productionResources} from '../../util/ResourcenProduction';
 
 export const Building = ({buildingsTypes, currentBuildings, addBuildingLevel, currentBuildingBuild}) => {
@@ -22,6 +22,7 @@ export const Building = ({buildingsTypes, currentBuildings, addBuildingLevel, cu
         const buildTime = buildingTime(buildPriceMoney, buildPriceIron);
 
         const buildInProgressButtonDisable = currentBuildingBuild === null ? false : true;
+        const buildInProgressTime = currentBuildingBuild === null ? '' : timeBuilder(Math.floor(currentBuildingBuild.diffTime / 1000),true);
 
         return (
           <StyledBuildingSection key={building.id}>
@@ -60,7 +61,8 @@ export const Building = ({buildingsTypes, currentBuildings, addBuildingLevel, cu
               </StyledBuildingDiv>
 
               <StyledBuildingButtonDiv>
-                <StyledBuildingButton
+                <StyledBuildingProgressTime>{buildInProgressTime}</StyledBuildingProgressTime>
+                <StyledBuildingButton 
                   disabled={buildInProgressButtonDisable}
                   data-buildid={building.id}
                   data-buildtime={buildTime.buildTimeSeconds}
@@ -147,6 +149,15 @@ const StyledBuildingButtonDiv = styled.div`
 
 const StyledBuildingButton = styled.button`
   margin-top: 10px;
+  width: 120px;
+  height: 30px;
+  font-size: larger;
+`;
+
+const StyledBuildingProgressTime = styled.span`
+text-align: right;
+  margin-top: 14px;
+  margin-right: 5px;
   width: 120px;
   height: 30px;
   font-size: larger;
