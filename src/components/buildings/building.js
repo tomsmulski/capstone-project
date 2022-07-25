@@ -103,9 +103,6 @@ const StyledBuildingParagraph = styled.p`
   max-height: 40px;
   text-overflow: ellipsis;
   overflow: hidden;
-  display: -webkit-box !important;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
   white-space: normal;
   padding: 5px;
 `;
