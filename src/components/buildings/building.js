@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 import {Resource} from '../resources/Resource';
 import {buildingPrice} from '../../util/BuildingPrice';
-import {buildingTime,timeBuilder} from '../../util/BuildingTime';
+import {buildingTime, timeBuilder} from '../../util/BuildingTime';
 import {productionResources} from '../../util/ResourcenProduction';
 
-export const Building = ({buildingsTypes, currentBuildings, addBuildingLevel, currentBuildingBuild}) => {
+export const Building = ({
+  buildingsTypes,
+  currentBuildings,
+  addBuildingLevel,
+  currentBuildingBuild,
+  currentResources,
+}) => {
   function onHandleClickUpgrade(e) {
     const buildingId = e.target.dataset.buildid;
     const buildingBuildTime = e.target.dataset.buildtime;
@@ -12,16 +18,18 @@ export const Building = ({buildingsTypes, currentBuildings, addBuildingLevel, cu
     addBuildingLevel(Number(buildingId), Number(buildingBuildTime));
   }
 
-  return buildingsTypes.map((buildType)=>{
+  return buildingsTypes.map(buildType => {
+    const currentBuildType = currentBuildings.find(currentBuild => currentBuild.buildingId === buildType.id);
 
-    const currentBuildType = currentBuildings.find(currentBuild => currentBuild.buildingId === buildType.id)
-
-
-    const inProgressButton = 'In progress';
     let inProgressId = 0;
-    if(currentBuildingBuild !== null){
+    let buttonTexts = 'Build';
+
+    if (currentBuildingBuild !== null) {
       inProgressId = currentBuildingBuild.id;
+      buttonTexts = inProgressId === buildType.id ? 'in Progress' : buttonTexts;
     }
+
+    buttonTexts = currentBuildType.level > 0 ? 'Upgrade' : buttonTexts;
 
     const nextLevel = currentBuildType.level + 1;
     const buildPriceMoney = buildingPrice(nextLevel, buildType.id, 'Money');
@@ -29,8 +37,21 @@ export const Building = ({buildingsTypes, currentBuildings, addBuildingLevel, cu
     const buildTime = buildingTime(buildPriceMoney, buildPriceIron);
 
     const buildInProgressButtonDisable = currentBuildingBuild === null ? false : true;
-    const buildInProgressTime = currentBuildingBuild === null ? '' : timeBuilder(Math.round(currentBuildingBuild.diffTime / 1000));
+    const buildInProgressTime =
+      currentBuildingBuild === null ? '' : timeBuilder(Math.round(currentBuildingBuild.diffTime / 1000));
 
+    const buildPriceTextColor = [];
+    let notEnoughRescourceButtonDisable = false;
+    buildType.buildMaterials.forEach(buildMaterial => {
+      const currentRess = currentResources.find(currentRess => currentRess.id === buildMaterial.id);
+      const enoughRescource =
+        currentRess.value >= buildingPrice(nextLevel, buildType.id, buildMaterial.name) ? true : false;
+      const textColor = enoughRescource ? 'black' : 'red';
+      if (!enoughRescource) {
+        notEnoughRescourceButtonDisable = true;
+      }
+      buildPriceTextColor.push(textColor);
+    });
 
     return (
       <StyledBuildingSection key={buildType.id}>
@@ -48,29 +69,28 @@ export const Building = ({buildingsTypes, currentBuildings, addBuildingLevel, cu
 
           <StyledBuildingDiv>
             <StyledBuildingDiv2>
-            {buildType.productionMaterials.map(productionMaterial => {
+              {buildType.productionMaterials.map(productionMaterial => {
                 return (
                   <Resource
                     key={productionMaterial.id}
                     iconSize="small"
+                    displayValuePosition="right"
                     currentRess={{
                       name: productionMaterial.name,
-                      value: productionResources(productionMaterial.name ,nextLevel, true),
+                      value: productionResources(productionMaterial.name, nextLevel, buildType.id === 4 ? 'add':'remove',  true, 'difference'),
                     }}
                   />
                 );
               })}
-
             </StyledBuildingDiv2>
 
-            
             <StyledBuildingSpanRes>
-              {buildType.buildMaterials.map(buildMaterial => {
+              {buildType.buildMaterials.map((buildMaterial, key) => {
                 return (
                   <Resource
                     key={buildMaterial.id}
                     iconSize="small"
-                    color="black"
+                    color={buildPriceTextColor[key]}
                     currentRess={{
                       name: buildMaterial.name,
                       value: buildingPrice(nextLevel, buildType.id, buildMaterial.name),
@@ -83,21 +103,19 @@ export const Building = ({buildingsTypes, currentBuildings, addBuildingLevel, cu
 
           <StyledBuildingButtonDiv>
             <StyledBuildingProgressTime>{buildInProgressTime}</StyledBuildingProgressTime>
-            <StyledBuildingButton 
-              disabled={buildInProgressButtonDisable}
+            <StyledBuildingButton
+              disabled={buildInProgressButtonDisable || notEnoughRescourceButtonDisable}
               data-buildid={buildType.id}
               data-buildtime={buildTime.buildTimeSeconds}
               onClick={onHandleClickUpgrade}
             >
-              {inProgressId > 0 ? inProgressId !== buildType.id ? currentBuildType.level > 0 ? 'Upgrade' : 'Build' : inProgressButton : currentBuildType.level > 0 ? 'Upgrade' : 'Build'}
+              {buttonTexts}
             </StyledBuildingButton>
           </StyledBuildingButtonDiv>
         </StyledBuildingArticle>
       </StyledBuildingSection>
     );
-
-  })
-
+  });
 };
 
 const StyledBuildingSection = styled.section`
@@ -181,7 +199,7 @@ const StyledBuildingButton = styled.button`
 `;
 
 const StyledBuildingProgressTime = styled.span`
-text-align: right;
+  text-align: right;
   margin-top: 14px;
   margin-right: 5px;
   width: 120px;

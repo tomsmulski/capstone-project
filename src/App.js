@@ -136,7 +136,7 @@ export default function App() {
                       setCurrentResources(current =>
                         current.map(obj => {
                           if (obj.id === 5) {
-                            return {...obj, value: objBuilding.buildingId === 4 ? productionResources(obj.name, updateToLevel) : -productionResources(obj.name, updateToLevel)};
+                            return {...obj, value: objBuilding.buildingId === 4 ? obj.value + productionResources(obj.name, updateToLevel,'add') : obj.value + productionResources(obj.name, updateToLevel,'remove')};
                           }
                           return obj;
                         })
@@ -191,6 +191,7 @@ export default function App() {
         currentBuildings={currentBuildings}
         addBuildingLevel={addBuildingLevel}
         currentBuildingBuild={currentBuildingBuild}
+        currentResources={currentResources}
       />
     </>
   );
