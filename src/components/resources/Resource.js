@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
-export const Resource = ({currentRes}) => {
-
-  const lowercaseName = currentRes.name.charAt(0).toLowerCase() + currentRes.name.slice(1);
+export const Resource = ({currentRess,displayValuePosition,iconSize}) => {
+  const lowercaseName = currentRess.name.charAt(0).toLowerCase() + currentRess.name.slice(1);
 
   return (
-    <StyledResourceSection>
+    <StyledResourceSection displayValuePosition={displayValuePosition}>
       <StyledResourceIcon
-        alt={currentRes.name}
+        alt={currentRess.name}
         src={'../images/icons/icon_' + lowercaseName + '.jpg'}
+        iconSize={iconSize}
       ></StyledResourceIcon>
-      <StyledResourceSpanNumber>{Math.floor(currentRes.value)}</StyledResourceSpanNumber>
+      <StyledResourceSpanNumber>{Math.floor(currentRess.value)}</StyledResourceSpanNumber>
     </StyledResourceSection>
   );
 };
@@ -18,15 +18,17 @@ export const Resource = ({currentRes}) => {
 const StyledResourceSection = styled.section`
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: ${props => (props.displayValuePosition === 'right' ? 'row' : 'column')};
   align-items: center;
 `;
 
 const StyledResourceSpanNumber = styled.span`
-  font-size: larger;
+  font-size: large;
+  color: ${props => props.color};
 `;
 
 const StyledResourceIcon = styled.img`
   width: 34px;
   height: 34px;
+  ${props => props.iconSize !== 'small' || 'padding:4px'};
 `;

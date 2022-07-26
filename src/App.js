@@ -1,63 +1,147 @@
 import {useState, useEffect} from 'react';
 import {ResourcesOverview} from './components/resources/ResourcesOverview';
+import {Building} from './components/buildings/building';
+import {gameConfig} from './util/GameConfig';
+import {productionResources} from './util/ResourcenProduction';
+import {buildingPrice} from './util/BuildingPrice';
 
-const gameSpeed = 1000;
+const userResources = [
+  {id: 1, name: 'Money', value: gameConfig.resourcesTypes.money.startResources},
+  {id: 2, name: 'Iron', value: gameConfig.resourcesTypes.iron.startResources},
+  {id: 3, name: 'Fuel', value: gameConfig.resourcesTypes.fuel.startResources},
+  {id: 4, name: 'Gold', value: gameConfig.resourcesTypes.gold.startResources},
+  {id: 5, name: 'Energy', value: gameConfig.resourcesTypes.energy.startResources},
+];
 
-const startResourceMoney = 1000;
-const startResourceIron = 500;
-const startResourceFuel = 0;
-const startResourceGold = 0;
-const startResourceEnergy = 0;
+const buildingsTypes = [
+  {
+    id: 4,
+    name: 'Windpower Plant',
+    buildMaterials: [
+      {id: 1, name: 'Money'},
+      {id: 2, name: 'Iron'},
+    ],
+    description:
+      'A Windpower plant converts the kinetic energy of the wind into electrical energy and feeds it into an electricity grid. Colloquially, the terms wind power plant or simply wind turbine are also used.',
+  },
+];
 
-const basicProductionMoney = 20;
-const basicProductionIron = 10;
-
-function productionMoney(currentLevel) {
-  return Math.floor((30 * currentLevel * Math.pow(currentLevel, 1.1) + basicProductionMoney) * gameSpeed);
-}
-
-function productionIron(currentLevel) {
-  return Math.floor((20 * currentLevel * Math.pow(currentLevel, 1.1) + basicProductionIron) * gameSpeed);
-}
-
-function productionFuel(currentLevel) {
-  return Math.floor(10 * currentLevel * Math.pow(currentLevel, 1.1) * gameSpeed);
-}
+const userBuildings = [{buildingId: 4, level: 0}];
 
 export default function App() {
-  
-  const [currentMoney, setCurrentMoney] = useState(startResourceMoney);
-  const [currentIron, setCurrentIron] = useState(startResourceIron);
-  const [currentFuel, setCurrentFuel] = useState(startResourceFuel);
-  const [currentGold] = useState(startResourceGold);
-  const [currentEnergy] = useState(startResourceEnergy);
+  const [currentBuildingBuild, setCurrentBuildingBuild] = useState(null);
+  const [currentResources, setCurrentResources] = useState(userResources);
+  const [currentBuildings, setCurrentBuildings] = useState(userBuildings);
 
-  useEffect(()=>{
-    setTimeout(() => {
-      const productionEachSecondMoney = productionMoney(0) / 3600;
-      const productionEachSecondIron = productionIron(0) / 3600;
-      const productionEachSecondFuel = productionFuel(0) / 3600;
-  
-      setCurrentMoney(currentMoney + productionEachSecondMoney);
-      setCurrentIron(currentIron + productionEachSecondIron);
-      setCurrentFuel(currentFuel + productionEachSecondFuel);
-    }, 1000);
-  },[currentMoney,currentIron,currentFuel])
+  function addBuildingLevel(buildingId, buildingBuildTime) {
+    if (currentBuildingBuild === null) {
+      const currentBuilding = currentBuildings.find(
+        currentBuilding => currentBuilding.buildingId === buildingId
+      );
+      const nextBuildingLevel = currentBuilding.level + 1;
+      const progressBuildingTime = buildingBuildTime * 1000;
 
+      const startBuildingTime = Date.now();
+      const endBuildingTime = startBuildingTime + progressBuildingTime;
 
+      setCurrentBuildingBuild({
+        id: buildingId,
+        startTime: startBuildingTime,
+        endTime: endBuildingTime,
+        diffTime: progressBuildingTime,
+        toLevel: nextBuildingLevel,
+      });
 
+      const buildingType = buildingsTypes.find(buildingType => buildingType.id === buildingId);
 
-  const mainResoures = [
-    {id: 1, name: 'Money', value: currentMoney},
-    {id: 2, name: 'Iron', value: currentIron},
-    {id: 3, name: 'Fuel', value: currentFuel},
-    {id: 4, name: 'Gold', value: currentGold},
-    {id: 5, name: 'Energy', value: currentEnergy},
-  ];
+      buildingType.buildMaterials.forEach(material => {
+        setCurrentResources(currentRess =>
+          currentRess.map(objRess => {
+            if (objRess.id === material.id) {
+              return {
+                ...objRess,
+                value: objRess.value - buildingPrice(nextBuildingLevel, buildingType.id, material.name),
+              };
+            }
+            return objRess;
+          })
+        );
+      });
+    }
+  }
+
+  useEffect(() => {
+    if (currentBuildingBuild !== null) {
+      const interval = setInterval(
+        () =>
+          setCurrentBuildingBuild(current => {
+            const timeNow = Date.now();
+            const endBuildTime = current.endTime;
+
+            const buildingDiffTime = endBuildTime - timeNow;
+
+            if (buildingDiffTime < 0) {
+              setCurrentBuildings(currentBuilding =>
+                currentBuilding.map(objBuilding => {
+                  if (objBuilding.buildingId === current.id) {
+                    if (current.toLevel !== objBuilding.level) {
+                      const updateToLevel = objBuilding.level + 1;
+
+                      setCurrentResources(current =>
+                        current.map(obj => {
+                          if (obj.id === 5) {
+                            return {...obj, value: productionResources(obj.name, updateToLevel)};
+                          }
+                          return obj;
+                        })
+                      );
+
+                      return {...objBuilding, level: updateToLevel};
+                    }
+                  }
+                  return objBuilding;
+                })
+              );
+            } else {
+              return {...current, diffTime: buildingDiffTime};
+            }
+
+            return null;
+          }),
+        1000
+      );
+
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [currentBuildingBuild]);
+
+  useEffect(() => {
+    const interval = setInterval(
+      () =>
+        setCurrentResources(current =>
+          current.map(obj => {
+            return {...obj, value: obj.value + productionResources(obj.name, 0)};
+          })
+        ),
+      1000
+    );
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [currentResources]);
 
   return (
     <>
-      <ResourcesOverview currentResource={mainResoures} />
+      <ResourcesOverview currentResources={currentResources} />
+      <Building
+        buildingsTypes={buildingsTypes}
+        currentBuildings={currentBuildings}
+        addBuildingLevel={addBuildingLevel}
+        currentBuildingBuild={currentBuildingBuild}
+      />
     </>
   );
 }
