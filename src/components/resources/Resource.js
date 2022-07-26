@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Resource = ({currentRess,displayValuePosition,iconSize}) => {
+export const Resource = ({currentRess,displayValuePosition,iconSize, color}) => {
   const lowercaseName = currentRess.name.charAt(0).toLowerCase() + currentRess.name.slice(1);
 
   return (
@@ -10,7 +10,7 @@ export const Resource = ({currentRess,displayValuePosition,iconSize}) => {
         src={'../images/icons/icon_' + lowercaseName + '.jpg'}
         iconSize={iconSize}
       ></StyledResourceIcon>
-      <StyledResourceSpanNumber>{Math.floor(currentRess.value)}</StyledResourceSpanNumber>
+      <StyledResourceSpanNumber color={color}>{Math.floor(currentRess.value)}</StyledResourceSpanNumber>
     </StyledResourceSection>
   );
 };

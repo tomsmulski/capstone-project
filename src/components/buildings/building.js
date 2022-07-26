@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {Resource} from '../resources/Resource';
 import {buildingPrice} from '../../util/BuildingPrice';
-import {buildingTime} from '../../util/BuildingTime';
+import {buildingTime,timeBuilder} from '../../util/BuildingTime';
 import {productionResources} from '../../util/ResourcenProduction';
 
 export const Building = ({buildingsTypes, currentBuildings, addBuildingLevel, currentBuildingBuild}) => {
@@ -12,70 +12,92 @@ export const Building = ({buildingsTypes, currentBuildings, addBuildingLevel, cu
     addBuildingLevel(Number(buildingId), Number(buildingBuildTime));
   }
 
-  return buildingsTypes.map(building =>
-    currentBuildings.map(currentBuilding => {
-      if (building.id === currentBuilding.buildingId) {
+  return buildingsTypes.map((buildType)=>{
 
-        const nextLevel = currentBuilding.level + 1;
-        const buildPriceMoney = buildingPrice(nextLevel, building.id, 'Money');
-        const buildPriceIron = buildingPrice(nextLevel, building.id, 'Iron');
-        const buildTime = buildingTime(buildPriceMoney, buildPriceIron);
+    const currentBuildType = currentBuildings.find(currentBuild => currentBuild.buildingId === buildType.id)
 
-        const buildInProgressButtonDisable = currentBuildingBuild === null ? false : true;
 
-        return (
-          <StyledBuildingSection key={building.id}>
-            <StyledBuildingArticle>
-              <StyledBuildingH1>
-                {building.name} ({currentBuilding.level})
-              </StyledBuildingH1>
-              <StyledBuildingParagraph>{building.description}</StyledBuildingParagraph>
-            </StyledBuildingArticle>
-            <StyledBuildingArticle>
-              <StyledBuildingSpan>
-                <StyledBuildingBuildTime>{buildTime.buildTimeDisplay}</StyledBuildingBuildTime>
-                <StyledBuildingSpanUpgradeText>To upgrade to level {nextLevel} you need</StyledBuildingSpanUpgradeText>
-              </StyledBuildingSpan>
+    const inProgressButton = 'In progress';
+    let inProgressId = 0;
+    if(currentBuildingBuild !== null){
+      inProgressId = currentBuildingBuild.id;
+    }
 
-              <StyledBuildingDiv>
-                <Resource
-                  displayValuePosition="right"
-                  iconSize="small"
-                  currentRess={{name: 'Energy', value: productionResources('Energy', nextLevel)}}
-                />
-                <StyledBuildingSpanRes>
-                  {building.buildMaterials.map(buildMaterial => {
-                    return (
-                      <Resource
-                        key={buildMaterial.id}
-                        iconSize="small"
-                        currentRess={{
-                          name: buildMaterial.name,
-                          value: buildingPrice(nextLevel, building.id, buildMaterial.name),
-                        }}
-                      />
-                    );
-                  })}
-                </StyledBuildingSpanRes>
-              </StyledBuildingDiv>
+    const nextLevel = currentBuildType.level + 1;
+    const buildPriceMoney = buildingPrice(nextLevel, buildType.id, 'Money');
+    const buildPriceIron = buildingPrice(nextLevel, buildType.id, 'Iron');
+    const buildTime = buildingTime(buildPriceMoney, buildPriceIron);
 
-              <StyledBuildingButtonDiv>
-                <StyledBuildingButton
-                  disabled={buildInProgressButtonDisable}
-                  data-buildid={building.id}
-                  data-buildtime={buildTime.buildTimeSeconds}
-                  onClick={onHandleClickUpgrade}
-                >
-                  {currentBuilding.level > 0 ? 'Upgrade' : 'Build'}
-                </StyledBuildingButton>
-              </StyledBuildingButtonDiv>
-            </StyledBuildingArticle>
-          </StyledBuildingSection>
-        );
-      }
-      return currentBuilding;
-    })
-  );
+    const buildInProgressButtonDisable = currentBuildingBuild === null ? false : true;
+    const buildInProgressTime = currentBuildingBuild === null ? '' : timeBuilder(Math.round(currentBuildingBuild.diffTime / 1000));
+
+
+    return (
+      <StyledBuildingSection key={buildType.id}>
+        <StyledBuildingArticle>
+          <StyledBuildingH1>
+            {buildType.name} ({currentBuildType.level})
+          </StyledBuildingH1>
+          <StyledBuildingParagraph>{buildType.description}</StyledBuildingParagraph>
+        </StyledBuildingArticle>
+        <StyledBuildingArticle>
+          <StyledBuildingSpan>
+            <StyledBuildingBuildTime>{buildTime.buildTimeDisplay}</StyledBuildingBuildTime>
+            <StyledBuildingSpanUpgradeText>To upgrade to level {nextLevel} you need</StyledBuildingSpanUpgradeText>
+          </StyledBuildingSpan>
+
+          <StyledBuildingDiv>
+            <StyledBuildingDiv2>
+            {buildType.productionMaterials.map(productionMaterial => {
+                return (
+                  <Resource
+                    key={productionMaterial.id}
+                    iconSize="small"
+                    currentRess={{
+                      name: productionMaterial.name,
+                      value: productionResources(productionMaterial.name ,nextLevel, true),
+                    }}
+                  />
+                );
+              })}
+
+            </StyledBuildingDiv2>
+
+            
+            <StyledBuildingSpanRes>
+              {buildType.buildMaterials.map(buildMaterial => {
+                return (
+                  <Resource
+                    key={buildMaterial.id}
+                    iconSize="small"
+                    color="black"
+                    currentRess={{
+                      name: buildMaterial.name,
+                      value: buildingPrice(nextLevel, buildType.id, buildMaterial.name),
+                    }}
+                  />
+                );
+              })}
+            </StyledBuildingSpanRes>
+          </StyledBuildingDiv>
+
+          <StyledBuildingButtonDiv>
+            <StyledBuildingProgressTime>{buildInProgressTime}</StyledBuildingProgressTime>
+            <StyledBuildingButton 
+              disabled={buildInProgressButtonDisable}
+              data-buildid={buildType.id}
+              data-buildtime={buildTime.buildTimeSeconds}
+              onClick={onHandleClickUpgrade}
+            >
+              {inProgressId > 0 ? inProgressId !== buildType.id ? currentBuildType.level > 0 ? 'Upgrade' : 'Build' : inProgressButton : currentBuildType.level > 0 ? 'Upgrade' : 'Build'}
+            </StyledBuildingButton>
+          </StyledBuildingButtonDiv>
+        </StyledBuildingArticle>
+      </StyledBuildingSection>
+    );
+
+  })
+
 };
 
 const StyledBuildingSection = styled.section`
@@ -117,6 +139,12 @@ const StyledBuildingDiv = styled.div`
   justify-content: space-between;
 `;
 
+const StyledBuildingDiv2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
 const StyledBuildingSpanRes = styled.span`
   width: 30%;
   display: flex;
@@ -147,6 +175,15 @@ const StyledBuildingButtonDiv = styled.div`
 
 const StyledBuildingButton = styled.button`
   margin-top: 10px;
+  width: 120px;
+  height: 30px;
+  font-size: larger;
+`;
+
+const StyledBuildingProgressTime = styled.span`
+text-align: right;
+  margin-top: 14px;
+  margin-right: 5px;
   width: 120px;
   height: 30px;
   font-size: larger;

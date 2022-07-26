@@ -15,18 +15,66 @@ const userResources = [
 
 const buildingsTypes = [
   {
+    id: 1,
+    name: 'Money Factory',
+    buildMaterials: [
+      {id: 1, name: 'Money'},
+      {id: 2, name: 'Iron'},
+    ],
+    productionMaterials: [
+      {id: 1, name: 'Money'},
+      {id: 5, name: 'Energy'},
+    ],
+    description:
+      'A Windpower plant converts the kinetic energy of the wind into electrical energy and feeds it into an electricity grid. Colloquially, the terms wind power plant or simply wind turbine are also used.',
+  },
+  {
+    id: 2,
+    name: 'Iron Foundry',
+    buildMaterials: [
+      {id: 1, name: 'Money'},
+      {id: 2, name: 'Iron'},
+    ],
+    productionMaterials: [
+      {id: 2, name: 'Iron'},
+      {id: 5, name: 'Energy'},
+    ],
+    description:
+      'A Windpower plant converts the kinetic energy of the wind into electrical energy and feeds it into an electricity grid. Colloquially, the terms wind power plant or simply wind turbine are also used.',
+  },
+  {
+    id: 3,
+    name: 'Oil Refinery',
+    buildMaterials: [
+      {id: 1, name: 'Money'},
+      {id: 2, name: 'Iron'},
+    ],
+    productionMaterials: [
+      {id: 3, name: 'Fuel'},
+      {id: 5, name: 'Energy'},
+    ],
+    description:
+      'A Windpower plant converts the kinetic energy of the wind into electrical energy and feeds it into an electricity grid. Colloquially, the terms wind power plant or simply wind turbine are also used.',
+  },
+  {
     id: 4,
     name: 'Windpower Plant',
     buildMaterials: [
       {id: 1, name: 'Money'},
       {id: 2, name: 'Iron'},
     ],
+    productionMaterials: [{id: 5, name: 'Energy'}],
     description:
       'A Windpower plant converts the kinetic energy of the wind into electrical energy and feeds it into an electricity grid. Colloquially, the terms wind power plant or simply wind turbine are also used.',
   },
 ];
 
-const userBuildings = [{buildingId: 4, level: 0}];
+const userBuildings = [
+  {buildingId: 1, level: 0},
+  {buildingId: 2, level: 0},
+  {buildingId: 3, level: 0},
+  {buildingId: 4, level: 0},
+];
 
 export default function App() {
   const [currentBuildingBuild, setCurrentBuildingBuild] = useState(null);
@@ -35,9 +83,7 @@ export default function App() {
 
   function addBuildingLevel(buildingId, buildingBuildTime) {
     if (currentBuildingBuild === null) {
-      const currentBuilding = currentBuildings.find(
-        currentBuilding => currentBuilding.buildingId === buildingId
-      );
+      const currentBuilding = currentBuildings.find(currentBuilding => currentBuilding.buildingId === buildingId);
       const nextBuildingLevel = currentBuilding.level + 1;
       const progressBuildingTime = buildingBuildTime * 1000;
 
@@ -90,7 +136,7 @@ export default function App() {
                       setCurrentResources(current =>
                         current.map(obj => {
                           if (obj.id === 5) {
-                            return {...obj, value: productionResources(obj.name, updateToLevel)};
+                            return {...obj, value: objBuilding.buildingId === 4 ? productionResources(obj.name, updateToLevel) : -productionResources(obj.name, updateToLevel)};
                           }
                           return obj;
                         })
@@ -122,7 +168,11 @@ export default function App() {
       () =>
         setCurrentResources(current =>
           current.map(obj => {
-            return {...obj, value: obj.value + productionResources(obj.name, 0)};
+            if (obj.id < 4) {
+              const currentBuildingLevel = currentBuildings.find(currBuild => currBuild.buildingId === obj.id);
+              return {...obj, value: obj.value + productionResources(obj.name, currentBuildingLevel.level)};
+            }
+            return obj;
           })
         ),
       1000
@@ -131,7 +181,7 @@ export default function App() {
     return () => {
       clearInterval(interval);
     };
-  }, [currentResources]);
+  }, [currentResources, currentBuildings]);
 
   return (
     <>
