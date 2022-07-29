@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import {ResourcesOverview} from './components/resources/ResourcesOverview';
-import {Building} from './components/buildings/building';
+import {Building} from './components/building/building';
 import {gameConfig} from './util/GameConfig';
 import {productionResources} from './util/ResourcenProduction';
 import {buildingPrice} from './util/BuildingPrice';
