@@ -4,6 +4,9 @@ import {Building} from './components/buildings/building';
 import {gameConfig} from './util/GameConfig';
 import {productionResources} from './util/ResourcenProduction';
 import {buildingPrice} from './util/BuildingPrice';
+import {getBuildingsTypes} from './services/buildingstypes';
+import {getResourcesTypes} from './services/resourcestypes';
+import {getUserCitys} from './services/usercitys';
 
 const userResources = [
   {id: 1, name: 'Money', value: gameConfig.resourcesTypes.money.startResources},
@@ -12,6 +15,25 @@ const userResources = [
   {id: 4, name: 'Gold', value: gameConfig.resourcesTypes.gold.startResources},
   {id: 5, name: 'Energy', value: gameConfig.resourcesTypes.energy.startResources},
 ];
+
+let buildingsTypesNew,resourcesTypesNew,userCitys;
+
+async function loadingGameDatas() {
+  try {
+    buildingsTypesNew = await getBuildingsTypes();
+    resourcesTypesNew = await getResourcesTypes();
+    userCitys = await getUserCitys();
+
+    console.log(buildingsTypesNew);
+    console.log(resourcesTypesNew);
+    console.log(userCitys);
+  } catch (error) {
+    //alert('loading Game datas Fail');
+  }
+}
+
+
+loadingGameDatas();
 
 const buildingsTypes = [
   {
@@ -81,6 +103,7 @@ export default function App() {
   const [currentResources, setCurrentResources] = useState(userResources);
   const [currentBuildings, setCurrentBuildings] = useState(userBuildings);
 
+
   function addBuildingLevel(buildingId, buildingBuildTime) {
     if (currentBuildingBuild === null) {
       const currentBuilding = currentBuildings.find(currentBuilding => currentBuilding.buildingId === buildingId);
@@ -116,6 +139,7 @@ export default function App() {
     }
   }
 
+
   useEffect(() => {
     if (currentBuildingBuild !== null) {
       const interval = setInterval(
@@ -136,7 +160,13 @@ export default function App() {
                       setCurrentResources(current =>
                         current.map(obj => {
                           if (obj.id === 5) {
-                            return {...obj, value: objBuilding.buildingId === 4 ? obj.value + productionResources(obj.name, updateToLevel,'add') : obj.value + productionResources(obj.name, updateToLevel,'remove')};
+                            return {
+                              ...obj,
+                              value:
+                                objBuilding.buildingId === 4
+                                  ? obj.value + productionResources(obj.name, updateToLevel, 'add')
+                                  : obj.value + productionResources(obj.name, updateToLevel, 'remove'),
+                            };
                           }
                           return obj;
                         })

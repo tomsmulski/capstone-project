@@ -3,6 +3,8 @@ import {Resource} from '../resources/Resource';
 import {buildingPrice} from '../../util/BuildingPrice';
 import {buildingTime, timeBuilder} from '../../util/BuildingTime';
 import {productionResources} from '../../util/ResourcenProduction';
+import Button from './../button/button';
+
 
 export const Building = ({
   buildingsTypes,
@@ -28,8 +30,7 @@ export const Building = ({
       inProgressId = currentBuildingBuild.id;
       buttonTexts = inProgressId === buildType.id ? 'in Progress' : buttonTexts;
     }
-
-    buttonTexts = currentBuildType.level > 0 ? 'Upgrade' : buttonTexts;
+    buttonTexts = currentBuildType.level > 0 && buttonTexts !== 'in Progress' ? 'Upgrade' : buttonTexts;
 
     const nextLevel = currentBuildType.level + 1;
     const buildPriceMoney = buildingPrice(nextLevel, buildType.id, 'Money');
@@ -77,7 +78,13 @@ export const Building = ({
                     displayValuePosition="right"
                     currentRess={{
                       name: productionMaterial.name,
-                      value: productionResources(productionMaterial.name, nextLevel, buildType.id === 4 ? 'add':'remove',  true, 'difference'),
+                      value: productionResources(
+                        productionMaterial.name,
+                        nextLevel,
+                        buildType.id === 4 ? 'add' : 'remove',
+                        true,
+                        'difference'
+                      ),
                     }}
                   />
                 );
@@ -103,14 +110,15 @@ export const Building = ({
 
           <StyledBuildingButtonDiv>
             <StyledBuildingProgressTime>{buildInProgressTime}</StyledBuildingProgressTime>
-            <StyledBuildingButton
+            <Button
               disabled={buildInProgressButtonDisable || notEnoughRescourceButtonDisable}
-              data-buildid={buildType.id}
-              data-buildtime={buildTime.buildTimeSeconds}
-              onClick={onHandleClickUpgrade}
+              buildId={buildType.id}
+              buildTime={buildTime.buildTimeSeconds}
+              onHandleClick={onHandleClickUpgrade}
+              buttonText={buttonTexts}
             >
               {buttonTexts}
-            </StyledBuildingButton>
+            </Button>
           </StyledBuildingButtonDiv>
         </StyledBuildingArticle>
       </StyledBuildingSection>

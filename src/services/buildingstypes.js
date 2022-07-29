@@ -3,7 +3,7 @@ export const getBuildingsTypes = async () => {
       const response = await fetch(`/api/buildingstypes`);
       if (response.ok) {
         const buildingstypes = await response.json();
-        return buildingstypes;
+        return await buildingstypes;
       } else {
         throw new Error(`${response.status}`);
       }

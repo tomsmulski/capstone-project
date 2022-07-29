@@ -13,6 +13,7 @@ function productionResources(name, level, eneryType = null, display = false, dis
         resultValue = -Math.ceil(10 * level * Math.pow(1.1, level));
       }
     } else {
+      
       resultValue = Math.floor(
         (amount * level * Math.pow(1.1, level) +
           (ressource === 'fuel' ? 0 : gameConfig.resourcesTypes[ressource].basicProduction)) *
