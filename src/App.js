@@ -16,24 +16,30 @@ const userResources = [
   {id: 5, name: 'Energy', value: gameConfig.resourcesTypes.energy.startResources},
 ];
 
-let buildingsTypesNew,resourcesTypesNew,userCitys;
+let buildingsTypesNew = [];
+let resourcesTypesNew = [];
+let userCitys = [];
 
 async function loadingGameDatas() {
   try {
+
     buildingsTypesNew = await getBuildingsTypes();
     resourcesTypesNew = await getResourcesTypes();
     userCitys = await getUserCitys();
 
-    console.log(buildingsTypesNew);
-    console.log(resourcesTypesNew);
-    console.log(userCitys);
+    if(buildingsTypesNew !== null && resourcesTypesNew !== null && userCitys !== null){
+      console.log('alles true')
+    }
+
+
   } catch (error) {
     //alert('loading Game datas Fail');
   }
 }
 
-
 loadingGameDatas();
+// hier warten auf daten per Promise
+
 
 const buildingsTypes = [
   {
@@ -92,16 +98,19 @@ const buildingsTypes = [
 ];
 
 const userBuildings = [
-  {buildingId: 1, level: 0},
+  {buildingId: 1, level: 10},
   {buildingId: 2, level: 0},
   {buildingId: 3, level: 0},
   {buildingId: 4, level: 0},
 ];
 
+
 export default function App() {
+ 
   const [currentBuildingBuild, setCurrentBuildingBuild] = useState(null);
   const [currentResources, setCurrentResources] = useState(userResources);
   const [currentBuildings, setCurrentBuildings] = useState(userBuildings);
+
 
 
   function addBuildingLevel(buildingId, buildingBuildTime) {
@@ -140,6 +149,7 @@ export default function App() {
   }
 
 
+
   useEffect(() => {
     if (currentBuildingBuild !== null) {
       const interval = setInterval(
@@ -158,12 +168,7 @@ export default function App() {
                       const updateToLevel = objBuilding.level + 1;
 
                       setCurrentResources(current =>
-                        current.map(obj => {
-                          if (obj.id === 5) {
-                            return {
-                              ...obj,
-                              value:
-                                objBuilding.buildingId === 4
+                        current.map(obj => {if (obj.id === 5) {return {...obj,value: objBuilding.buildingId === 4
                                   ? obj.value + productionResources(obj.name, updateToLevel, 'add')
                                   : obj.value + productionResources(obj.name, updateToLevel, 'remove'),
                             };
@@ -213,7 +218,13 @@ export default function App() {
     };
   }, [currentResources, currentBuildings]);
 
+
+  if(buildingsTypesNew.length > 0 && resourcesTypesNew.length > 0 && userCitys.length > 0){
+
+
+ 
   return (
+
     <>
       <ResourcesOverview currentResources={currentResources} />
       <Building
@@ -225,4 +236,12 @@ export default function App() {
       />
     </>
   );
+}else{
+  return (
+
+    <>
+    <div>LOADING .... {Date.now()}</div>
+    </>
+  ); 
+}
 }

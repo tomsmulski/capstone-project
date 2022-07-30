@@ -11,7 +11,7 @@ export const getResourcesTypes = async () => {
       console.log(err);
       throw err;
     }
-  };
+};
   
 
   
