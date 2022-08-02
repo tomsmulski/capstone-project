@@ -46,7 +46,7 @@ export default function Buildingcard({
                     value: productionResources(
                       productionMaterial.resourceType,
                       currentBuildLevel + 1,
-                      buildType.id === 4 ? 'add' : 'remove',
+                      buildId === '62e7dbb7cefed5e153f6bb88' ? 'add' : 'remove',
                       true,
                       'difference'
                     ),
