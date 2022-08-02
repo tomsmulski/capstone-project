@@ -3,7 +3,9 @@ import {gameConfig} from './GameConfig';
 const resourcenProductionsInterval = 3600;
 
 function productionResources(name, level, eneryType = null, display = false, displayType = null) {
+
   function calculateRessoureces(ressource, amount) {
+
     let resultValue = 0;
 
     if (ressource === 'energy') {
@@ -38,11 +40,11 @@ function productionResources(name, level, eneryType = null, display = false, dis
   }
 
   const ressources = {
-    Money: calculateRessoureces(name.toLowerCase(), 30),
-    Iron: calculateRessoureces(name.toLowerCase(), 20),
-    Fuel: calculateRessoureces(name.toLowerCase(), 10),
-    Gold: 0,
-    Energy: calculateRessoureces(name.toLowerCase(), 20),
+    money: calculateRessoureces(name.toLowerCase(), 30),
+    iron: calculateRessoureces(name.toLowerCase(), 20),
+    fuel: calculateRessoureces(name.toLowerCase(), 10),
+    gold: 0,
+    energy: calculateRessoureces(name.toLowerCase(), 20),
   };
 
   return ressources[name];

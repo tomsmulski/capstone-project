@@ -42,9 +42,9 @@ export default function Buildingcard({
                   iconSize="small"
                   displayValuePosition="right"
                   currentRess={{
-                    name: productionMaterial.name,
+                    name: productionMaterial.resourceType,
                     value: productionResources(
-                      productionMaterial.name,
+                      productionMaterial.resourceType,
                       currentBuildLevel + 1,
                       buildType.id === 4 ? 'add' : 'remove',
                       true,
@@ -57,15 +57,15 @@ export default function Buildingcard({
           </StyledBuildYieldInfo>
 
           <StyledBuildPriceInfo>
-            {buildPrice.map((buildMaterial, key) => {
+            {buildPrice.map((buildMaterial, index) => {
               return (
                 <Resource
                   key={buildMaterial.id}
                   iconSize="small"
-                  color={buildPriceTextColor[key]}
+                  color={buildPriceTextColor[index]}
                   currentRess={{
-                    name: buildMaterial.name,
-                    value: buildingPrice(currentBuildLevel + 1, buildId, buildMaterial.name),
+                    name: buildMaterial.resourceType,
+                    value: buildingPrice(currentBuildLevel + 1, buildId, buildMaterial.resourceType),
                   }}
                 />
               );

@@ -1,7 +1,7 @@
 export const gameConfig = Object.freeze({
   speed: {
-    buildingSpeed: 100,
-    resourcesSpeed: 100,
+    buildingSpeed: 20,
+    resourcesSpeed: 10,
   },
   resourcesTypes: {
     money: {id: 1, name: 'Money', startResources: 500, basicProduction: 20},
