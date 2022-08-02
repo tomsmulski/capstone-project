@@ -1,8 +1,6 @@
 import {gameConfig} from './GameConfig';
 
-
-function timeBuilder(seconds){
-
+function timeBuilder(seconds) {
   const weeks = Math.floor(seconds / 3600 / 24 / 7);
   const days = weeks > 1 ? Math.floor((seconds / 3600 / 24) % 7) : Math.floor(seconds / 3600 / 24);
   const hours = days > 1 ? Math.floor((seconds / 3600) % 24) : Math.floor(seconds / 3600);
@@ -27,10 +25,7 @@ function timeBuilder(seconds){
   }
 
   return dateString.trim();
-
 }
-
-
 
 function buildingTime(money, iron) {
   const buildTime = Math.floor((money + iron) / gameConfig.speed.buildingSpeed);
@@ -38,4 +33,4 @@ function buildingTime(money, iron) {
   return {buildTimeSeconds: buildTime > 0 ? buildTime : 1, buildTimeDisplay: timeBuilder(buildTime)};
 }
 
-export {buildingTime,timeBuilder};
+export {buildingTime, timeBuilder};

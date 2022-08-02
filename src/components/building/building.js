@@ -25,9 +25,7 @@ export const Building = () => {
       const startBuildingTime = Date.now();
       const endBuildingTime = startBuildingTime + progressBuildingTime;
 
-
-      addBuildingToBuild(0,buildingId,startBuildingTime,endBuildingTime,progressBuildingTime,nextBuildingLevel);
-
+      addBuildingToBuild(0, buildingId, startBuildingTime, endBuildingTime, progressBuildingTime, nextBuildingLevel);
 
       const buildingType = gameBuildingsTypes.find(buildingType => buildingType.id === buildingId);
 
@@ -75,7 +73,6 @@ export const Building = () => {
       currentUserBuildingInProgress.length === 0
         ? ''
         : timeBuilder(Math.round(currentUserBuildingInProgress[0].diffTime / 1000));
-
 
     let buildPriceTextColor = [];
     let notEnoughRescourceButtonDisable = false;
