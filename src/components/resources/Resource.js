@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Resource = ({currentRess, displayValuePosition, iconSize, color}) => {
+
   return (
     <StyledResourceSection displayValuePosition={displayValuePosition}>
       <StyledResourceIcon
