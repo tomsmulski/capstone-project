@@ -19,7 +19,7 @@ function timeBuilder(seconds) {
       dateString = dateString + newTimeObject[key] + key.charAt(0) + ' ';
     } else {
       if (key === 'seconds') {
-        dateString = '1s';
+        dateString = '1s';        
       }
     }
   }
