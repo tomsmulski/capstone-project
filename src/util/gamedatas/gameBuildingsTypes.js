@@ -6,10 +6,18 @@ export const gameBuildingsTypes = [
       {
         id: '62e0e366663a9f95727518bc',
         resourceType: 'money',
+        calculation: {
+          value: 40,
+          pow: 1.5,
+        },
       },
       {
         id: '62e0e366663a9f95727518bd',
         resourceType: 'iron',
+        calculation: {
+          value: 10,
+          pow: 1.5,
+        },
       },
     ],
     productionMaterials: [
@@ -32,10 +40,18 @@ export const gameBuildingsTypes = [
       {
         id: '62e0e366663a9f95727518bc',
         resourceType: 'money',
+        calculation: {
+          value: 30,
+          pow: 1.6,
+        },
       },
       {
         id: '62e0e366663a9f95727518bd',
         resourceType: 'iron',
+        calculation: {
+          value: 15,
+          pow: 1.6,
+        },
       },
     ],
     productionMaterials: [
@@ -58,10 +74,18 @@ export const gameBuildingsTypes = [
       {
         id: '62e0e366663a9f95727518bc',
         resourceType: 'money',
+        calculation: {
+          value: 150,
+          pow: 1.5,
+        },
       },
       {
         id: '62e0e366663a9f95727518bd',
         resourceType: 'iron',
+        calculation: {
+          value: 50,
+          pow: 1.5,
+        },
       },
     ],
     productionMaterials: [
@@ -84,10 +108,18 @@ export const gameBuildingsTypes = [
       {
         id: '62e0e366663a9f95727518bc',
         resourceType: 'money',
+        calculation: {
+          value: 40,
+          pow: 1.5,
+        },
       },
       {
         id: '62e0e366663a9f95727518bd',
         resourceType: 'iron',
+        calculation: {
+          value: 20,
+          pow: 1.5,
+        },
       },
     ],
     productionMaterials: [

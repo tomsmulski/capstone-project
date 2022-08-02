@@ -1,4 +1,4 @@
-export const resourcesTypes = [
+export const gameResourcesTypes = [
   {
     id: '62e0e366663a9f95727518bc',
     name: 'money',
