@@ -3,6 +3,7 @@ import Button from '../button/button';
 import {Resource} from '../resources/Resource';
 import {productionResources} from '../../util/ResourcenProduction';
 import {buildingPrice} from '../../util/BuildingPrice';
+import { nanoid } from '@reduxjs/toolkit';
 
 export default function Buildingcard({
   buildType,
@@ -112,8 +113,10 @@ const StyledDescription = styled.p`
   max-height: 40px;
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: normal;
   padding: 5px;
+  display: -webkit-box; /* stylelint-disable-line value-no-vendor-prefix  */
+-webkit-line-clamp: 2; /* stylelint-disable-line value-no-vendor-prefix  */
+-webkit-box-orient: vertical;/* stylelint-disable-line value-no-vendor-prefix  */
 `;
 
 const StyledBuildInfoContainer = styled.article`
