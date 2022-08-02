@@ -61,13 +61,11 @@ export default function App() {
   useEffect(() => {
     if (!loadingStatus.status) {
       const interval = setInterval(() => {
-        for (const key in currentUserResources) {
-          currentUserBuildings.forEach(building => {
-            if (building.resourceType !== 'energy') {
-              addResources(key, productionResources(key, building.level));
-            }
-          });
-        }
+        currentUserBuildings.forEach(building => {
+          if (building.resourcesType !== 'energy') {
+            addResources(building.resourcesType, productionResources(building.resourcesType, building.level));
+          }
+        });
       }, 1000);
 
       return () => {

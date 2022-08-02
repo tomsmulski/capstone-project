@@ -3,7 +3,6 @@ import Button from '../button/button';
 import {Resource} from '../resources/Resource';
 import {productionResources} from '../../util/ResourcenProduction';
 import {buildingPrice} from '../../util/BuildingPrice';
-import {nanoid} from '@reduxjs/toolkit';
 
 export default function Buildingcard({
   buildType,

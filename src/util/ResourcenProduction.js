@@ -1,6 +1,6 @@
 import {gameConfig} from './GameConfig';
 
-const resourcenProductionsInterval = 3600;
+const resourcenProductionsInterval = 1;
 
 function productionResources(name, level, eneryType = null, display = false, displayType = null) {
   function calculateRessoureces(ressource, amount) {
@@ -14,8 +14,7 @@ function productionResources(name, level, eneryType = null, display = false, dis
       }
     } else {
       resultValue = Math.floor(
-        (amount * level * Math.pow(1.1, level) +
-          (ressource === 'fuel' ? 0 : gameConfig.resourcesTypes[ressource].basicProduction)) *
+        (amount * level * Math.pow(1.1, level) + gameConfig.resourcesTypes[ressource].basicProduction) *
           gameConfig.speed.resourcesSpeed
       );
 
@@ -25,8 +24,7 @@ function productionResources(name, level, eneryType = null, display = false, dis
 
       if (displayType === 'difference') {
         let resultValuebelow = Math.floor(
-          (amount * (level - 1) * Math.pow(1.1, level - 1) +
-            (ressource === 'fuel' ? 0 : gameConfig.resourcesTypes[ressource].basicProduction)) *
+          (amount * (level - 1) * Math.pow(1.1, level - 1) + gameConfig.resourcesTypes[ressource].basicProduction) *
             gameConfig.speed.resourcesSpeed
         );
         resultValue = resultValue - resultValuebelow;
