@@ -1,6 +1,6 @@
 import {gameConfig} from './GameConfig';
 
-const resourcenProductionsInterval = 1;
+const resourcenProductionsInterval = 3600;
 
 function productionResources(name, level, eneryType = null, display = false, displayType = null) {
   function calculateRessoureces(ressource, amount) {
