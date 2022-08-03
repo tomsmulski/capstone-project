@@ -79,9 +79,11 @@ export const Building = () => {
     gameBuildingType.buildMaterials.forEach(buildMaterial => {
       for (const key in currentUserResources) {
         if (key === buildMaterial.resourceType) {
+          
           const currentResource = currentUserResources[key];
           const neededResource = buildingPrice(nextLevel, gameBuildingType.id, key);
           const enoughRescource = currentResource >= neededResource;
+          
           const textColor = enoughRescource ? 'black' : 'red';
           if (!enoughRescource) {
             notEnoughRescourceButtonDisable = true;
@@ -105,7 +107,7 @@ export const Building = () => {
           buildInProgressTime={buildInProgressTime}
           currentBuildLevel={currentUserBuilding.level}
           buttonText={buttonTexts}
-          buttonDisabled={buildInProgressButtonDisable || notEnoughRescourceButtonDisable}
+          buttonDisabled={notEnoughRescourceButtonDisable || buildInProgressButtonDisable }
           buttonFunction={onHandleClickUpgrade}
         />
       </article>

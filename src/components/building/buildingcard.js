@@ -57,7 +57,7 @@ export default function Buildingcard({
           </StyledBuildYieldInfo>
 
           <StyledBuildPriceInfo>
-            {buildPrice.map((buildMaterial, index) => {
+            {buildPrice.map((buildMaterial, index) => {              
               return (
                 <Resource
                   key={buildMaterial.id}

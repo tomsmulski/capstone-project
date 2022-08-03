@@ -8,6 +8,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators} from './state/index';
 
+import Loading from './components/loading/loading';
 
 export default function App() {
   const {
@@ -110,6 +111,6 @@ export default function App() {
       </>
     );
   } else {
-    return <p>Loading</p>;
+    return <Loading></Loading>;
   }
 }
