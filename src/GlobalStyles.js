@@ -11,8 +11,6 @@ export default styled.createGlobalStyle`
   }
 
   body {
-    max-width: 375px;
-    max-height: 667px;
     display: block;
   }
 `;
