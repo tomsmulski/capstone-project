@@ -1,12 +1,22 @@
 import styled from 'styled-components';
 import {Resource} from './Resource';
+import {nanoid} from '@reduxjs/toolkit';
+import {useSelector} from 'react-redux';
 
-export const ResourcesOverview = ({currentResources}) => {
+export const ResourcesOverview = () => {
+  const currentUserResources = useSelector(state => state.currentUserResources);
+
+  let currentRess = [];
+
+  Object.keys(currentUserResources).forEach(key => {
+    currentRess.push({id:nanoid() ,name: key, value: currentUserResources[key]});
+  });
+
   return (
     <StyledResourcesContainer>
-      {currentResources.map(currentRess => (
-        <Resource key={currentRess.id} displayValue={true} currentRess={currentRess}></Resource>
-      ))}
+      {currentRess.map(ress => {
+        return <Resource key={ress.id} displayValue={true} currentRess={ress}></Resource>;
+      })}
     </StyledResourcesContainer>
   );
 };

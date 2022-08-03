@@ -1,12 +1,17 @@
+import {gameBuildingsTypes} from './gamedatas/gameBuildingsTypes';
+
 function buildingPrice(level, buildingId, resourcesType) {
-  if (buildingId === 4) {
-    if (resourcesType === 'Money') {
-      return 50 * Math.pow(1.3, level);
+  const buildingType = gameBuildingsTypes.find(buildingType => buildingType.id === buildingId);
+
+  let price = 0;
+
+  buildingType.buildMaterials.forEach(material => {
+    if (material.resourceType === resourcesType) {
+      price = material.calculation.value * Math.pow(material.calculation.pow, level);
     }
-    if (resourcesType === 'Iron') {
-      return 20 * Math.pow(1.3, level);
-    }
-  }
+  });
+
+  return price;
 }
 
 export {buildingPrice};

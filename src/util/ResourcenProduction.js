@@ -2,33 +2,47 @@ import {gameConfig} from './GameConfig';
 
 const resourcenProductionsInterval = 3600;
 
-function productionResources(name, level) {
-  switch (name) {
-    case 'Money':
-      return (
-        Math.floor(
-          (30 * level * Math.pow(1.1, level) + gameConfig.resourcesTypes.money.basicProduction) *
+function productionResources(name, level, eneryType = null, display = false, displayType = null) {
+  function calculateRessoureces(ressource, amount) {
+    let resultValue = 0;
+
+    if (ressource === 'energy') {
+      if (eneryType === 'add') {
+        resultValue = Math.ceil(20 * level * Math.pow(1.1, level));
+      } else if (eneryType === 'remove') {
+        resultValue = -Math.ceil(10 * level * Math.pow(1.1, level));
+      }
+    } else {
+      resultValue = Math.floor(
+        (amount * level * Math.pow(1.1, level) + gameConfig.resourcesTypes[ressource].basicProduction) *
+          gameConfig.speed.resourcesSpeed
+      );
+
+      if (!display) {
+        resultValue /= resourcenProductionsInterval;
+      }
+
+      if (displayType === 'difference') {
+        let resultValuebelow = Math.floor(
+          (amount * (level - 1) * Math.pow(1.1, level - 1) + gameConfig.resourcesTypes[ressource].basicProduction) *
             gameConfig.speed.resourcesSpeed
-        ) / resourcenProductionsInterval
-      );
-    case 'Iron':
-      return (
-        Math.floor(
-          (20 * level * Math.pow(1.1, level) + gameConfig.resourcesTypes.iron.basicProduction) *
-            gameConfig.speed.resourcesSpeed
-        ) / resourcenProductionsInterval
-      );
-    case 'Fuel':
-      return (
-        Math.floor(10 * level * Math.pow(1.1, level) * gameConfig.speed.resourcesSpeed) / resourcenProductionsInterval
-      );
-    case 'Gold':
-      return 0;
-    case 'Energy':
-      return Math.floor(20 * level * Math.pow(1.1, level));
-    default:
-      return 0;
+        );
+        resultValue = resultValue - resultValuebelow;
+      }
+    }
+
+    return resultValue;
   }
+
+  const ressources = {
+    money: calculateRessoureces(name.toLowerCase(), 30),
+    iron: calculateRessoureces(name.toLowerCase(), 20),
+    fuel: calculateRessoureces(name.toLowerCase(), 10),
+    gold: 0,
+    energy: calculateRessoureces(name.toLowerCase(), 20),
+  };
+
+  return ressources[name];
 }
 
 export {productionResources};

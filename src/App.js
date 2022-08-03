@@ -1,147 +1,115 @@
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
 import {ResourcesOverview} from './components/resources/ResourcesOverview';
-import {Building} from './components/buildings/building';
-import {gameConfig} from './util/GameConfig';
+import {Building} from './components/building/building';
 import {productionResources} from './util/ResourcenProduction';
-import {buildingPrice} from './util/BuildingPrice';
+import {getUserCitys} from './services/usercitys';
 
-const userResources = [
-  {id: 1, name: 'Money', value: gameConfig.resourcesTypes.money.startResources},
-  {id: 2, name: 'Iron', value: gameConfig.resourcesTypes.iron.startResources},
-  {id: 3, name: 'Fuel', value: gameConfig.resourcesTypes.fuel.startResources},
-  {id: 4, name: 'Gold', value: gameConfig.resourcesTypes.gold.startResources},
-  {id: 5, name: 'Energy', value: gameConfig.resourcesTypes.energy.startResources},
-];
+import {useSelector, useDispatch} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {actionCreators} from './state/index';
 
-const buildingsTypes = [
-  {
-    id: 4,
-    name: 'Windpower Plant',
-    buildMaterials: [
-      {id: 1, name: 'Money'},
-      {id: 2, name: 'Iron'},
-    ],
-    description:
-      'A Windpower plant converts the kinetic energy of the wind into electrical energy and feeds it into an electricity grid. Colloquially, the terms wind power plant or simply wind turbine are also used.',
-  },
-];
-
-const userBuildings = [{buildingId: 4, level: 0}];
 
 export default function App() {
-  const [currentBuildingBuild, setCurrentBuildingBuild] = useState(null);
-  const [currentResources, setCurrentResources] = useState(userResources);
-  const [currentBuildings, setCurrentBuildings] = useState(userBuildings);
+  const {
+    addResources,
+    setResources,
+    setBuildings,
+    addBuildings,
+    setLoading,
+    updateBuildingToBuild,
+    removeBuildingToBuild,
+  } = bindActionCreators(actionCreators, useDispatch());
 
-  function addBuildingLevel(buildingId, buildingBuildTime) {
-    if (currentBuildingBuild === null) {
-      const currentBuilding = currentBuildings.find(
-        currentBuilding => currentBuilding.buildingId === buildingId
-      );
-      const nextBuildingLevel = currentBuilding.level + 1;
-      const progressBuildingTime = buildingBuildTime * 1000;
-
-      const startBuildingTime = Date.now();
-      const endBuildingTime = startBuildingTime + progressBuildingTime;
-
-      setCurrentBuildingBuild({
-        id: buildingId,
-        startTime: startBuildingTime,
-        endTime: endBuildingTime,
-        diffTime: progressBuildingTime,
-        toLevel: nextBuildingLevel,
-      });
-
-      const buildingType = buildingsTypes.find(buildingType => buildingType.id === buildingId);
-
-      buildingType.buildMaterials.forEach(material => {
-        setCurrentResources(currentRess =>
-          currentRess.map(objRess => {
-            if (objRess.id === material.id) {
-              return {
-                ...objRess,
-                value: objRess.value - buildingPrice(nextBuildingLevel, buildingType.id, material.name),
-              };
-            }
-            return objRess;
-          })
-        );
-      });
-    }
-  }
+  const currentUserResources = useSelector(state => state.currentUserResources);
+  const currentUserBuildings = useSelector(state => state.currentUserBuildings);
+  const loadingStatus = useSelector(state => state.loadingStatus);
+  const currentUserBuildingInProgress = useSelector(state => state.currentUserBuildingInProgress);
 
   useEffect(() => {
-    if (currentBuildingBuild !== null) {
-      const interval = setInterval(
-        () =>
-          setCurrentBuildingBuild(current => {
-            const timeNow = Date.now();
-            const endBuildTime = current.endTime;
+    loadingUserCitys();
 
-            const buildingDiffTime = endBuildTime - timeNow;
+    async function loadingUserCitys() {
+      try {
+        const userCitys = await getUserCitys();
 
-            if (buildingDiffTime < 0) {
-              setCurrentBuildings(currentBuilding =>
-                currentBuilding.map(objBuilding => {
-                  if (objBuilding.buildingId === current.id) {
-                    if (current.toLevel !== objBuilding.level) {
-                      const updateToLevel = objBuilding.level + 1;
+        userCitys.forEach(userCity => {
+          for (const key in userCity.currentResources[0]) {
+            setResources(key, userCity.currentResources[0][key]);
+          }
 
-                      setCurrentResources(current =>
-                        current.map(obj => {
-                          if (obj.id === 5) {
-                            return {...obj, value: productionResources(obj.name, updateToLevel)};
-                          }
-                          return obj;
-                        })
-                      );
+          userCity.currentBuildings.forEach(currentBuilding => {
+            setBuildings(currentBuilding.buildingId, currentBuilding.level);
+          });
+        });
 
-                      return {...objBuilding, level: updateToLevel};
-                    }
-                  }
-                  return objBuilding;
-                })
-              );
-            } else {
-              return {...current, diffTime: buildingDiffTime};
-            }
+        setLoading('loadUserCitys', true);
+      } catch (error) {
+        console.log('loading Game datas Fail');
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-            return null;
-          }),
-        1000
-      );
+  useEffect(() => {
+    if (loadingStatus.loadUserCitys) {
+      setLoading('status', false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadingStatus]);
+
+  useEffect(() => {
+    if (!loadingStatus.status) {
+      const interval = setInterval(() => {
+        currentUserBuildings.forEach(building => {
+          if (building.resourcesType !== 'energy') {
+            addResources(building.resourcesType, productionResources(building.resourcesType, building.level));
+          }
+        });
+      }, 1000);
 
       return () => {
         clearInterval(interval);
       };
     }
-  }, [currentBuildingBuild]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUserResources, loadingStatus]);
 
   useEffect(() => {
-    const interval = setInterval(
-      () =>
-        setCurrentResources(current =>
-          current.map(obj => {
-            return {...obj, value: obj.value + productionResources(obj.name, 0)};
-          })
-        ),
-      1000
+    if (currentUserBuildingInProgress.length > 0) {
+      const timeNow = Date.now();
+      const endBuildTime = currentUserBuildingInProgress[0].endTime;
+
+      const buildingDiffTime = endBuildTime - timeNow;
+
+      if (buildingDiffTime < 0) {
+        addBuildings(currentUserBuildingInProgress[0].buildingId);
+        removeBuildingToBuild(currentUserBuildingInProgress[0].cityId, currentUserBuildingInProgress[0].buildingId);
+
+        if (currentUserBuildingInProgress[0].buildingId === '62e7dbb7cefed5e153f6bb88') {
+          addResources('energy', productionResources('energy', currentUserBuildingInProgress[0].toLevel, 'add'));
+        } else {
+          addResources('energy', productionResources('energy', currentUserBuildingInProgress[0].toLevel, 'remove'));
+        }
+      } else {
+        updateBuildingToBuild(
+          currentUserBuildingInProgress[0].cityId,
+          currentUserBuildingInProgress[0].buildingId,
+          buildingDiffTime
+        );
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUserResources]);
+
+  if (!loadingStatus.status) {
+    return (
+      <>
+        <ResourcesOverview />
+        <Building />
+      </>
     );
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [currentResources]);
-
-  return (
-    <>
-      <ResourcesOverview currentResources={currentResources} />
-      <Building
-        buildingsTypes={buildingsTypes}
-        currentBuildings={currentBuildings}
-        addBuildingLevel={addBuildingLevel}
-        currentBuildingBuild={currentBuildingBuild}
-      />
-    </>
-  );
+  } else {
+    return <p>Loading</p>;
+  }
 }
