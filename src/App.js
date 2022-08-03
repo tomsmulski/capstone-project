@@ -103,9 +103,7 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUserResources]);
 
-  const onlyForTestLoading = true;
-
-  if (!loadingStatus.status && !onlyForTestLoading) {
+  if (!loadingStatus.status) {
     return (
       <>
         <ResourcesOverview />
