@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export default function Button({disabled, buildId, buildTime, onHandleClick, buttonText}) {
   return (
-    <StyledButton disabled={disabled} data-buildid={buildId} data-buildtime={buildTime} onClick={onHandleClick}>
+    <StyledButton type='button' disabled={disabled} data-buildid={buildId} data-buildtime={buildTime} onClick={onHandleClick}>
       {buttonText}
     </StyledButton>
   );

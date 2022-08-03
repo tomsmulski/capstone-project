@@ -9,13 +9,13 @@ export const ResourcesOverview = () => {
   let currentRess = [];
 
   Object.keys(currentUserResources).forEach(key => {
-    currentRess.push({name: key, value: currentUserResources[key]});
+    currentRess.push({id:nanoid() ,name: key, value: currentUserResources[key]});
   });
 
   return (
     <StyledResourcesContainer>
       {currentRess.map(ress => {
-        return <Resource key={nanoid()} displayValue={true} currentRess={ress}></Resource>;
+        return <Resource key={ress.id} displayValue={true} currentRess={ress}></Resource>;
       })}
     </StyledResourcesContainer>
   );

@@ -10,8 +10,6 @@ import {actionCreators} from './state/index';
 
 import Loading from './components/loading/loading';
 
-let userCitys = [];
-
 export default function App() {
   const {
     addResources,
@@ -33,7 +31,7 @@ export default function App() {
 
     async function loadingUserCitys() {
       try {
-        userCitys = await getUserCitys();
+        const userCitys = await getUserCitys();
 
         userCitys.forEach(userCity => {
           for (const key in userCity.currentResources[0]) {

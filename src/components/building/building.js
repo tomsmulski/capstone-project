@@ -41,15 +41,14 @@ export const Building = () => {
   }
 
   return gameBuildingsTypes.map(gameBuildingType => {
-    let currentUserBuilding = currentUserBuildings.find(
+    const currentUserBuilding = currentUserBuildings.find(
       userBuilding => userBuilding.buildingId === gameBuildingType.id
     );
 
-    let inProgressId = 0;
     let buttonTexts = 'Build';
 
     if (currentUserBuildingInProgress.length > 0) {
-      inProgressId = currentUserBuildingInProgress[0].buildingId;
+      const inProgressId = currentUserBuildingInProgress[0].buildingId;
       buttonTexts = inProgressId === gameBuildingType.id ? 'in Progress' : buttonTexts;
     }
 
@@ -95,7 +94,7 @@ export const Building = () => {
     });
 
     return (
-      <div key={gameBuildingType.id}>
+      <article key={gameBuildingType.id}>
         <Buildingcard
           buildType={0}
           buildId={gameBuildingType.id}
@@ -111,7 +110,7 @@ export const Building = () => {
           buttonDisabled={notEnoughRescourceButtonDisable || buildInProgressButtonDisable }
           buttonFunction={onHandleClickUpgrade}
         />
-      </div>
+      </article>
     );
   });
 };
