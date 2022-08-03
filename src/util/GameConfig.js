@@ -1,6 +1,6 @@
 export const gameConfig = Object.freeze({
   speed: {
-    buildingSpeed: 20,
+    buildingSpeed: 10,
     resourcesSpeed: 10,
   },
   resourcesTypes: {

@@ -13,7 +13,7 @@ const StyledSpan = styled.span`
   position: fixed;
   top: 57%;
   left: 50%;
-  margin-top: -120px;
+  margin-top: -130px;
   margin-left: -30px;
   font-size: large;
 `;
