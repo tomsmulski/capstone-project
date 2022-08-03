@@ -93,7 +93,7 @@ export const Building = () => {
     });
 
     return (
-      <div key={gameBuildingType.id}>
+      <article key={gameBuildingType.id}>
         <Buildingcard
           buildType={0}
           buildId={gameBuildingType.id}
@@ -109,7 +109,7 @@ export const Building = () => {
           buttonDisabled={buildInProgressButtonDisable || notEnoughRescourceButtonDisable}
           buttonFunction={onHandleClickUpgrade}
         />
-      </div>
+      </article>
     );
   });
 };

@@ -8,7 +8,6 @@ import {useSelector, useDispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators} from './state/index';
 
-let userCitys = [];
 
 export default function App() {
   const {
@@ -31,7 +30,7 @@ export default function App() {
 
     async function loadingUserCitys() {
       try {
-        userCitys = await getUserCitys();
+        const userCitys = await getUserCitys();
 
         userCitys.forEach(userCity => {
           for (const key in userCity.currentResources[0]) {
