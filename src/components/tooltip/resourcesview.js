@@ -12,9 +12,6 @@ export default function ResourcesView({isOpen, currentRess}) {
 
   if (currentRess) {
     if (currentRess.name !== 'gold') {
-      const currentBuilding = currentUserBuildings.find(
-        currentBuilding => currentBuilding.resourcesType === currentRess.name
-      );
       const currentTotalEnergy = calculateEachBuildingEnergy(currentUserBuildings);
 
       currentTotalEnergy.forEach(energy => {
@@ -26,7 +23,6 @@ export default function ResourcesView({isOpen, currentRess}) {
       });
 
       currentHourProduction = productionResources(currentRess.name, currentUserBuildings);
-
     }
   }
 
