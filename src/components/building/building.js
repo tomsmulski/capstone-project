@@ -109,6 +109,7 @@ export const Building = () => {
           buttonText={buttonTexts}
           buttonDisabled={notEnoughRescourceButtonDisable || buildInProgressButtonDisable }
           buttonFunction={onHandleClickUpgrade}
+          currentUserBuildings={currentUserBuildings}
         />
       </article>
     );

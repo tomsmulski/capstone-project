@@ -24,10 +24,18 @@ export const gameBuildingsTypes = [
       {
         id: '62e0e366663a9f95727518bc',
         resourceType: 'money',
+        calculation: {
+          value: 30,
+          pow: 1.1,
+        },
       },
       {
         id: '62e0e366663a9f95727518c0',
         resourceType: 'energy',
+        calculation: {
+          value: -10,
+          pow: 1.1,
+        },
       },
     ],
     description:
@@ -58,10 +66,18 @@ export const gameBuildingsTypes = [
       {
         id: '62e0e366663a9f95727518bd',
         resourceType: 'iron',
+        calculation: {
+          value: 20,
+          pow: 1.1,
+        },
       },
       {
         id: '62e0e366663a9f95727518c0',
         resourceType: 'energy',
+        calculation: {
+          value: -10,
+          pow: 1.1,
+        },
       },
     ],
     description:
@@ -92,10 +108,18 @@ export const gameBuildingsTypes = [
       {
         id: '62e0e366663a9f95727518be',
         resourceType: 'fuel',
+        calculation: {
+          value: 10,
+          pow: 1.1,
+        },
       },
       {
         id: '62e0e366663a9f95727518c0',
         resourceType: 'energy',
+        calculation: {
+          value: -20,
+          pow: 1.1,
+        },
       },
     ],
     description:
@@ -126,6 +150,10 @@ export const gameBuildingsTypes = [
       {
         id: '62e0e366663a9f95727518c0',
         resourceType: 'energy',
+        calculation: {
+          value: 20,
+          pow: 1.1,
+        },
       },
     ],
     description:

@@ -12,5 +12,7 @@ export default styled.createGlobalStyle`
 
   body {
     display: block;
+    max-width: 800px;
+    margin: 0 auto;
   }
 `;

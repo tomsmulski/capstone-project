@@ -1,48 +1,131 @@
 import {gameConfig} from './GameConfig';
+import {gameBuildingsTypes} from './gamedatas/gameBuildingsTypes';
 
-const resourcenProductionsInterval = 3600;
-
-function productionResources(name, level, eneryType = null, display = false, displayType = null) {
-  function calculateRessoureces(ressource, amount) {
+function productionResources(
+  resourcesType,
+  currentUserBuildings,
+  addLevel = 0,
+  resourcenProductionsIntervalSeconds = 1
+) {
+  function calculateResoureces(resourcesType, addLevel = 0, resourcenProductionsIntervalSeconds = 1) {
     let resultValue = 0;
 
-    if (ressource === 'energy') {
-      if (eneryType === 'add') {
-        resultValue = Math.ceil(20 * level * Math.pow(1.1, level));
-      } else if (eneryType === 'remove') {
-        resultValue = -Math.ceil(10 * level * Math.pow(1.1, level));
-      }
-    } else {
-      resultValue = Math.floor(
-        (amount * level * Math.pow(1.1, level) + gameConfig.resourcesTypes[ressource].basicProduction) *
-          gameConfig.speed.resourcesSpeed
-      );
+    const currentUserBuild = currentUserBuildings.find(
+      currentUserBuildings => currentUserBuildings.resourcesType === resourcesType
+    );
 
-      if (!display) {
-        resultValue /= resourcenProductionsInterval;
-      }
+    const gameBuildingType = gameBuildingsTypes.find(buildingType => buildingType.id === currentUserBuild.buildingId);
 
-      if (displayType === 'difference') {
-        let resultValuebelow = Math.floor(
-          (amount * (level - 1) * Math.pow(1.1, level - 1) + gameConfig.resourcesTypes[ressource].basicProduction) *
-            gameConfig.speed.resourcesSpeed
-        );
-        resultValue = resultValue - resultValuebelow;
-      }
-    }
+    const productionMaterials = gameBuildingType.productionMaterials.find(
+      material => material.resourceType === resourcesType
+    );
+
+    resultValue = Math.floor(
+      (productionMaterials.calculation.value *
+        (currentUserBuild.level + addLevel) *
+        Math.pow(productionMaterials.calculation.pow, currentUserBuild.level + addLevel) +
+        gameConfig.resourcesTypes[resourcesType].basicProduction) *
+        gameConfig.speed.resourcesSpeed
+    );
+
+    resultValue /= resourcenProductionsIntervalSeconds;
 
     return resultValue;
   }
 
-  const ressources = {
-    money: calculateRessoureces(name.toLowerCase(), 30),
-    iron: calculateRessoureces(name.toLowerCase(), 20),
-    fuel: calculateRessoureces(name.toLowerCase(), 10),
-    gold: 0,
-    energy: calculateRessoureces(name.toLowerCase(), 20),
-  };
+  function calculateTotalEnergy(resourcesType) {
+    let resultValue = 0;
 
-  return ressources[name];
+    gameBuildingsTypes.forEach(buildingType => {
+      const currentUserBuild = currentUserBuildings.find(
+        currentUserBuildings => currentUserBuildings.buildingId === buildingType.id
+      );
+      const productionMaterials = buildingType.productionMaterials.find(
+        material => material.resourceType === resourcesType
+      );
+
+      if (productionMaterials !== undefined) {
+        resultValue += Math.floor(
+          productionMaterials.calculation.value *
+            currentUserBuild.level *
+            Math.pow(productionMaterials.calculation.pow, currentUserBuild.level) +
+            gameConfig.resourcesTypes[resourcesType].basicProduction
+        );
+      }
+    });
+
+    return resultValue;
+  }
+
+
+
+  const ressources = {
+    money: calculateResoureces(resourcesType, addLevel, resourcenProductionsIntervalSeconds),
+    iron: calculateResoureces(resourcesType, addLevel, resourcenProductionsIntervalSeconds),
+    fuel: calculateResoureces(resourcesType, addLevel, resourcenProductionsIntervalSeconds),
+    gold: 0,
+    energy: calculateTotalEnergy(resourcesType),
+  };
+  return ressources[resourcesType];
 }
 
-export {productionResources};
+function displayLevelUpResourcesProduction(resourcesType, currentUserBuildings, buildId, addLevel = 1) {
+  let resultValue = 0;
+  let resultValue2 = 0;
+
+  const currentUserBuild = currentUserBuildings.find(
+    currentUserBuildings => currentUserBuildings.buildingId === buildId
+  );
+
+  const gameBuildingType = gameBuildingsTypes.find(buildingType => buildingType.id === currentUserBuild.buildingId);
+
+  const productionMaterials = gameBuildingType.productionMaterials.find(
+    material => material.resourceType === resourcesType
+  );
+
+  resultValue = Math.floor(
+    (productionMaterials.calculation.value *
+      currentUserBuild.level *
+      Math.pow(productionMaterials.calculation.pow, currentUserBuild.level) +
+      gameConfig.resourcesTypes[resourcesType].basicProduction) *
+      (resourcesType === 'energy' ? 1 : gameConfig.speed.resourcesSpeed)
+  );
+
+  resultValue2 = Math.floor(
+    (productionMaterials.calculation.value *
+      (currentUserBuild.level + addLevel) *
+      Math.pow(productionMaterials.calculation.pow, currentUserBuild.level + addLevel) +
+      gameConfig.resourcesTypes[resourcesType].basicProduction) *
+      (resourcesType === 'energy' ? 1 : gameConfig.speed.resourcesSpeed)
+  );
+
+  resultValue = resultValue2 - resultValue;
+
+  return resultValue;
+}
+
+function calculateEachBuildingEnergy(currentUserBuildings) {
+  let resultValue = [];
+
+  gameBuildingsTypes.forEach(buildingType => {
+    const currentUserBuild = currentUserBuildings.find(
+      currentUserBuildings => currentUserBuildings.buildingId === buildingType.id
+    );
+    const productionMaterials = buildingType.productionMaterials.find(
+      material => material.resourceType === 'energy'
+    );
+
+    if (productionMaterials !== undefined) {
+      resultValue.push(Math.floor(
+        productionMaterials.calculation.value *
+          currentUserBuild.level *
+          Math.pow(productionMaterials.calculation.pow, currentUserBuild.level) +
+          gameConfig.resourcesTypes['energy'].basicProduction
+      ));
+    }
+  });
+
+  return resultValue;
+}
+
+export {productionResources, displayLevelUpResourcesProduction,calculateEachBuildingEnergy};
