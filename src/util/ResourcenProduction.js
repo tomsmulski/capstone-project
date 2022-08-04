@@ -57,8 +57,6 @@ function productionResources(
     return resultValue;
   }
 
-
-
   const ressources = {
     money: calculateResoureces(resourcesType, addLevel, resourcenProductionsIntervalSeconds),
     iron: calculateResoureces(resourcesType, addLevel, resourcenProductionsIntervalSeconds),
@@ -111,21 +109,21 @@ function calculateEachBuildingEnergy(currentUserBuildings) {
     const currentUserBuild = currentUserBuildings.find(
       currentUserBuildings => currentUserBuildings.buildingId === buildingType.id
     );
-    const productionMaterials = buildingType.productionMaterials.find(
-      material => material.resourceType === 'energy'
-    );
+    const productionMaterials = buildingType.productionMaterials.find(material => material.resourceType === 'energy');
 
     if (productionMaterials !== undefined) {
-      resultValue.push(Math.floor(
-        productionMaterials.calculation.value *
-          currentUserBuild.level *
-          Math.pow(productionMaterials.calculation.pow, currentUserBuild.level) +
-          gameConfig.resourcesTypes['energy'].basicProduction
-      ));
+      resultValue.push(
+        Math.floor(
+          productionMaterials.calculation.value *
+            currentUserBuild.level *
+            Math.pow(productionMaterials.calculation.pow, currentUserBuild.level) +
+            gameConfig.resourcesTypes['energy'].basicProduction
+        )
+      );
     }
   });
 
   return resultValue;
 }
 
-export {productionResources, displayLevelUpResourcesProduction,calculateEachBuildingEnergy};
+export {productionResources, displayLevelUpResourcesProduction, calculateEachBuildingEnergy};

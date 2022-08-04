@@ -26,7 +26,6 @@ export default function App() {
   const loadingStatus = useSelector(state => state.loadingStatus);
   const currentUserBuildingInProgress = useSelector(state => state.currentUserBuildingInProgress);
 
-
   useEffect(() => {
     loadingUserCitys();
 
@@ -44,7 +43,7 @@ export default function App() {
           });
         });
 
-        setResources('energy',productionResources('energy', currentUserBuildings));
+        setResources('energy', productionResources('energy', currentUserBuildings));
 
         setLoading('loadUserCitys', true);
       } catch (error) {
@@ -66,11 +65,13 @@ export default function App() {
       const interval = setInterval(() => {
         currentUserBuildings.forEach(building => {
           if (building.resourcesType !== 'energy') {
-            addResources(building.resourcesType, productionResources(building.resourcesType,currentUserBuildings,0,3600));
-          }else{
-            setResources('energy',productionResources('energy', currentUserBuildings));
+            addResources(
+              building.resourcesType,
+              productionResources(building.resourcesType, currentUserBuildings, 0, 3600)
+            );
+          } else {
+            setResources('energy', productionResources('energy', currentUserBuildings));
           }
-          
         });
       }, 1000);
 
@@ -94,7 +95,6 @@ export default function App() {
         removeBuildingToBuild(currentUserBuildingInProgress[0].cityId, currentUserBuildingInProgress[0].buildingId);
 
         productionResources('energy', currentUserBuildings);
-
       } else {
         updateBuildingToBuild(
           currentUserBuildingInProgress[0].cityId,
@@ -105,8 +105,6 @@ export default function App() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUserResources]);
-
-
 
   if (!loadingStatus.status) {
     return (
