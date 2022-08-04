@@ -25,7 +25,8 @@ export default function ResourcesView({isOpen, currentRess}) {
         }
       });
 
-      currentHourProduction = productionResources(currentRess.name, currentUserBuildings, currentBuilding.level, 1);
+      currentHourProduction = productionResources(currentRess.name, currentUserBuildings);
+
     }
   }
 
