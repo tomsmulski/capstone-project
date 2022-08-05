@@ -11,8 +11,8 @@ export const ResourcesOverview = () => {
   const {setTooltipResources} = bindActionCreators(actionCreators, useDispatch());
   const tooltipResourcesView = useSelector(state => state.tooltipResourcesView);
 
-  const handleClick = currentRess => {
-    setTooltipResources(!tooltipResourcesView.status[currentRess.name], currentRess.name, currentRess);
+  const handleClick = currentResource => {
+    setTooltipResources(!tooltipResourcesView.status[currentResource.name], currentResource.name, currentResource);
   };
 
   let currentResources = [];
@@ -29,7 +29,10 @@ export const ResourcesOverview = () => {
             <div onClick={() => handleClick(currentResource)}>
               <Resource displayValue={true} currentRess={currentResource}></Resource>
             </div>
-            <ResourcesView isOpen={tooltipResourcesView.status[currentResource.name]} currentRess={currentResource}></ResourcesView>
+            <ResourcesView
+              isOpen={tooltipResourcesView.status[currentResource.name]}
+              currentRess={currentResource}
+            ></ResourcesView>
           </section>
         );
       })}
