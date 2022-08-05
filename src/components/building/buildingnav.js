@@ -54,10 +54,10 @@ export const Buildingnav = ({currentUserBuildings, selectedBuilding}) => {
           <StyledUl key={gameBuildingType.id} borderColor={borderColor} notEnoughRescource={notEnoughRescource}>
             <StyledLiName>{gameBuildingType.name}</StyledLiName>
             <li>
-              {timeLeft.length > 0 ? <StyledTimeLeft>{timeLeft}</StyledTimeLeft> : ''}
               <StyledButton onClick={() => setSelectedBuilding(gameBuildingType.id)}>
                 <StyledImg src="" alt={gameBuildingType.name}></StyledImg>
               </StyledButton>
+              {timeLeft.length > 0 ? <StyledTimeLeft>{timeLeft}</StyledTimeLeft> : ''}
             </li>
             <StyledLiLevel>Level: {currentUserBuilding.level}</StyledLiLevel>
           </StyledUl>
@@ -89,7 +89,7 @@ const StyledUl = styled.ul`
   list-style: none;
   ${props =>
     props.notEnoughRescource === 'red'
-      ? `background:repeating-linear-gradient(-55deg,#222, #222 10px,  #333 10px,  #333 20px)`
+      ? `background:repeating-linear-gradient(-55deg,#222, #222 10px,  #333 10px,  #333 20px); color:white;`
       : ''};
 `;
 
@@ -110,15 +110,17 @@ const StyledLiLevel = styled.li`
 `;
 
 const StyledImg = styled.img`
+  position: relative;
   min-width: 134px;
   min-height: 96px;
   opacity: 0.4;
   background: black;
+  z-index: 999;
 `;
 
 const StyledTimeLeft = styled.span`
   position: relative;
-  top: 40px;
+  bottom: 60px;
   left: 60px;
   z-index: 2;
 `;
@@ -126,5 +128,4 @@ const StyledTimeLeft = styled.span`
 const StyledButton = styled.div`
   text-decoration: none;
   border: none;
-  position: absolute;
 `;
