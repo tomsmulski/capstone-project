@@ -93,7 +93,7 @@ const StyledSection = styled.section`
   flex-direction: column;  
 `;
 
-const StyledHeader = styled.article`
+const StyledHeader = styled.header`
   border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -143,7 +143,7 @@ const StyledBuildNextLevelText = styled.span`
   width: 100%;
 `;
 
-const StyledDiv = styled.span`
+const StyledDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;

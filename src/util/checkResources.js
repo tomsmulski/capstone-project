@@ -5,7 +5,7 @@ import { buildingPrice } from "./BuildingPrice";
 function checkRescource(gameBuildingType,currentUserResources,nextLevel){
 
     let buildPriceTextColor = [];
-    let notEnoughRescourceButtonDisable = false;
+    let notEnoughResourceButtonDisable = false;
   
     gameBuildingType.buildMaterials.forEach(buildMaterial => {
       for (const key in currentUserResources) {
@@ -16,7 +16,7 @@ function checkRescource(gameBuildingType,currentUserResources,nextLevel){
     
           const textColor = enoughRescource ? 'black' : 'red';
           if (!enoughRescource) {
-            notEnoughRescourceButtonDisable = true;
+            notEnoughResourceButtonDisable = true;
           }
           buildPriceTextColor.push(textColor);
         }
@@ -24,7 +24,7 @@ function checkRescource(gameBuildingType,currentUserResources,nextLevel){
     });
   
   
-    return {buildPriceTextColor:buildPriceTextColor, notEnoughRescourceButtonDisable:notEnoughRescourceButtonDisable}
+    return {buildPriceTextColor:buildPriceTextColor, notEnoughResourceButtonDisable:notEnoughResourceButtonDisable}
   
   }
 

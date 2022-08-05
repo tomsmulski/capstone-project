@@ -69,7 +69,7 @@ function productionResources(
 
 function displayLevelUpResourcesProduction(resourcesType, currentUserBuildings, buildId, addLevel = 1) {
   let resultValue = 0;
-  let resultValue2 = 0;
+  let resultValueUpper = 0;
 
   const currentUserBuild = currentUserBuildings.find(
     currentUserBuildings => currentUserBuildings.buildingId === buildId
@@ -89,7 +89,7 @@ function displayLevelUpResourcesProduction(resourcesType, currentUserBuildings, 
       (resourcesType === 'energy' ? 1 : gameConfig.speed.resourcesSpeed)
   );
 
-  resultValue2 = Math.floor(
+  resultValueUpper = Math.floor(
     (productionMaterials.calculation.value *
       (currentUserBuild.level + addLevel) *
       Math.pow(productionMaterials.calculation.pow, currentUserBuild.level + addLevel) +
@@ -97,7 +97,7 @@ function displayLevelUpResourcesProduction(resourcesType, currentUserBuildings, 
       (resourcesType === 'energy' ? 1 : gameConfig.speed.resourcesSpeed)
   );
 
-  resultValue = resultValue2 - resultValue;
+  resultValue = resultValueUpper - resultValue;
 
   return resultValue;
 }

@@ -16,12 +16,10 @@ export const buildingInBuildSlice = createSlice({
       });
     },
     update: (state, action) => {
-      const {cityId, buildingId, diffTime} = action.payload;
+      const {diffTime} = action.payload;
       state[0].diffTime = diffTime;
     },
     remove: (state, action) => {
-      const {cityId, buildingId} = action.payload;
-
       state.pop();
     },
   },

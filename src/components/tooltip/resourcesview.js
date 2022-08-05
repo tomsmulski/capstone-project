@@ -27,26 +27,24 @@ export default function ResourcesView({isOpen, currentRess}) {
   }
 
   return (
-    <>
-      <StyledSection isOpen={isOpen}>
-        <p>
-          <strong>{resNameUpperCase}</strong>
-        </p>
-        <hr />
-        <StyledP>
-          <span>You have</span>
-          <span>{Math.floor(currentRess.value)}</span>
-        </StyledP>
-        <StyledP>
-          <span>{currentRess.name === 'energy' ? 'Current Production' : 'Current /h Production'}</span>
-          <span>{currentRess.name === 'energy' ? currentEnergyProduction : currentHourProduction}</span>
-        </StyledP>
-        <StyledP>
-          <span>{currentRess.name === 'energy' ? 'Current using' : ''}</span>
-          <span>{currentRess.name === 'energy' ? currentEnergyUsed : ''}</span>
-        </StyledP>
-      </StyledSection>
-    </>
+    <StyledSection isOpen={isOpen}>
+      <p>
+        <strong>{resNameUpperCase}</strong>
+      </p>
+      <hr />
+      <StyledSpan>
+        <span>You have</span>
+        <span>{Math.floor(currentRess.value)}</span>
+      </StyledSpan>
+      <StyledSpan>
+        <span>{currentRess.name === 'energy' ? 'Current Production' : 'Current /h Production'}</span>
+        <span>{currentRess.name === 'energy' ? currentEnergyProduction : currentHourProduction}</span>
+      </StyledSpan>
+      <StyledSpan>
+        <span>{currentRess.name === 'energy' ? 'Current using' : ''}</span>
+        <span>{currentRess.name === 'energy' ? currentEnergyUsed : ''}</span>
+      </StyledSpan>
+    </StyledSection>
   );
 }
 
@@ -64,7 +62,7 @@ const StyledSection = styled.section`
   left: 20%;
 `;
 
-const StyledP = styled.p`
+const StyledSpan = styled.span`
   padding-top: 3px;
   display: flex;
   justify-content: space-between;

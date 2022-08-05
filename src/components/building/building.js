@@ -93,7 +93,7 @@ export const Building = ({selectedBuilding}) => {
         buildInProgressTime={buildInProgressTime}
         currentBuildLevel={currentUserBuilding.level}
         buttonText={buttonTexts}
-        buttonDisabled={checkEnoughRescource.notEnoughRescourceButtonDisable || buildInProgressButtonDisable}
+        buttonDisabled={checkEnoughRescource.notEnoughResourceButtonDisable || buildInProgressButtonDisable}
         buttonFunction={onHandleClickUpgrade}
         currentUserBuildings={currentUserBuildings}
       />
