@@ -2,16 +2,16 @@ import styled from 'styled-components';
 import {productionResources, calculateEachBuildingEnergy} from '../../util/ResourcenProduction';
 import {useSelector} from 'react-redux';
 
-export default function ResourcesView({isOpen, currentRess}) {
+export default function ResourcesView({isOpen, currentResource}) {
   const currentUserBuildings = useSelector(state => state.currentUserBuildings);
-  const resNameUpperCase = currentRess ? currentRess.name.charAt(0).toUpperCase() + currentRess.name.slice(1) : '';
+  const resNameUpperCase = currentResource ? currentResource.name.charAt(0).toUpperCase() + currentResource.name.slice(1) : '';
 
   let currentHourProduction = 0;
   let currentEnergyProduction = 0;
   let currentEnergyUsed = 0;
 
-  if (currentRess) {
-    if (currentRess.name !== 'gold') {
+  if (currentResource) {
+    if (currentResource.name !== 'gold') {
       const currentTotalEnergy = calculateEachBuildingEnergy(currentUserBuildings);
 
       currentTotalEnergy.forEach(energy => {
@@ -22,7 +22,7 @@ export default function ResourcesView({isOpen, currentRess}) {
         }
       });
 
-      currentHourProduction = productionResources(currentRess.name, currentUserBuildings);
+      currentHourProduction = productionResources(currentResource.name, currentUserBuildings);
     }
   }
 
@@ -34,15 +34,15 @@ export default function ResourcesView({isOpen, currentRess}) {
       <hr />
       <StyledSpan>
         <span>You have</span>
-        <span>{Math.floor(currentRess.value)}</span>
+        <span>{Math.floor(currentResource.value)}</span>
       </StyledSpan>
       <StyledSpan>
-        <span>{currentRess.name === 'energy' ? 'Current Production' : 'Current /h Production'}</span>
-        <span>{currentRess.name === 'energy' ? currentEnergyProduction : currentHourProduction}</span>
+        <span>{currentResource.name === 'energy' ? 'Current Production' : 'Current /h Production'}</span>
+        <span>{currentResource.name === 'energy' ? currentEnergyProduction : currentHourProduction}</span>
       </StyledSpan>
       <StyledSpan>
-        <span>{currentRess.name === 'energy' ? 'Current using' : ''}</span>
-        <span>{currentRess.name === 'energy' ? currentEnergyUsed : ''}</span>
+        <span>{currentResource.name === 'energy' ? 'Current using' : ''}</span>
+        <span>{currentResource.name === 'energy' ? currentEnergyUsed : ''}</span>
       </StyledSpan>
     </StyledSection>
   );

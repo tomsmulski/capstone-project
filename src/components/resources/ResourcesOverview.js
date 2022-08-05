@@ -31,7 +31,7 @@ export const ResourcesOverview = () => {
             </div>
             <ResourcesView
               isOpen={tooltipResourcesView.status[currentResource.name]}
-              currentRess={currentResource}
+              currentResource={currentResource}
             ></ResourcesView>
           </section>
         );
