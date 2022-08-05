@@ -23,32 +23,20 @@ export const Buildingnav = ({currentUserBuildings, selectedBuilding}) => {
 
         const selectedBuildID = selectedBuilding.buildingId;
 
-        let borderColor = 'black';
-
-        if (gameBuildingType.id === selectedBuildID) {
-          borderColor = 'green';
-        }
+        const borderColor = gameBuildingType.id === selectedBuildID ? 'green' : 'black';
 
         const checkEnoughRescource = checkRescource(
           gameBuildingType,
           currentUserResources,
           currentUserBuilding.level + 1
         );
-        let notEnoughRescource = checkEnoughRescource.buildPriceTextColor.find(color => color === 'red');
-
-        if (notEnoughRescource === undefined) {
-          notEnoughRescource = 'black';
-        }
+        const notEnoughRescource = checkEnoughRescource.buildPriceTextColor.find(color => color === 'red') ||  'black' ;
 
         const buildingInProgress = currentUserBuildingInProgress.find(
           buildingInProgress => buildingInProgress.buildingId === gameBuildingType.id
         );
 
-        let timeLeft = '';
-
-        if (buildingInProgress !== undefined) {
-          timeLeft = timeBuilder(Math.round(buildingInProgress.diffTime / 1000));
-        }
+        const timeLeft = buildingInProgress !== undefined ? timeBuilder(Math.round(buildingInProgress.diffTime / 1000)) : '';
 
         return (
           <StyledUl key={gameBuildingType.id} borderColor={borderColor} notEnoughRescource={notEnoughRescource}>

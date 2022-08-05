@@ -80,7 +80,7 @@ export const Building = ({selectedBuilding}) => {
       const checkEnoughRescource = checkRescource(gameBuildingType,currentUserResources,nextLevel)
 
   return (
-    <article key={gameBuildingType.id}>
+    <article>
       <Buildingcard
         buildType={0}
         buildId={gameBuildingType.id}
