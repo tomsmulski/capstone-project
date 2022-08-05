@@ -26,26 +26,13 @@ export default function ResourcesView({isOpen, currentRess}) {
     }
   }
 
-  let tooltipPosition = 0;
-
-  if (currentRess.name === 'money') {
-    tooltipPosition = '5%';
-  } else if (currentRess.name === 'iron') {
-    tooltipPosition = '15%';
-  } else if (currentRess.name === 'fuel') {
-    tooltipPosition = '25%';
-  } else if (currentRess.name === 'gold') {
-    tooltipPosition = '35%';
-  } else if (currentRess.name === 'energy') {
-    tooltipPosition = '45%';
-  }
-
   return (
     <>
-      <StyledSection isOpen={isOpen} tooltipPosition={tooltipPosition}>
+      <StyledSection isOpen={isOpen}>
         <p>
           <strong>{resNameUpperCase}</strong>
         </p>
+        <hr />
         <StyledP>
           <span>You have</span>
           <span>{Math.floor(currentRess.value)}</span>
@@ -66,18 +53,19 @@ export default function ResourcesView({isOpen, currentRess}) {
 const StyledSection = styled.section`
   position: absolute;
   top: 55px;
-  left: ${props => props.tooltipPosition ?? props.tooltipPosition};
   background: black;
   color: white;
-  width: 200px;
+  width: 220px;
   height: 100px;
   border-radius: 7px;
   display: ${props => (props.isOpen ? 'block' : 'none')};
   padding: 5px;
   font-size: 14px;
+  left: 20%;
 `;
 
 const StyledP = styled.p`
+  padding-top: 3px;
   display: flex;
   justify-content: space-between;
 `;
