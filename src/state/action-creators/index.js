@@ -82,16 +82,21 @@ export const updateBuildingToBuild = createAction(
   }
 );
 
-export const removeBuildingToBuild = createAction(
-  'buildingsInBuild/remove',
-  function prepare(cityId, buildingId) {
-    return {
-      payload: {
-        cityId: cityId,
-        buildingId: buildingId
-      },
-    };
-  }
-);
+export const removeBuildingToBuild = createAction('buildingsInBuild/remove', function prepare(cityId, buildingId) {
+  return {
+    payload: {
+      cityId: cityId,
+      buildingId: buildingId,
+    },
+  };
+});
 
-
+export const setTooltipResources = createAction('tooltipresources/set', function prepare(status, keyRess, currentRess) {
+  return {
+    payload: {
+      status: status,
+      keyRess: keyRess,
+      currentRess: currentRess,
+    },
+  };
+});

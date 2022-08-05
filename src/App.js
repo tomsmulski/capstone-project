@@ -43,6 +43,8 @@ export default function App() {
           });
         });
 
+        setResources('energy', productionResources('energy', currentUserBuildings));
+
         setLoading('loadUserCitys', true);
       } catch (error) {
         console.log('loading Game datas Fail');
@@ -63,7 +65,12 @@ export default function App() {
       const interval = setInterval(() => {
         currentUserBuildings.forEach(building => {
           if (building.resourcesType !== 'energy') {
-            addResources(building.resourcesType, productionResources(building.resourcesType, building.level));
+            addResources(
+              building.resourcesType,
+              productionResources(building.resourcesType, currentUserBuildings, 0, 3600)
+            );
+          } else {
+            setResources('energy', productionResources('energy', currentUserBuildings));
           }
         });
       }, 1000);
@@ -87,11 +94,7 @@ export default function App() {
         addBuildings(currentUserBuildingInProgress[0].buildingId);
         removeBuildingToBuild(currentUserBuildingInProgress[0].cityId, currentUserBuildingInProgress[0].buildingId);
 
-        if (currentUserBuildingInProgress[0].buildingId === '62e7dbb7cefed5e153f6bb88') {
-          addResources('energy', productionResources('energy', currentUserBuildingInProgress[0].toLevel, 'add'));
-        } else {
-          addResources('energy', productionResources('energy', currentUserBuildingInProgress[0].toLevel, 'remove'));
-        }
+        productionResources('energy', currentUserBuildings);
       } else {
         updateBuildingToBuild(
           currentUserBuildingInProgress[0].cityId,

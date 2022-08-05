@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Button from '../button/button';
 import {Resource} from '../resources/Resource';
-import {productionResources} from '../../util/ResourcenProduction';
+import {displayLevelUpResourcesProduction} from '../../util/ResourcenProduction';
 import {buildingPrice} from '../../util/BuildingPrice';
 
 export default function Buildingcard({
@@ -18,6 +18,7 @@ export default function Buildingcard({
   buttonText,
   buttonDisabled,
   buttonFunction,
+  currentUserBuildings,
 }) {
   return (
     <StyledSection>
@@ -29,7 +30,7 @@ export default function Buildingcard({
       </StyledHeader>
       <StyledBuildInfoContainer>
         <StyledSpan>
-          <StyledBuildTimeInfo>{buildTime.buildTimeDisplay}</StyledBuildTimeInfo>
+          <StyledBuildTimeInfo>🕜{buildTime.buildTimeDisplay}</StyledBuildTimeInfo>
           <StyledBuildNextLevelText>To upgrade to level {currentBuildLevel + 1} you need</StyledBuildNextLevelText>
         </StyledSpan>
 
@@ -43,12 +44,9 @@ export default function Buildingcard({
                   displayValuePosition="right"
                   currentRess={{
                     name: productionMaterial.resourceType,
-                    value: productionResources(
+                    value: displayLevelUpResourcesProduction(
                       productionMaterial.resourceType,
-                      currentBuildLevel + 1,
-                      buildId === '62e7dbb7cefed5e153f6bb88' ? 'add' : 'remove',
-                      true,
-                      'difference'
+                      currentUserBuildings,buildId
                     ),
                   }}
                 />
@@ -57,7 +55,7 @@ export default function Buildingcard({
           </StyledBuildYieldInfo>
 
           <StyledBuildPriceInfo>
-            {buildPrice.map((buildMaterial, index) => {              
+            {buildPrice.map((buildMaterial, index) => {
               return (
                 <Resource
                   key={buildMaterial.id}
