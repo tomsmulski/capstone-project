@@ -90,7 +90,7 @@ const StyledSection = styled.section`
   margin-top: 80px;
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  
 `;
 
 const StyledHeader = styled.article`
@@ -107,6 +107,7 @@ const StyledTitle = styled.h1`
 `;
 
 const StyledDescription = styled.p`
+  min-height: 40px;
   max-height: 40px;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -121,6 +122,7 @@ const StyledBuildInfoContainer = styled.article`
   display: flex;
   flex-direction: column;
   padding: 5px;
+  min-height: 158px;
 `;
 
 const StyledSpan = styled.span`
@@ -145,6 +147,7 @@ const StyledDiv = styled.span`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  min-height: 68px;
 `;
 
 const StyledBuildYieldInfo = styled.span`

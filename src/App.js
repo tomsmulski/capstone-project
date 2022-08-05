@@ -1,6 +1,7 @@
 import {useEffect} from 'react';
 import {ResourcesOverview} from './components/resources/ResourcesOverview';
 import {Building} from './components/building/building';
+import {Buildingnav} from './components/building/buildingnav';
 import {productionResources} from './util/ResourcenProduction';
 import {getUserCitys} from './services/usercitys';
 
@@ -25,6 +26,7 @@ export default function App() {
   const currentUserBuildings = useSelector(state => state.currentUserBuildings);
   const loadingStatus = useSelector(state => state.loadingStatus);
   const currentUserBuildingInProgress = useSelector(state => state.currentUserBuildingInProgress);
+  const selectedBuilding = useSelector(state => state.selectedBuilding);
 
   useEffect(() => {
     loadingUserCitys();
@@ -110,7 +112,10 @@ export default function App() {
     return (
       <>
         <ResourcesOverview />
-        <Building />
+        <span>
+          <Building selectedBuilding={selectedBuilding} />
+          <Buildingnav currentUserBuildings={currentUserBuildings} selectedBuilding={selectedBuilding} />
+        </span>
       </>
     );
   } else {
