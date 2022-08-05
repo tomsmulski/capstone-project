@@ -93,8 +93,9 @@ const StyledLiLevel = styled.li`
   width: 100%;
   max-width: 140px;
   text-align: center;
-  color: white;
+  color: blue;
   padding-bottom: 3px;
+
 `;
 
 const StyledImg = styled.img`
