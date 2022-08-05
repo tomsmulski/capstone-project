@@ -47,7 +47,7 @@ export const Buildingnav = ({currentUserBuildings, selectedBuilding}) => {
               </StyledButton>
               {timeLeft.length > 0 ? <StyledTimeLeft>{timeLeft}</StyledTimeLeft> : ''}
             </li>
-            <StyledLiLevel>Level: {currentUserBuilding.level}</StyledLiLevel>
+            <StyledLiLevel notEnoughRescource={notEnoughRescource}>Level: {currentUserBuilding.level}</StyledLiLevel>
           </StyledUl>
         );
       })}
@@ -93,7 +93,7 @@ const StyledLiLevel = styled.li`
   width: 100%;
   max-width: 140px;
   text-align: center;
-  color: blue;
+  color: ${props => props.notEnoughRescource === 'red' ? 'white' : 'black'};
   padding-bottom: 3px;
 
 `;
