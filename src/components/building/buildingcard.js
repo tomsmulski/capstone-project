@@ -13,7 +13,6 @@ export default function Buildingcard({
   buildPrice,
   buildPriceTextColor,
   buildYield,
-  buildInProgressTime,
   currentBuildLevel,
   buttonText,
   buttonDisabled,
@@ -73,7 +72,6 @@ export default function Buildingcard({
         </StyledDiv>
 
         <StyledButtonContainer>
-          <StyledProgressTime>{buildInProgressTime}</StyledProgressTime>
           <Button
             disabled={buttonDisabled}
             buildId={buildId}
@@ -170,13 +168,4 @@ const StyledButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: end;
-`;
-
-const StyledProgressTime = styled.span`
-  text-align: right;
-  margin-top: 14px;
-  margin-right: 5px;
-  width: 120px;
-  height: 30px;
-  font-size: larger;
 `;

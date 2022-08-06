@@ -47,7 +47,7 @@ export const Buildingnav = ({currentUserBuildings, selectedBuilding}) => {
           Math.round(totalDiffTime / 1000) -
           (timeLeft.length === 0 ? 0 : Math.round(buildingInProgress.diffTime / 1000));
 
-        calcuTimeDifference = ((calcuTimeDifference / Math.round(totalDiffTime / 1000)) * 100) - 100;
+        calcuTimeDifference = (calcuTimeDifference / Math.round(totalDiffTime / 1000)) * 100 - 100;
 
         return (
           <StyledUl key={gameBuildingType.id} borderColor={borderColor} notEnoughRescource={notEnoughRescource}>
@@ -129,7 +129,7 @@ const StyledButton = styled.div`
     props.calcuTimeDifference > 0
       ? 'background: linear-gradient(#777, #777 ' +
         props.calcuTimeDifference +
-        '%, #AAA ' +
+        '%, #FFF ' +
         props.calcuTimeDifference +
         '% );'
       : 0}

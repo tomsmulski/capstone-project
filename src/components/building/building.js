@@ -1,11 +1,11 @@
 import {buildingPrice} from '../../util/BuildingPrice';
-import {buildingTime, timeBuilder} from '../../util/BuildingTime';
+import {buildingTime} from '../../util/BuildingTime';
 import Buildingcard from './buildingcard';
 import {bindActionCreators} from 'redux';
 import {useSelector, useDispatch} from 'react-redux';
 import {actionCreators} from '../../state';
 import {gameBuildingsTypes} from '../../util/gamedatas/gameBuildingsTypes';
-import { checkRescource } from '../../util/checkResources';
+import {checkRescource} from '../../util/checkResources';
 
 export const Building = ({selectedBuilding}) => {
   const {removeResources, addBuildingToBuild} = bindActionCreators(actionCreators, useDispatch());
@@ -72,12 +72,8 @@ export const Building = ({selectedBuilding}) => {
   );
 
   const buildInProgressButtonDisable = currentUserBuildingInProgress.length === 0 ? false : true;
-  const buildInProgressTime =
-    currentUserBuildingInProgress.length === 0
-      ? ''
-      : timeBuilder(Math.round(currentUserBuildingInProgress[0].diffTime / 1000));
 
-      const checkEnoughRescource = checkRescource(gameBuildingType,currentUserResources,nextLevel)
+  const checkEnoughRescource = checkRescource(gameBuildingType, currentUserResources, nextLevel);
 
   return (
     <article>
@@ -90,7 +86,6 @@ export const Building = ({selectedBuilding}) => {
         buildPrice={gameBuildingType.buildMaterials}
         buildPriceTextColor={checkEnoughRescource.buildPriceTextColor}
         buildYield={gameBuildingType.productionMaterials}
-        buildInProgressTime={buildInProgressTime}
         currentBuildLevel={currentUserBuilding.level}
         buttonText={buttonTexts}
         buttonDisabled={checkEnoughRescource.notEnoughResourceButtonDisable || buildInProgressButtonDisable}
@@ -100,7 +95,3 @@ export const Building = ({selectedBuilding}) => {
     </article>
   );
 };
-
-
-
-
