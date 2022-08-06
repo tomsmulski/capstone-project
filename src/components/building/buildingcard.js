@@ -46,7 +46,8 @@ export default function Buildingcard({
                     name: productionMaterial.resourceType,
                     value: displayLevelUpResourcesProduction(
                       productionMaterial.resourceType,
-                      currentUserBuildings,buildId
+                      currentUserBuildings,
+                      buildId
                     ),
                   }}
                 />
@@ -90,7 +91,7 @@ const StyledSection = styled.section`
   margin-top: 80px;
   position: relative;
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
 `;
 
 const StyledHeader = styled.header`
@@ -131,7 +132,7 @@ const StyledSpan = styled.span`
 `;
 
 const StyledBuildTimeInfo = styled.p`
-  width: 100px;
+  width: 200px;
   padding: 5px;
   font-size: large;
 `;

@@ -13,13 +13,19 @@ function timeBuilder(seconds) {
     seconds: Math.floor((seconds % 3600) % 60),
   };
 
+  console.log(newTimeObject)
+
   let dateString = '';
   for (const key in newTimeObject) {
     if (newTimeObject[key] > 0) {
-      dateString = dateString + newTimeObject[key] + key.charAt(0) + ' ';
+      dateString =
+        dateString +
+        (newTimeObject[key] < 10
+          ? '0' + newTimeObject[key] + key.charAt(0) + ' '
+          : newTimeObject[key] + key.charAt(0) + ' ');
     } else {
-      if (key === 'seconds') {
-        dateString = '1s';        
+      if (key === 'seconds' && dateString.length === 0) {
+        dateString = '01s';
       }
     }
   }
@@ -30,7 +36,7 @@ function timeBuilder(seconds) {
 function buildingTime(money, iron) {
   const buildTime = Math.floor((money + iron) / gameConfig.speed.buildingSpeed);
 
-  return {buildTimeSeconds: buildTime > 0 ? buildTime : 1, buildTimeDisplay: timeBuilder(buildTime)};
+  return {buildTimeSeconds: buildTime >= 0 ? buildTime : 1, buildTimeDisplay: timeBuilder(buildTime)};
 }
 
 export {buildingTime, timeBuilder};
