@@ -1,36 +1,18 @@
 import {gameConfig} from './GameConfig';
 
 function timeBuilder(seconds) {
-  const weeks = Math.floor(seconds / 3600 / 24 / 7);
-  const days = weeks > 1 ? Math.floor((seconds / 3600 / 24) % 7) : Math.floor(seconds / 3600 / 24);
-  const hours = days > 1 ? Math.floor((seconds / 3600) % 24) : Math.floor(seconds / 3600);
-
-  const newTimeObject = {
-    weeks,
-    days,
-    hours,
-    minutes: Math.floor((seconds % 3600) / 60),
-    seconds: Math.floor((seconds % 3600) % 60),
-  };
-
-  console.log(newTimeObject)
-
-  let dateString = '';
-  for (const key in newTimeObject) {
-    if (newTimeObject[key] > 0) {
-      dateString =
-        dateString +
-        (newTimeObject[key] < 10
-          ? '0' + newTimeObject[key] + key.charAt(0) + ' '
-          : newTimeObject[key] + key.charAt(0) + ' ');
-    } else {
-      if (key === 'seconds' && dateString.length === 0) {
-        dateString = '01s';
-      }
-    }
-  }
-
-  return dateString.trim();
+  var w = Math.floor(seconds / 604800),
+    d = Math.floor(seconds / 86400) % 7,
+    h = Math.floor(seconds / 3600) % 24,
+    m = ('0' + (Math.floor(seconds / 60) % 60)).slice(-2),
+    s = ('0' + (seconds % 60)).slice(-2);
+  return (
+    (w > 0 ? w + 'w ' : '') +
+    (d > 0 ? d + 'd ' : '') +
+    (h > 0 ? h + 'h ' : '') +
+    (m > 0 ? m + 'm ' : '') +
+    (seconds > 60 ? s + 's ' : s + 's')
+  );
 }
 
 function buildingTime(money, iron) {
