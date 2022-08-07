@@ -57,7 +57,7 @@ export const Buildingnav = ({currentUserBuildings, selectedBuilding}) => {
                 onClick={() => setSelectedBuilding(gameBuildingType.id)}
                 calcuTimeDifference={-calcuTimeDifference}
               >
-                <StyledImg src="" alt={gameBuildingType.name}></StyledImg>
+                <StyledImg src={'../images/buildings/' + gameBuildingType.image + '.png'} alt={gameBuildingType.name}></StyledImg>
               </StyledButton>
               {timeLeft.length > 0 ? <StyledTimeLeft>{timeLeft}</StyledTimeLeft> : ''}
             </li>
@@ -109,9 +109,11 @@ const StyledLiLevel = styled.li`
 const StyledImg = styled.img`
   position: relative;
   min-width: 134px;
+  max-width: 134px;
   min-height: 96px;
-  opacity: 0.4;
-  background: black;
+  max-height: 96px;
+  opacity: 0.5;
+  background: gray;
 `;
 
 const StyledTimeLeft = styled.span`
@@ -119,6 +121,8 @@ const StyledTimeLeft = styled.span`
   bottom: 60px;
   display: flex;
   justify-content: center;
+  color: yellow;
+  font-weight: bold;
 `;
 
 const StyledButton = styled.div`
