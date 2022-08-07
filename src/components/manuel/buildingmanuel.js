@@ -1,23 +1,22 @@
 import styled from 'styled-components';
-import Table from './table';
+import BuildingManuelNextLevelTable from './buildingmanuelnextleveltable';
 
-import { useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 import {gameBuildingsTypes} from '../../util/gamedatas/gameBuildingsTypes';
 
-export default function Modul({buildId, currentBuildLevel, setOpenManuel}) {
+export default function BuildingManuel({buildId, currentUserBuildings, setOpenManuel}) {
   const gameBuildingsType = gameBuildingsTypes.find(gameBuildingsType => gameBuildingsType.id === buildId);
 
   const openManuelStatus = useSelector(state => state.openManuel.status);
 
-  
   return (
     <>
       <StyledSection openManuelStatus={openManuelStatus}>
         <StyledDiv>
           <StyledArticleTitle>
             <StyledH1>Building Manuel</StyledH1>
-            <StyledCloseButton onClick={()=>setOpenManuel(false)}>X</StyledCloseButton>
+            <StyledCloseButton onClick={() => setOpenManuel(false)}>X</StyledCloseButton>
           </StyledArticleTitle>
           <StyledArticleInfomation>
             <StyledH2>{gameBuildingsType.name}</StyledH2>
@@ -32,7 +31,7 @@ export default function Modul({buildId, currentBuildLevel, setOpenManuel}) {
             <StyledP>{gameBuildingsType.description}</StyledP>
           </StyledArticleDescription>
           <StyledArticleNextLevel>
-            <Table buildId={buildId} currentBuildLevel={currentBuildLevel}/>
+            <BuildingManuelNextLevelTable buildId={buildId} currentUserBuildings={currentUserBuildings} />
           </StyledArticleNextLevel>
         </StyledDiv>
       </StyledSection>
@@ -42,7 +41,7 @@ export default function Modul({buildId, currentBuildLevel, setOpenManuel}) {
 
 const StyledSection = styled.section`
   position: fixed;
-  display: ${props => props.openManuelStatus ? 'block' : 'none'};
+  display: ${props => (props.openManuelStatus ? 'block' : 'none')};
   top: 0;
   background: gray;
   height: 100%;
@@ -55,7 +54,7 @@ const StyledDiv = styled.div`
 `;
 
 const StyledArticleTitle = styled.article`
-  border: 1px solid yellow;
+  border: 1px solid black;
   position: relative;
   height: 50px;
   text-align: center;
@@ -78,7 +77,7 @@ const StyledCloseButton = styled.button`
 `;
 
 const StyledArticleInfomation = styled.article`
-  border: 1px solid yellow;
+  border: 1px solid black;
   position: relative;
   height: 200px;
   padding: 10px;
@@ -95,8 +94,8 @@ const StyledImg = styled.img`
   border: 1px solid black;
   min-width: 134px;
   max-width: 134px;
-  min-height: 96px;
-  max-height: 96px;
+  min-height: 134px;
+  max-height: 134px;
 `;
 
 const StyledH3 = styled.h3`
@@ -106,7 +105,7 @@ const StyledH3 = styled.h3`
 `;
 
 const StyledArticleDescription = styled.article`
-  border: 1px solid yellow;
+  border: 1px solid black;
   position: relative;
   height: 200px;
   padding: 10px;
@@ -114,7 +113,7 @@ const StyledArticleDescription = styled.article`
 `;
 
 const StyledP = styled.p`
-  border: 1px solid green;
+  border: 1px solid black;
   padding: 5px;
 `;
 

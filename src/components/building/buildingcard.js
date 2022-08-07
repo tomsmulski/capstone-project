@@ -3,7 +3,7 @@ import Button from '../button/button';
 import {Resource} from '../resources/Resource';
 import {displayLevelUpResourcesProduction} from '../../util/ResourcenProduction';
 import {buildingPrice} from '../../util/BuildingPrice';
-import Modul from './../modul/modul';
+import BuildingManuel from '../manuel/buildingmanuel';
 
 import {bindActionCreators} from 'redux';
 import { useDispatch} from 'react-redux';
@@ -92,7 +92,7 @@ export default function Buildingcard({
           </StyledButtonContainer>
         </StyledBuildInfoContainer>
       </StyledSection>
-      <Modul buildId={buildId} currentBuildLevel={currentBuildLevel} setOpenManuel={setOpenManuel}></Modul>
+      <BuildingManuel buildId={buildId} currentUserBuildings={currentUserBuildings} setOpenManuel={setOpenManuel}></BuildingManuel>
     </>
   );
 }
