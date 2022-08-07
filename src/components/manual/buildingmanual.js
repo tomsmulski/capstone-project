@@ -11,7 +11,7 @@ export default function BuildingManual({buildId, currentBuildLevel, setOpenManua
 
   return (
     <>
-      <StyledSection openManualStatus={openManualStatus}>
+      <StyledSection openManualStatus={openManualStatus} imageBackground={Images.background.imageBackgroundManual}>
         <StyledDiv>
           <StyledArticleTitle>
             <StyledH1>Building Manual</StyledH1>
@@ -19,10 +19,7 @@ export default function BuildingManual({buildId, currentBuildLevel, setOpenManua
           </StyledArticleTitle>
           <StyledArticleInfomation>
             <StyledH2>{gameBuildingsType.name}</StyledH2>
-            <StyledImg
-              src={Images.image[gameBuildingsType.image]}
-              alt={gameBuildingsType.name}
-            ></StyledImg>
+            <StyledImg src={Images.image[gameBuildingsType.image]} alt={gameBuildingsType.name}></StyledImg>
             <StyledH3>Infomation</StyledH3>
           </StyledArticleInfomation>
           <StyledArticleDescription>
@@ -42,9 +39,11 @@ const StyledSection = styled.section`
   position: fixed;
   display: ${props => (props.openManualStatus ? 'block' : 'none')};
   top: 0;
-  background: gray;
   height: 100%;
   z-index: 99;
+  background-image: url(${props => props.imageBackground});
+  background-size: cover;
+  background-attachment: fixed;
 `;
 
 const StyledDiv = styled.div`

@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import Images from '../../images';
 
 export const Resource = ({currentRess, displayValuePosition, iconSize, color}) => {
-  console.log(Images);
-
   return (
     <StyledResourceSection displayValuePosition={displayValuePosition}>
       <StyledResourceIcon

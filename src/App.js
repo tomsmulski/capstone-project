@@ -9,6 +9,7 @@ import {bindActionCreators} from 'redux';
 import {actionCreators} from './state/index';
 import Loading from './components/loading/loading';
 import styled from 'styled-components';
+import Images from './images';
 
 export default function App() {
   const {
@@ -122,6 +123,8 @@ export default function App() {
   }
 }
 
+
 const StyledMain = styled.main`
-  background: gray;
-`;
+height: 100%;
+border-radius: 10px;
+`
