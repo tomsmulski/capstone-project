@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {gameBuildingsTypes} from '../../util/gamedatas/gameBuildingsTypes';
 import {displayLevelUpResourcesProduction} from '../../util/ResourcenProduction';
 
-export default function BuildingManuelNextLevelTable({buildId, currentUserBuildings}) {
+export default function BuildingManualNextLevelTable({buildId, currentUserBuildings}) {
   const gameBuildingsType = gameBuildingsTypes.find(gameBuildingsType => gameBuildingsType.id === buildId);
 
   const currentUserBuilding = currentUserBuildings.find(
@@ -44,10 +44,10 @@ export default function BuildingManuelNextLevelTable({buildId, currentUserBuildi
         {nextLevelObject.map(nextLevel => {
           return (
             <StyledTableRow key={nextLevel.level}>
-            <td>{nextLevel.level}</td>
-            <td>{nextLevel.production}</td>
-            <td>{nextLevel.difference}</td>
-          </StyledTableRow>
+              <td>{nextLevel.level}</td>
+              <td>{nextLevel.production}</td>
+              <td>{nextLevel.difference}</td>
+            </StyledTableRow>
           );
         })}
       </tbody>

@@ -110,7 +110,7 @@ export const setSelectedBuilding = createAction('selectedBuilding/set', function
 });
 
 
-export const setOpenManuel = createAction('manuel/set', function prepare(status) {
+export const setOpenManual = createAction('manual/set', function prepare(status) {
   return {
     payload: {
       status: status,

@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-export const manuelSlice = createSlice({
-  name: 'manuel',
+export const manualSlice = createSlice({
+  name: 'manual',
   initialState: {status: false},
   reducers: {
     set: (state, action) => {
@@ -10,4 +10,4 @@ export const manuelSlice = createSlice({
   },
 });
 
-export default manuelSlice.reducer;
+export default manualSlice.reducer;

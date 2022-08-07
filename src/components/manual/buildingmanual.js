@@ -1,22 +1,22 @@
 import styled from 'styled-components';
-import BuildingManuelNextLevelTable from './buildingmanuelnextleveltable';
+import BuildingManualNextLevelTable from './buildingmanualnextleveltable';
 
 import {useSelector} from 'react-redux';
 
 import {gameBuildingsTypes} from '../../util/gamedatas/gameBuildingsTypes';
 
-export default function BuildingManuel({buildId, currentUserBuildings, setOpenManuel}) {
+export default function BuildingManual({buildId, currentUserBuildings, setOpenManual}) {
   const gameBuildingsType = gameBuildingsTypes.find(gameBuildingsType => gameBuildingsType.id === buildId);
 
-  const openManuelStatus = useSelector(state => state.openManuel.status);
+  const openManualStatus = useSelector(state => state.openManual.status);
 
   return (
     <>
-      <StyledSection openManuelStatus={openManuelStatus}>
+      <StyledSection openManualStatus={openManualStatus}>
         <StyledDiv>
           <StyledArticleTitle>
-            <StyledH1>Building Manuel</StyledH1>
-            <StyledCloseButton onClick={() => setOpenManuel(false)}>X</StyledCloseButton>
+            <StyledH1>Building Manual</StyledH1>
+            <StyledCloseButton onClick={() => setOpenManual(false)}>X</StyledCloseButton>
           </StyledArticleTitle>
           <StyledArticleInfomation>
             <StyledH2>{gameBuildingsType.name}</StyledH2>
@@ -31,7 +31,7 @@ export default function BuildingManuel({buildId, currentUserBuildings, setOpenMa
             <StyledP>{gameBuildingsType.description}</StyledP>
           </StyledArticleDescription>
           <StyledArticleNextLevel>
-            <BuildingManuelNextLevelTable buildId={buildId} currentUserBuildings={currentUserBuildings} />
+            <BuildingManualNextLevelTable buildId={buildId} currentUserBuildings={currentUserBuildings} />
           </StyledArticleNextLevel>
         </StyledDiv>
       </StyledSection>
@@ -41,7 +41,7 @@ export default function BuildingManuel({buildId, currentUserBuildings, setOpenMa
 
 const StyledSection = styled.section`
   position: fixed;
-  display: ${props => (props.openManuelStatus ? 'block' : 'none')};
+  display: ${props => (props.openManualStatus ? 'block' : 'none')};
   top: 0;
   background: gray;
   height: 100%;

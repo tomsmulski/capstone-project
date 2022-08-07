@@ -3,7 +3,7 @@ import Button from '../button/button';
 import {Resource} from '../resources/Resource';
 import {displayLevelUpResourcesProduction} from '../../util/ResourcenProduction';
 import {buildingPrice} from '../../util/BuildingPrice';
-import BuildingManuel from '../manuel/buildingmanuel';
+import BuildingManual from '../manual/buildingmanual';
 
 import {bindActionCreators} from 'redux';
 import { useDispatch} from 'react-redux';
@@ -24,7 +24,7 @@ export default function Buildingcard({
   buttonFunction,
   currentUserBuildings,
 }) {
-  const {setOpenManuel} = bindActionCreators(actionCreators, useDispatch());
+  const {setOpenManual} = bindActionCreators(actionCreators, useDispatch());
   return (
     <>
       <StyledSection>
@@ -33,7 +33,7 @@ export default function Buildingcard({
             <StyledTitle>
               {buildName} ({currentBuildLevel})
             </StyledTitle>
-            <StyledManuelButton onClick={() => setOpenManuel(true)}>📖</StyledManuelButton>
+            <StyledManualButton onClick={() => setOpenManual(true)}>📖</StyledManualButton>
           </StyledDivHeader>
           <StyledDescription>{buildDescription}</StyledDescription>
         </StyledHeader>
@@ -92,7 +92,7 @@ export default function Buildingcard({
           </StyledButtonContainer>
         </StyledBuildInfoContainer>
       </StyledSection>
-      <BuildingManuel buildId={buildId} currentUserBuildings={currentUserBuildings} setOpenManuel={setOpenManuel}></BuildingManuel>
+      <BuildingManual buildId={buildId} currentUserBuildings={currentUserBuildings} setOpenManual={setOpenManual}></BuildingManual>
     </>
   );
 }
@@ -155,7 +155,7 @@ const StyledBuildNextLevelText = styled.span`
   width: 100%;
 `;
 
-const StyledManuelButton = styled.span`
+const StyledManualButton = styled.span`
   font-size: 25px;
   margin: 0;
 `;
