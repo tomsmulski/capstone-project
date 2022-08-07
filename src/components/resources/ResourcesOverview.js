@@ -11,31 +11,32 @@ export const ResourcesOverview = () => {
   const {setTooltipResources} = bindActionCreators(actionCreators, useDispatch());
   const tooltipResourcesView = useSelector(state => state.tooltipResourcesView);
 
-  const handleClick = currentRess => {
-    setTooltipResources(!tooltipResourcesView.status[currentRess.name], currentRess.name, currentRess);
+  const handleClick = currentResource => {
+    setTooltipResources(!tooltipResourcesView.status[currentResource.name], currentResource.name, currentResource);
   };
 
-  let currentRess = [];
+  let currentResources = [];
 
   Object.keys(currentUserResources).forEach(key => {
-    currentRess.push({id: nanoid(), name: key, value: currentUserResources[key]});
+    currentResources.push({id: nanoid(), name: key, value: currentUserResources[key]});
   });
 
   return (
-    <>
-      <StyledResourcesContainer>
-        {currentRess.map(ress => {
-          return (
-            <section key={ress.id}>
-              <div onClick={() => handleClick(ress)}>
-                <Resource displayValue={true} currentRess={ress}></Resource>
-              </div>
-              <ResourcesView isOpen={tooltipResourcesView.status[ress.name]} currentRess={ress}></ResourcesView>
-            </section>
-          );
-        })}
-      </StyledResourcesContainer>
-    </>
+    <StyledResourcesContainer>
+      {currentResources.map(currentResource => {
+        return (
+          <section key={currentResource.id}>
+            <div onClick={() => handleClick(currentResource)}>
+              <Resource displayValue={true} currentRess={currentResource}></Resource>
+            </div>
+            <ResourcesView
+              isOpen={tooltipResourcesView.status[currentResource.name]}
+              currentResource={currentResource}
+            ></ResourcesView>
+          </section>
+        );
+      })}
+    </StyledResourcesContainer>
   );
 };
 

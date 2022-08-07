@@ -100,3 +100,11 @@ export const setTooltipResources = createAction('tooltipresources/set', function
     },
   };
 });
+
+export const setSelectedBuilding = createAction('selectedBuilding/set', function prepare(buildingId) {
+  return {
+    payload: {
+      buildingId: buildingId,
+    },
+  };
+});

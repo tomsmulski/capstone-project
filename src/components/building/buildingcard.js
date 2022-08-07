@@ -13,7 +13,6 @@ export default function Buildingcard({
   buildPrice,
   buildPriceTextColor,
   buildYield,
-  buildInProgressTime,
   currentBuildLevel,
   buttonText,
   buttonDisabled,
@@ -46,7 +45,8 @@ export default function Buildingcard({
                     name: productionMaterial.resourceType,
                     value: displayLevelUpResourcesProduction(
                       productionMaterial.resourceType,
-                      currentUserBuildings,buildId
+                      currentUserBuildings,
+                      buildId
                     ),
                   }}
                 />
@@ -72,7 +72,6 @@ export default function Buildingcard({
         </StyledDiv>
 
         <StyledButtonContainer>
-          <StyledProgressTime>{buildInProgressTime}</StyledProgressTime>
           <Button
             disabled={buttonDisabled}
             buildId={buildId}
@@ -93,7 +92,7 @@ const StyledSection = styled.section`
   flex-direction: column;
 `;
 
-const StyledHeader = styled.article`
+const StyledHeader = styled.header`
   border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -107,6 +106,7 @@ const StyledTitle = styled.h1`
 `;
 
 const StyledDescription = styled.p`
+  min-height: 40px;
   max-height: 40px;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -121,6 +121,7 @@ const StyledBuildInfoContainer = styled.article`
   display: flex;
   flex-direction: column;
   padding: 5px;
+  min-height: 158px;
 `;
 
 const StyledSpan = styled.span`
@@ -129,7 +130,7 @@ const StyledSpan = styled.span`
 `;
 
 const StyledBuildTimeInfo = styled.p`
-  width: 100px;
+  width: 200px;
   padding: 5px;
   font-size: large;
 `;
@@ -141,10 +142,11 @@ const StyledBuildNextLevelText = styled.span`
   width: 100%;
 `;
 
-const StyledDiv = styled.span`
+const StyledDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  min-height: 68px;
 `;
 
 const StyledBuildYieldInfo = styled.span`
@@ -166,13 +168,4 @@ const StyledButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: end;
-`;
-
-const StyledProgressTime = styled.span`
-  text-align: right;
-  margin-top: 14px;
-  margin-right: 5px;
-  width: 120px;
-  height: 30px;
-  font-size: larger;
 `;

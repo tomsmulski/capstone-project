@@ -2,16 +2,14 @@ import styled from 'styled-components';
 
 export const Resource = ({currentRess, displayValuePosition, iconSize, color}) => {
   return (
-    <>
-      <StyledResourceSection displayValuePosition={displayValuePosition}>
-        <StyledResourceIcon
-          alt={currentRess.name}
-          src={'../images/icons/icon_' + currentRess.name + '.jpg'}
-          iconSize={iconSize}
-        ></StyledResourceIcon>
-        <StyledResourceSpanNumber color={color}>{Math.floor(currentRess.value)}</StyledResourceSpanNumber>
-      </StyledResourceSection>
-    </>
+    <StyledResourceSection displayValuePosition={displayValuePosition}>
+      <StyledResourceIcon
+        alt={currentRess.name}
+        src={'../images/icons/icon_' + currentRess.name + '.jpg'}
+        iconSize={iconSize}
+      ></StyledResourceIcon>
+      <StyledResourceSpanNumber color={color}>{Math.floor(currentRess.value)}</StyledResourceSpanNumber>
+    </StyledResourceSection>
   );
 };
 
