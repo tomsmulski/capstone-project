@@ -79,7 +79,7 @@ const StyledSection = styled.section`
   max-width: 100%;
   overflow: hidden;
   overflow-x: scroll;
-
+  background-color: rgba(0, 0, 0, 0.6);
 
   @media screen and (min-width: 600px){
     overflow-x: hidden;

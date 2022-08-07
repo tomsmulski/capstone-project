@@ -10,6 +10,7 @@ import {actionCreators} from './state/index';
 import Loading from './components/loading/loading';
 import styled from 'styled-components';
 import Images from './images';
+import Buildingcard from './components/building/buildingcard';
 
 export default function App() {
   const {
@@ -126,5 +127,5 @@ export default function App() {
 
 const StyledMain = styled.main`
 height: 100%;
-border-radius: 10px;
+background-color: rgba(0, 0, 0, 0.6);
 `
