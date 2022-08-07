@@ -67,37 +67,41 @@ function productionResources(
   return ressources[resourcesType];
 }
 
-function displayLevelUpResourcesProduction(resourcesType, currentUserBuildings, buildId, addLevel = 1) {
+function displayLevelUpResourcesProduction(
+  resourcesType,
+  currentUserBuildingLevel,
+  buildId,
+  addLevel = 1,
+  total = false
+) {
   let resultValue = 0;
   let resultValueUpper = 0;
 
-  const currentUserBuild = currentUserBuildings.find(
-    currentUserBuildings => currentUserBuildings.buildingId === buildId
-  );
-
-  const gameBuildingType = gameBuildingsTypes.find(buildingType => buildingType.id === currentUserBuild.buildingId);
+  const gameBuildingType = gameBuildingsTypes.find(buildingType => buildingType.id === buildId);
 
   const productionMaterials = gameBuildingType.productionMaterials.find(
     material => material.resourceType === resourcesType
   );
 
   resultValue = Math.floor(
-    (productionMaterials.calculation.value *
-      currentUserBuild.level *
-      Math.pow(productionMaterials.calculation.pow, currentUserBuild.level) +
-      gameConfig.resourcesTypes[resourcesType].basicProduction) *
+    productionMaterials.calculation.value *
+      currentUserBuildingLevel *
+      Math.pow(productionMaterials.calculation.pow, currentUserBuildingLevel) *
       (resourcesType === 'energy' ? 1 : gameConfig.speed.resourcesSpeed)
   );
 
   resultValueUpper = Math.floor(
-    (productionMaterials.calculation.value *
-      (currentUserBuild.level + addLevel) *
-      Math.pow(productionMaterials.calculation.pow, currentUserBuild.level + addLevel) +
-      gameConfig.resourcesTypes[resourcesType].basicProduction) *
+    productionMaterials.calculation.value *
+      (currentUserBuildingLevel + addLevel) *
+      Math.pow(productionMaterials.calculation.pow, currentUserBuildingLevel + addLevel) *
       (resourcesType === 'energy' ? 1 : gameConfig.speed.resourcesSpeed)
   );
 
-  resultValue = resultValueUpper - resultValue;
+  if (!total) {
+    resultValue = resultValueUpper - resultValue;
+  } else {
+    resultValue = resultValueUpper;
+  }
 
   return resultValue;
 }

@@ -3,32 +3,28 @@ import styled from 'styled-components';
 import {gameBuildingsTypes} from '../../util/gamedatas/gameBuildingsTypes';
 import {displayLevelUpResourcesProduction} from '../../util/ResourcenProduction';
 
-export default function BuildingManualNextLevelTable({buildId, currentUserBuildings}) {
+export default function BuildingManualNextLevelTable({buildId, currentBuildLevel}) {
   const gameBuildingsType = gameBuildingsTypes.find(gameBuildingsType => gameBuildingsType.id === buildId);
 
-  const currentUserBuilding = currentUserBuildings.find(
-    currentUserBuilding => currentUserBuilding.buildingId === buildId
-  );
-
-  let startLevel = currentUserBuilding.level === 0 ? 1 : currentUserBuilding.level;
+  const startLevel = currentBuildLevel === 0 ? 1 : currentBuildLevel;
 
   const nextLevelObject = [];
 
-  for (let index = startLevel; index < startLevel + 5; index++) {
+  for (let index = startLevel; index <= startLevel + 5; index++) {
     const hourProduction = displayLevelUpResourcesProduction(
       gameBuildingsType.productionMaterials[0].resourceType,
-      currentUserBuildings,
+      index - 1,
       gameBuildingsType.id,
-      index
+      1,
+      true
     );
     const hourProductionDiff = displayLevelUpResourcesProduction(
       gameBuildingsType.productionMaterials[0].resourceType,
-      currentUserBuildings,
-      gameBuildingsType.id,
-      index - 1
+      index,
+      gameBuildingsType.id
     );
 
-    nextLevelObject.push({level: index, production: hourProduction, difference: hourProduction - hourProductionDiff});
+    nextLevelObject.push({level: index, production: hourProduction, difference: hourProductionDiff});
   }
 
   return (

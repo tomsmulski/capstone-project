@@ -6,8 +6,8 @@ import {buildingPrice} from '../../util/BuildingPrice';
 import BuildingManual from '../manual/buildingmanual';
 
 import {bindActionCreators} from 'redux';
-import { useDispatch} from 'react-redux';
-import { actionCreators } from '../../state';
+import {useDispatch} from 'react-redux';
+import {actionCreators} from '../../state';
 
 export default function Buildingcard({
   buildType,
@@ -55,7 +55,7 @@ export default function Buildingcard({
                       name: productionMaterial.resourceType,
                       value: displayLevelUpResourcesProduction(
                         productionMaterial.resourceType,
-                        currentUserBuildings,
+                        currentBuildLevel,
                         buildId
                       ),
                     }}
@@ -92,7 +92,11 @@ export default function Buildingcard({
           </StyledButtonContainer>
         </StyledBuildInfoContainer>
       </StyledSection>
-      <BuildingManual buildId={buildId} currentUserBuildings={currentUserBuildings} setOpenManual={setOpenManual}></BuildingManual>
+      <BuildingManual
+        buildId={buildId}
+        currentBuildLevel={currentBuildLevel}
+        setOpenManual={setOpenManual}
+      ></BuildingManual>
     </>
   );
 }

@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux';
 
 import {gameBuildingsTypes} from '../../util/gamedatas/gameBuildingsTypes';
 
-export default function BuildingManual({buildId, currentUserBuildings, setOpenManual}) {
+export default function BuildingManual({buildId, currentBuildLevel, setOpenManual}) {
   const gameBuildingsType = gameBuildingsTypes.find(gameBuildingsType => gameBuildingsType.id === buildId);
 
   const openManualStatus = useSelector(state => state.openManual.status);
@@ -31,7 +31,7 @@ export default function BuildingManual({buildId, currentUserBuildings, setOpenMa
             <StyledP>{gameBuildingsType.description}</StyledP>
           </StyledArticleDescription>
           <StyledArticleNextLevel>
-            <BuildingManualNextLevelTable buildId={buildId} currentUserBuildings={currentUserBuildings} />
+            <BuildingManualNextLevelTable buildId={buildId} currentBuildLevel={currentBuildLevel} />
           </StyledArticleNextLevel>
         </StyledDiv>
       </StyledSection>
