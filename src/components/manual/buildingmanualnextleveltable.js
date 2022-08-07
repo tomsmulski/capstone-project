@@ -6,16 +6,14 @@ import {displayLevelUpResourcesProduction} from '../../util/ResourcenProduction'
 export default function BuildingManualNextLevelTable({buildId, currentBuildLevel}) {
   const gameBuildingsType = gameBuildingsTypes.find(gameBuildingsType => gameBuildingsType.id === buildId);
 
-  const startLevel = currentBuildLevel === 0 ? 1 : currentBuildLevel;
-
   const nextLevelObject = [];
 
-  for (let index = startLevel; index <= startLevel + 5; index++) {
+  for (let index = currentBuildLevel; index <= currentBuildLevel + 5; index++) {
     const hourProduction = displayLevelUpResourcesProduction(
       gameBuildingsType.productionMaterials[0].resourceType,
-      index - 1,
+      index,
       gameBuildingsType.id,
-      1,
+      0,
       true
     );
     const hourProductionDiff = displayLevelUpResourcesProduction(

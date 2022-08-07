@@ -97,13 +97,11 @@ function displayLevelUpResourcesProduction(
       (resourcesType === 'energy' ? 1 : gameConfig.speed.resourcesSpeed)
   );
 
-  if (!total) {
-    resultValue = resultValueUpper - resultValue;
+  if (total) {
+    return (resultValue = resultValueUpper);
   } else {
-    resultValue = resultValueUpper;
+    return (resultValue = resultValueUpper - resultValue);
   }
-
-  return resultValue;
 }
 
 function calculateEachBuildingEnergy(currentUserBuildings) {

@@ -57,7 +57,10 @@ export const Buildingnav = ({currentUserBuildings, selectedBuilding}) => {
                 onClick={() => setSelectedBuilding(gameBuildingType.id)}
                 calcuTimeDifference={-calcuTimeDifference}
               >
-                <StyledImg src={'../images/buildings/' + gameBuildingType.image + '.png'} alt={gameBuildingType.name}></StyledImg>
+                <StyledImg
+                  src={'../images/buildings/' + gameBuildingType.image + '.png'}
+                  alt={gameBuildingType.name}
+                ></StyledImg>
               </StyledButton>
               {timeLeft.length > 0 ? <StyledTimeLeft>{timeLeft}</StyledTimeLeft> : ''}
             </li>
