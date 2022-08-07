@@ -13,5 +13,6 @@ export default styled.createGlobalStyle`
 
   body {
     display: block;
+    background: #936037;
   }
 `;

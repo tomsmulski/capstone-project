@@ -1,11 +1,14 @@
 import styled from 'styled-components';
+import Images from '../../images';
 
 export const Resource = ({currentRess, displayValuePosition, iconSize, color}) => {
+  console.log(Images);
+
   return (
     <StyledResourceSection displayValuePosition={displayValuePosition}>
       <StyledResourceIcon
         alt={currentRess.name}
-        src={'../images/icons/icon_' + currentRess.name + '.jpg'}
+        src={Images.icon[currentRess.name]}
         iconSize={iconSize}
       ></StyledResourceIcon>
       <StyledResourceSpanNumber color={color}>{Math.floor(currentRess.value)}</StyledResourceSpanNumber>

@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import BuildingManualNextLevelTable from './buildingmanualnextleveltable';
-
 import {useSelector} from 'react-redux';
-
 import {gameBuildingsTypes} from '../../util/gamedatas/gameBuildingsTypes';
+import Images from '../../images';
 
 export default function BuildingManual({buildId, currentBuildLevel, setOpenManual}) {
   const gameBuildingsType = gameBuildingsTypes.find(gameBuildingsType => gameBuildingsType.id === buildId);
@@ -21,7 +20,7 @@ export default function BuildingManual({buildId, currentBuildLevel, setOpenManua
           <StyledArticleInfomation>
             <StyledH2>{gameBuildingsType.name}</StyledH2>
             <StyledImg
-              src={'../images/buildings/' + gameBuildingsType.image + '.png'}
+              src={Images.image[gameBuildingsType.image]}
               alt={gameBuildingsType.name}
             ></StyledImg>
             <StyledH3>Infomation</StyledH3>

@@ -1,13 +1,12 @@
 import styled from 'styled-components';
-
 import {bindActionCreators} from 'redux';
 import {useDispatch, useSelector} from 'react-redux';
 import {actionCreators} from '../../state';
-
 import {checkRescource} from '../../util/checkResources';
-
 import {gameBuildingsTypes} from '../../util/gamedatas/gameBuildingsTypes';
 import {timeBuilder} from '../../util/BuildingTime';
+import Images from '../../images';
+
 
 export const Buildingnav = ({currentUserBuildings, selectedBuilding}) => {
   const {setSelectedBuilding} = bindActionCreators(actionCreators, useDispatch());
@@ -58,7 +57,7 @@ export const Buildingnav = ({currentUserBuildings, selectedBuilding}) => {
                 calcuTimeDifference={-calcuTimeDifference}
               >
                 <StyledImg
-                  src={'../images/buildings/' + gameBuildingType.image + '.png'}
+                  src={Images.image[gameBuildingType.image]}
                   alt={gameBuildingType.name}
                 ></StyledImg>
               </StyledButton>
@@ -80,6 +79,12 @@ const StyledSection = styled.section`
   max-width: 100%;
   overflow: hidden;
   overflow-x: scroll;
+  background: #e2c233;
+
+  @media screen and (min-width: 600px){
+    overflow-x: hidden;
+  }
+
 `;
 
 const StyledUl = styled.ul`
@@ -115,8 +120,7 @@ const StyledImg = styled.img`
   max-width: 134px;
   min-height: 96px;
   max-height: 96px;
-  opacity: 0.5;
-  background: gray;
+
 `;
 
 const StyledTimeLeft = styled.span`
@@ -124,7 +128,7 @@ const StyledTimeLeft = styled.span`
   bottom: 60px;
   display: flex;
   justify-content: center;
-  color: yellow;
+  color: black;
   font-weight: bold;
 `;
 
@@ -135,7 +139,7 @@ const StyledButton = styled.div`
     props.calcuTimeDifference > 0
       ? 'background: linear-gradient(#777, #777 ' +
         props.calcuTimeDifference +
-        '%, #FFF ' +
+        '%, #e2c28b ' +
         props.calcuTimeDifference +
         '% );'
       : 0}

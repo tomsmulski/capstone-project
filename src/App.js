@@ -4,12 +4,11 @@ import {Building} from './components/building/building';
 import {Buildingnav} from './components/building/buildingnav';
 import {productionResources} from './util/ResourcenProduction';
 import {getUserCitys} from './services/usercitys';
-
 import {useSelector, useDispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators} from './state/index';
-
 import Loading from './components/loading/loading';
+import styled from 'styled-components';
 
 export default function App() {
   const {
@@ -110,15 +109,19 @@ export default function App() {
 
   if (!loadingStatus.status) {
     return (
-      <>
+      <StyledMain>
         <ResourcesOverview />
         <span>
           <Building selectedBuilding={selectedBuilding} />
           <Buildingnav currentUserBuildings={currentUserBuildings} selectedBuilding={selectedBuilding} />
         </span>
-      </>
+      </StyledMain>
     );
   } else {
     return <Loading></Loading>;
   }
 }
+
+const StyledMain = styled.main`
+  background: gray;
+`;

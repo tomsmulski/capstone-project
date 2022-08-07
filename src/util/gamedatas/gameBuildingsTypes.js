@@ -2,7 +2,7 @@ export const gameBuildingsTypes = [
   {
     id: '62e0e777663a9f95727518dd',
     name: 'Money Factory',
-    image: 'money_factory',
+    image: 'money',
     buildMaterials: [
       {
         id: '62e0e366663a9f95727518bc',
@@ -45,7 +45,7 @@ export const gameBuildingsTypes = [
   {
     id: '62e7dbadcefed5e153f6bb86',
     name: 'Iron Foundry',
-    image: 'iron_foundry',
+    image: 'iron',
     buildMaterials: [
       {
         id: '62e0e366663a9f95727518bc',
@@ -88,7 +88,7 @@ export const gameBuildingsTypes = [
   {
     id: '62e7dbb2cefed5e153f6bb87',
     name: 'Oil Refinery',
-    image: 'oil_refinery',
+    image: 'fuel',
     buildMaterials: [
       {
         id: '62e0e366663a9f95727518bc',
@@ -131,7 +131,7 @@ export const gameBuildingsTypes = [
   {
     id: '62e7dbb7cefed5e153f6bb88',
     name: 'Windpower Plant',
-    image: 'windpower_plant',
+    image: 'energy',
     buildMaterials: [
       {
         id: '62e0e366663a9f95727518bc',
