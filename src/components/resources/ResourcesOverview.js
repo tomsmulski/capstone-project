@@ -27,7 +27,7 @@ export const ResourcesOverview = () => {
         return (
           <section key={currentResource.id}>
             <div onClick={() => handleClick(currentResource)}>
-              <Resource displayValue={true} currentRess={currentResource}></Resource>
+              <Resource displayValue={true} currentResources={currentResource}></Resource>
             </div>
             <ResourcesView
               isOpen={tooltipResourcesView.status[currentResource.name]}

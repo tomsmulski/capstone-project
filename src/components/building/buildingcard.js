@@ -21,7 +21,7 @@ export default function Buildingcard({
   currentBuildLevel,
   buttonText,
   buttonDisabled,
-  buttonFunction,
+  onActionButtonClick,
   currentUserBuildings,
 }) {
   const {setOpenManual} = bindActionCreators(actionCreators, useDispatch());
@@ -51,7 +51,7 @@ export default function Buildingcard({
                     key={productionMaterial.id}
                     iconSize="small"
                     displayValuePosition="right"
-                    currentRess={{
+                    currentResources={{
                       name: productionMaterial.resourceType,
                       value: displayLevelUpResourcesProduction(
                         productionMaterial.resourceType,
@@ -71,7 +71,7 @@ export default function Buildingcard({
                     key={buildMaterial.id}
                     iconSize="small"
                     color={buildPriceTextColor[index]}
-                    currentRess={{
+                    currentResources={{
                       name: buildMaterial.resourceType,
                       value: buildingPrice(currentBuildLevel + 1, buildId, buildMaterial.resourceType),
                     }}
@@ -86,7 +86,7 @@ export default function Buildingcard({
               disabled={buttonDisabled}
               buildId={buildId}
               buildTime={buildTime.buildTimeSeconds}
-              onHandleClick={buttonFunction}
+              onHandleClick={onActionButtonClick}
               buttonText={buttonText}
             />
           </StyledButtonContainer>

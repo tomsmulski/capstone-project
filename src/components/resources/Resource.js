@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 import Images from '../../images';
 
-export const Resource = ({currentRess, displayValuePosition, iconSize, color}) => {
+export const Resource = ({currentResources, displayValuePosition, iconSize, color}) => {
   return (
     <StyledResourceSection displayValuePosition={displayValuePosition}>
       <StyledResourceIcon
-        alt={currentRess.name}
-        src={Images.icon[currentRess.name]}
+        alt={currentResources.name}
+        src={Images.icon[currentResources.name]}
         iconSize={iconSize}
       ></StyledResourceIcon>
-      <StyledResourceSpanNumber color={color}>{Math.floor(currentRess.value)}</StyledResourceSpanNumber>
+      <StyledResourceSpanNumber color={color}>{Math.floor(currentResources.value)}</StyledResourceSpanNumber>
     </StyledResourceSection>
   );
 };

@@ -9,8 +9,6 @@ import {bindActionCreators} from 'redux';
 import {actionCreators} from './state/index';
 import Loading from './components/loading/loading';
 import styled from 'styled-components';
-import Images from './images';
-import Buildingcard from './components/building/buildingcard';
 
 export default function App() {
   const {
@@ -113,19 +111,16 @@ export default function App() {
     return (
       <StyledMain>
         <ResourcesOverview />
-        <span>
-          <Building selectedBuilding={selectedBuilding} />
-          <Buildingnav currentUserBuildings={currentUserBuildings} selectedBuilding={selectedBuilding} />
-        </span>
+        <Building selectedBuilding={selectedBuilding} />
+        <Buildingnav currentUserBuildings={currentUserBuildings} selectedBuilding={selectedBuilding} />
       </StyledMain>
     );
   } else {
-    return <Loading></Loading>;
+    return <Loading/>;
   }
 }
 
-
 const StyledMain = styled.main`
-height: 100%;
-background-color: rgba(0, 0, 0, 0.6);
-`
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+`;

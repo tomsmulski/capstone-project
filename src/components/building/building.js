@@ -14,9 +14,7 @@ export const Building = ({selectedBuilding}) => {
   const currentUserBuildings = useSelector(state => state.currentUserBuildings);
   const currentUserBuildingInProgress = useSelector(state => state.currentUserBuildingInProgress);
 
-  function onHandleClickUpgrade(e) {
-    const buildingId = e.target.dataset.buildid;
-    const buildingBuildTime = e.target.dataset.buildtime;
+  function onHandleClickUpgrade(buildingId,buildingBuildTime) {
 
     if (currentUserBuildingInProgress.length === 0) {
       const currentBuilding = currentUserBuildings.find(currentBuilding => currentBuilding.buildingId === buildingId);
@@ -49,14 +47,14 @@ export const Building = ({selectedBuilding}) => {
     userBuilding => userBuilding.buildingId === gameBuildingType.id
   );
 
-  let buttonTexts = 'Build';
+  let buttonText = 'Build';
 
   if (currentUserBuildingInProgress.length > 0) {
     const inProgressId = currentUserBuildingInProgress[0].buildingId;
-    buttonTexts = inProgressId === gameBuildingType.id ? 'in Progress' : buttonTexts;
+    buttonText = inProgressId === gameBuildingType.id ? 'in Progress' : buttonText;
   }
 
-  buttonTexts = currentUserBuilding.level > 0 && buttonTexts !== 'in Progress' ? 'Upgrade' : buttonTexts;
+  buttonText = currentUserBuilding.level > 0 && buttonText !== 'in Progress' ? 'Upgrade' : buttonText;
 
   const nextLevel = currentUserBuilding.level + 1;
 
@@ -87,9 +85,9 @@ export const Building = ({selectedBuilding}) => {
         buildPriceTextColor={checkEnoughRescource.buildPriceTextColor}
         buildYield={gameBuildingType.productionMaterials}
         currentBuildLevel={currentUserBuilding.level}
-        buttonText={buttonTexts}
+        buttonText={buttonText}
         buttonDisabled={checkEnoughRescource.notEnoughResourceButtonDisable || buildInProgressButtonDisable}
-        buttonFunction={onHandleClickUpgrade}
+        onActionButtonClick={onHandleClickUpgrade}
         currentUserBuildings={currentUserBuildings}
       />
     </article>

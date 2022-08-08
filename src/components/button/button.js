@@ -5,9 +5,7 @@ export default function Button({disabled, buildId, buildTime, onHandleClick, but
     <StyledButton
       type="button"
       disabled={disabled}
-      data-buildid={buildId}
-      data-buildtime={buildTime}
-      onClick={onHandleClick}
+      onClick={()=>onHandleClick(buildId,buildTime)}
     >
       {buttonText}
     </StyledButton>
