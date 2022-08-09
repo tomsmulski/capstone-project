@@ -78,7 +78,6 @@ const StyledH2 = styled.h2`
 `;
 
 const StyledImg = styled.img`
-
   min-width: 134px;
   max-width: 134px;
   min-height: 134px;
