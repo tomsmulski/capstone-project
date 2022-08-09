@@ -39,7 +39,7 @@ export default function Buildingcard({
         </StyledHeader>
         <StyledBuildInfoContainer>
           <StyledSpan>
-            <StyledBuildTimeInfo>🕜{buildTime.buildTimeDisplay}</StyledBuildTimeInfo>
+            <StyledBuildTimeInfo>🕜 {buildTime.buildTimeDisplay}</StyledBuildTimeInfo>
             <StyledBuildNextLevelText>To upgrade to level {currentBuildLevel + 1} you need</StyledBuildNextLevelText>
           </StyledSpan>
 

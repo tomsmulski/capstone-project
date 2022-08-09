@@ -44,8 +44,6 @@ export default function App() {
           });
         });
 
-        setResources('energy', productionResources('energy', currentUserBuildings));
-
         setLoading('loadUserCitys', true);
       } catch (error) {
         console.log('loading Game datas Fail');
@@ -82,7 +80,7 @@ export default function App() {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUserResources, loadingStatus]);
+  }, [currentUserResources, loadingStatus, addResources, setResources,currentUserBuildings,currentUserBuildingInProgress]);
 
   useEffect(() => {
     if (currentUserBuildingInProgress.length > 0) {
@@ -93,9 +91,9 @@ export default function App() {
 
       if (buildingDiffTime < 0) {
         addBuildings(currentUserBuildingInProgress[0].buildingId);
+        setResources('energy', productionResources('energy', currentUserBuildings));
         removeBuildingToBuild(currentUserBuildingInProgress[0].cityId, currentUserBuildingInProgress[0].buildingId);
 
-        setResources('energy', productionResources('energy', currentUserBuildings));
       } else {
         updateBuildingToBuild(
           currentUserBuildingInProgress[0].cityId,

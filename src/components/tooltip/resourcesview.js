@@ -66,6 +66,7 @@ const StyledSection = styled.section`
   padding: 5px;
   font-size: 14px;
   left: 25%;
+  z-index: 1;
 `;
 
 const StyledDiv2 = styled.div`
@@ -74,7 +75,7 @@ const StyledDiv2 = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding-top: 3px;
-  z-index: 5;
+  z-index: 1;
 `;
 
 const StyledDiv = styled.div`

@@ -18,7 +18,6 @@ export default function BuildingManual({buildId, currentBuildLevel, setOpenManua
       <StyledArticleInfomation>
         <StyledH2>{gameBuildingsType.name}</StyledH2>
         <StyledImg src={Images.image[gameBuildingsType.image]} alt={gameBuildingsType.name}></StyledImg>
-        <StyledH3>Infomation</StyledH3>
       </StyledArticleInfomation>
       <StyledArticleDescription>
         <StyledH2>Description</StyledH2>
