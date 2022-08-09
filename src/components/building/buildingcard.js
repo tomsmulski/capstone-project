@@ -28,7 +28,7 @@ export default function Buildingcard({
   return (
     <>
       <StyledSection>
-        <StyledHeader>
+        <StyledHeaderDiv>
           <StyledDivHeader>
             <StyledTitle>
               {buildName} ({currentBuildLevel})
@@ -36,7 +36,7 @@ export default function Buildingcard({
             <StyledManualButton onClick={() => setOpenManual(true)}>📖</StyledManualButton>
           </StyledDivHeader>
           <StyledDescription>{buildDescription}</StyledDescription>
-        </StyledHeader>
+        </StyledHeaderDiv>
         <StyledBuildInfoContainer>
           <StyledSpan>
             <StyledBuildTimeInfo>🕜 {buildTime.buildTimeDisplay}</StyledBuildTimeInfo>
@@ -109,7 +109,7 @@ const StyledSection = styled.section`
   color: white;
 `;
 
-const StyledHeader = styled.header`
+const StyledHeaderDiv = styled.div`
   border: 1px solid black;
   display: flex;
   flex-direction: column;
