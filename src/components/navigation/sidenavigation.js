@@ -2,10 +2,21 @@ import styled from 'styled-components';
 import Images from '../../images';
 import {Icon} from '@iconify/react';
 
-export default function Sidenavigation() {
+import {bindActionCreators} from 'redux';
+import {useDispatch} from 'react-redux';
+import { actionCreators } from '../../state';
+
+
+
+export default function Sidenavigation({sideNavigationStatus}) {
+
+  const {setOpenSideNavigation} = bindActionCreators(actionCreators, useDispatch());
+
+
+
   return (
-    <StyledNavigation imageBackground={Images.background.imageBackgroundManual}>
-      <StyledCloseButton>
+    <StyledNavigation isOpen={sideNavigationStatus} imageBackground={Images.background.imageBackgroundManual}>
+      <StyledCloseButton onClick={()=>{setOpenSideNavigation(false)}} >
         <Icon icon="akar-icons:arrow-back-thick-fill" fontSize={'30px'} />
       </StyledCloseButton>
       <StyledDiv>
@@ -17,18 +28,28 @@ export default function Sidenavigation() {
 
 const StyledNavigation = styled.nav`
   position: fixed;
+  display: ${props => props.isOpen ? 'block' : 'none'};
   width: 40%;
   height: 100%;
   background: url(${props => props.imageBackground});
   top: 0;
-
+  z-index: 99;
+  border-radius: 0 20px 20px 0;
+  animation: animateright 1.4s;
+  @keyframes animateright {
+    from {
+      left: -300px;
+      opacity: 0;
+    }
+    to {
+      left: 0;
+      opacity: 1;
+    }
+  }
   @media screen and (min-width: 500px) {
     width: 20%;
     height: 70%;
   }
-
-  z-index: 99;
-  border-radius: 0 20px 20px 0;
 `;
 
 const StyledCloseButton = styled.button`
@@ -39,10 +60,8 @@ const StyledCloseButton = styled.button`
   height: 30px;
   background: transparent;
   border: none;
-
   &:active {
     color: red;
-    opacity: 0.6;
   }
 `;
 

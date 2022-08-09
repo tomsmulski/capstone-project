@@ -118,3 +118,14 @@ export const setOpenManual = createAction('manual/set', function prepare(status)
   };
 });
 
+
+export const setOpenSideNavigation = createAction('sideNavigation/set', function prepare(status) {
+  return {
+    payload: {
+      status: status,
+    },
+  };
+});
+
+
+

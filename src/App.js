@@ -28,6 +28,7 @@ export default function App() {
   const loadingStatus = useSelector(state => state.loadingStatus);
   const currentUserBuildingInProgress = useSelector(state => state.currentUserBuildingInProgress);
   const selectedBuilding = useSelector(state => state.selectedBuilding);
+  const sideNavigationStatus = useSelector(state => state.sideNavigation.status);
 
   useEffect(() => {
     loadingUserCitys();
@@ -122,7 +123,7 @@ export default function App() {
           <Building selectedBuilding={selectedBuilding} />
           <Buildingnav currentUserBuildings={currentUserBuildings} selectedBuilding={selectedBuilding} />
         </StyledMain>
-        <Sidenavigation/>
+        <Sidenavigation sideNavigationStatus={sideNavigationStatus}/>
       </>
     );
   } else {

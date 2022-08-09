@@ -1,11 +1,19 @@
 import styled from 'styled-components';
 import {Icon} from '@iconify/react';
 
+import {bindActionCreators} from 'redux';
+import {useDispatch} from 'react-redux';
+import { actionCreators } from '../../state';
+
 export default function Header() {
+
+    const {setOpenSideNavigation} = bindActionCreators(actionCreators, useDispatch());
+
   return (
     <StyledHeader>
-      <StyledButton>
+      <StyledButton onClick={()=>{setOpenSideNavigation(true)}}>
         <Icon icon="dashicons:menu-alt3" fontSize={'26px'} />
+        
       </StyledButton>
     </StyledHeader>
   );
