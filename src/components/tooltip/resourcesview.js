@@ -4,7 +4,9 @@ import {useSelector} from 'react-redux';
 
 export default function ResourcesView({isOpen, currentResource}) {
   const currentUserBuildings = useSelector(state => state.currentUserBuildings);
-  const resNameUpperCase = currentResource ? currentResource.name.charAt(0).toUpperCase() + currentResource.name.slice(1) : '';
+  const resNameUpperCase = currentResource
+    ? currentResource.name.charAt(0).toUpperCase() + currentResource.name.slice(1)
+    : '';
 
   let currentHourProduction = 0;
   let currentEnergyProduction = 0;
@@ -28,29 +30,33 @@ export default function ResourcesView({isOpen, currentResource}) {
 
   return (
     <StyledSection isOpen={isOpen}>
-      <p>
-        <strong>{resNameUpperCase}</strong>
-      </p>
+      <h3>{resNameUpperCase}</h3>
       <hr />
-      <StyledSpan>
-        <span>You have</span>
-        <span>{Math.floor(currentResource.value)}</span>
-      </StyledSpan>
-      <StyledSpan>
-        <span>{currentResource.name === 'energy' ? 'Current Production' : 'Current /h Production'}</span>
-        <span>{currentResource.name === 'energy' ? currentEnergyProduction : currentHourProduction}</span>
-      </StyledSpan>
-      <StyledSpan>
-        <span>{currentResource.name === 'energy' ? 'Current using' : ''}</span>
-        <span>{currentResource.name === 'energy' ? currentEnergyUsed : ''}</span>
-      </StyledSpan>
+      <StyledDiv2>
+        <StyledDiv>
+          <StyledSpan>You have</StyledSpan>
+          <StyledSpan>
+            {Math.floor(
+              currentResource.name === 'energy' ? currentEnergyUsed - currentEnergyProduction : currentResource.value
+            )}
+          </StyledSpan>
+        </StyledDiv>
+        <StyledDiv>
+          <StyledSpan>{currentResource.name === 'energy' ? 'Current Production' : 'Current /h Production'}</StyledSpan>
+          <StyledSpan>{currentResource.name === 'energy' ? currentEnergyProduction : currentHourProduction}</StyledSpan>
+        </StyledDiv>
+        <StyledDiv>
+          <StyledSpan>{currentResource.name === 'energy' ? 'Current using' : ''}</StyledSpan>
+          <StyledSpan>{currentResource.name === 'energy' ? currentEnergyUsed : ''}</StyledSpan>
+        </StyledDiv>
+      </StyledDiv2>
     </StyledSection>
   );
 }
 
 const StyledSection = styled.section`
   position: absolute;
-  top: 55px;
+  top: 65px;
   background: black;
   color: white;
   width: 220px;
@@ -59,11 +65,27 @@ const StyledSection = styled.section`
   display: ${props => (props.isOpen ? 'block' : 'none')};
   padding: 5px;
   font-size: 14px;
-  left: 20%;
+  left: 25%;
+  z-index: 1;
+`;
+
+const StyledDiv2 = styled.div`
+  position: relative;
+  display: block;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 3px;
+  z-index: 1;
+`;
+
+const StyledDiv = styled.div`
+  position: relative;
+  padding-top: 3px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const StyledSpan = styled.span`
-  padding-top: 3px;
-  display: flex;
-  justify-content: space-between;
+  margin: 0;
 `;

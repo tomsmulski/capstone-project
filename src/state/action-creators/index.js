@@ -91,12 +91,12 @@ export const removeBuildingToBuild = createAction('buildingsInBuild/remove', fun
   };
 });
 
-export const setTooltipResources = createAction('tooltipresources/set', function prepare(status, keyRess, currentRess) {
+export const setTooltipResources = createAction('tooltipresources/set', function prepare(status, keyRess, currentResources) {
   return {
     payload: {
       status: status,
       keyRess: keyRess,
-      currentRess: currentRess,
+      currentResources: currentResources,
     },
   };
 });
@@ -108,3 +108,13 @@ export const setSelectedBuilding = createAction('selectedBuilding/set', function
     },
   };
 });
+
+
+export const setOpenManual = createAction('manual/set', function prepare(status) {
+  return {
+    payload: {
+      status: status,
+    },
+  };
+});
+

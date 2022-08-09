@@ -27,7 +27,7 @@ export const ResourcesOverview = () => {
         return (
           <section key={currentResource.id}>
             <div onClick={() => handleClick(currentResource)}>
-              <Resource displayValue={true} currentRess={currentResource}></Resource>
+              <Resource displayValue={true} currentResources={currentResource} color={'white'}></Resource>
             </div>
             <ResourcesView
               isOpen={tooltipResourcesView.status[currentResource.name]}
@@ -42,7 +42,7 @@ export const ResourcesOverview = () => {
 
 const StyledResourcesContainer = styled.div`
   position: relative;
-  margin-top: 80px;
+  margin-top: 60px;
   border: 1px solid black;
   display: flex;
   flex-direction: row;

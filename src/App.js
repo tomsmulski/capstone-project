@@ -4,12 +4,11 @@ import {Building} from './components/building/building';
 import {Buildingnav} from './components/building/buildingnav';
 import {productionResources} from './util/ResourcenProduction';
 import {getUserCitys} from './services/usercitys';
-
 import {useSelector, useDispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators} from './state/index';
-
 import Loading from './components/loading/loading';
+import styled from 'styled-components';
 
 export default function App() {
   const {
@@ -44,8 +43,6 @@ export default function App() {
             setBuildings(currentBuilding.buildingId, currentBuilding.level);
           });
         });
-
-        setResources('energy', productionResources('energy', currentUserBuildings));
 
         setLoading('loadUserCitys', true);
       } catch (error) {
@@ -83,7 +80,7 @@ export default function App() {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUserResources, loadingStatus]);
+  }, [currentUserResources, loadingStatus, addResources, setResources,currentUserBuildings,currentUserBuildingInProgress]);
 
   useEffect(() => {
     if (currentUserBuildingInProgress.length > 0) {
@@ -94,9 +91,9 @@ export default function App() {
 
       if (buildingDiffTime < 0) {
         addBuildings(currentUserBuildingInProgress[0].buildingId);
+        setResources('energy', productionResources('energy', currentUserBuildings));
         removeBuildingToBuild(currentUserBuildingInProgress[0].cityId, currentUserBuildingInProgress[0].buildingId);
 
-        productionResources('energy', currentUserBuildings);
       } else {
         updateBuildingToBuild(
           currentUserBuildingInProgress[0].cityId,
@@ -110,15 +107,18 @@ export default function App() {
 
   if (!loadingStatus.status) {
     return (
-      <>
+      <StyledMain>
         <ResourcesOverview />
-        <span>
-          <Building selectedBuilding={selectedBuilding} />
-          <Buildingnav currentUserBuildings={currentUserBuildings} selectedBuilding={selectedBuilding} />
-        </span>
-      </>
+        <Building selectedBuilding={selectedBuilding} />
+        <Buildingnav currentUserBuildings={currentUserBuildings} selectedBuilding={selectedBuilding} />
+      </StyledMain>
     );
   } else {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 }
+
+const StyledMain = styled.main`
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+`;

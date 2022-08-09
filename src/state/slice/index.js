@@ -5,6 +5,7 @@ import loadingSlice from './loading/loadingSlice';
 import buildingInBuildSlice from './buildings/buildingInBuildSlice';
 import tooltipResourcesSlice from './tooltip/tooltipResourcesSlice';
 import selectedBuildingSlice from './buildings/selectedBuildingSlice';
+import manualSlice from './manual/manualSlice';
 
 const reducers = combineReducers({
   currentUserResources: resourcesSlice,
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   currentUserBuildingInProgress: buildingInBuildSlice,
   tooltipResourcesView: tooltipResourcesSlice,
   selectedBuilding: selectedBuildingSlice,
+  openManual: manualSlice,
 });
 
 export default reducers;

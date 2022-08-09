@@ -4,11 +4,11 @@ export const tooltipResourcesSlice = createSlice({
   name: 'tooltipresources',
   initialState: {
     status: {money: false, iron: false, fuel: false, gold: false, energy: false},
-    currentRess: {name: '', value: 0},
+    currentResources: {name: '', value: 0},
   },
   reducers: {
     set: (state, action) => {
-      const {status, keyRess, currentRess} = action.payload;
+      const {status, keyRess, currentResources} = action.payload;
 
       for (const key in state.status) {
         if (key !== keyRess) {
@@ -17,7 +17,7 @@ export const tooltipResourcesSlice = createSlice({
           state.status[key] = status;
         }
       }
-      state.currentRess = currentRess;
+      state.currentResources = currentResources;
     },
   },
 });
