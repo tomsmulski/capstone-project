@@ -36,7 +36,9 @@ export default function ResourcesView({isOpen, currentResource}) {
         <StyledDiv>
           <StyledSpan>You have</StyledSpan>
           <StyledSpan>
-            {Math.floor(currentResource.value)}
+            {Math.floor(
+              currentResource.name === 'energy' ? currentEnergyUsed - currentEnergyProduction : currentResource.value
+            )}
           </StyledSpan>
         </StyledDiv>
         <StyledDiv>
