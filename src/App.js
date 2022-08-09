@@ -10,6 +10,7 @@ import {actionCreators} from './state/index';
 import Loading from './components/loading/loading';
 import styled from 'styled-components';
 import Header from './components/header/header';
+import Sidenavigation from './components/navigation/sidenavigation';
 
 export default function App() {
   const {
@@ -121,6 +122,7 @@ export default function App() {
           <Building selectedBuilding={selectedBuilding} />
           <Buildingnav currentUserBuildings={currentUserBuildings} selectedBuilding={selectedBuilding} />
         </StyledMain>
+        <Sidenavigation/>
       </>
     );
   } else {
