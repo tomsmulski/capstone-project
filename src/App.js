@@ -9,6 +9,7 @@ import {bindActionCreators} from 'redux';
 import {actionCreators} from './state/index';
 import Loading from './components/loading/loading';
 import styled from 'styled-components';
+import Header from './components/header/header';
 
 export default function App() {
   const {
@@ -80,7 +81,14 @@ export default function App() {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUserResources, loadingStatus, addResources, setResources,currentUserBuildings,currentUserBuildingInProgress]);
+  }, [
+    currentUserResources,
+    loadingStatus,
+    addResources,
+    setResources,
+    currentUserBuildings,
+    currentUserBuildingInProgress,
+  ]);
 
   useEffect(() => {
     if (currentUserBuildingInProgress.length > 0) {
@@ -93,7 +101,6 @@ export default function App() {
         addBuildings(currentUserBuildingInProgress[0].buildingId);
         setResources('energy', productionResources('energy', currentUserBuildings));
         removeBuildingToBuild(currentUserBuildingInProgress[0].cityId, currentUserBuildingInProgress[0].buildingId);
-
       } else {
         updateBuildingToBuild(
           currentUserBuildingInProgress[0].cityId,
@@ -107,11 +114,14 @@ export default function App() {
 
   if (!loadingStatus.status) {
     return (
-      <StyledMain>
-        <ResourcesOverview />
-        <Building selectedBuilding={selectedBuilding} />
-        <Buildingnav currentUserBuildings={currentUserBuildings} selectedBuilding={selectedBuilding} />
-      </StyledMain>
+      <>
+        <Header/>
+        <StyledMain>
+          <ResourcesOverview />
+          <Building selectedBuilding={selectedBuilding} />
+          <Buildingnav currentUserBuildings={currentUserBuildings} selectedBuilding={selectedBuilding} />
+        </StyledMain>
+      </>
     );
   } else {
     return <Loading />;

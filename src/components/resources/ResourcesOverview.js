@@ -42,7 +42,6 @@ export const ResourcesOverview = () => {
 
 const StyledResourcesContainer = styled.div`
   position: relative;
-  margin-top: 60px;
   border: 1px solid black;
   display: flex;
   flex-direction: row;
