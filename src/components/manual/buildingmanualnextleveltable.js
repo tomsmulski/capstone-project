@@ -28,11 +28,11 @@ export default function BuildingManualNextLevelTable({buildId, currentBuildLevel
   return (
     <StyledTable>
       <thead>
-        <StyledTableRow>
+        <StyledTableHeaderRow>
           <td>Level</td>
           <td>Production</td>
           <td>Difference</td>
-        </StyledTableRow>
+        </StyledTableHeaderRow>
       </thead>
       <tbody>
         {nextLevelObject.map(nextLevel => {
@@ -51,7 +51,14 @@ export default function BuildingManualNextLevelTable({buildId, currentBuildLevel
 
 const StyledTable = styled.table`
   width: 100%;
-  border: 1px solid black;
+  font-weight: bold;
+`;
+
+const StyledTableHeaderRow = styled.tr`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
 `;
 
 const StyledTableRow = styled.tr`
@@ -59,4 +66,5 @@ const StyledTableRow = styled.tr`
   flex-direction: row;
   justify-content: space-between;
   padding: 5px;
+  color: white;
 `;

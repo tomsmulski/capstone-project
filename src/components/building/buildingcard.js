@@ -106,6 +106,7 @@ const StyledSection = styled.section`
   position: relative;
   display: flex;
   flex-direction: column;
+  color: white;
 `;
 
 const StyledHeader = styled.header`
