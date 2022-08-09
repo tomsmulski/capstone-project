@@ -114,8 +114,8 @@ const StyledImg = styled.img`
   position: relative;
   min-width: 134px;
   max-width: 134px;
-  min-height: 120px;
-  max-height: 120px;
+  min-height: 100px;
+  max-height: 100px;
 `;
 
 const StyledTimeLeft = styled.span`
