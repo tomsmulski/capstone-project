@@ -95,7 +95,7 @@ export default function App() {
         addBuildings(currentUserBuildingInProgress[0].buildingId);
         removeBuildingToBuild(currentUserBuildingInProgress[0].cityId, currentUserBuildingInProgress[0].buildingId);
 
-        productionResources('energy', currentUserBuildings);
+        setResources('energy', productionResources('energy', currentUserBuildings));
       } else {
         updateBuildingToBuild(
           currentUserBuildingInProgress[0].cityId,
@@ -116,7 +116,7 @@ export default function App() {
       </StyledMain>
     );
   } else {
-    return <Loading/>;
+    return <Loading />;
   }
 }
 
