@@ -67,6 +67,7 @@ const StyledSection = styled.section`
   z-index: 1;
 `;
 
+
 const StyledDiv2 = styled.div`
   position: relative;
   display: block;

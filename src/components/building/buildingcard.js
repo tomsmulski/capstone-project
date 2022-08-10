@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Button from '../button/button';
+import Button from '../button/Button';
 import {Resource} from '../resources/Resource';
 import {displayLevelUpResourcesProduction} from '../../util/ResourcenProduction';
 import {buildingPrice} from '../../util/BuildingPrice';
@@ -27,15 +27,15 @@ export default function Buildingcard({
   return (
     <>
       <StyledSection>
-        <StyledHeaderDiv>
-          <StyledDivHeader>
+        <StyledWrapper>
+          <StyledHeadSpan>
             <StyledTitle>
               {buildName} ({currentBuildLevel})
             </StyledTitle>
             <StyledManualButton onClick={() => setOpenManual(true, 'Building', buildId)}>📖</StyledManualButton>
-          </StyledDivHeader>
+          </StyledHeadSpan>
           <StyledDescription>{buildDescription}</StyledDescription>
-        </StyledHeaderDiv>
+        </StyledWrapper>
         <StyledBuildInfoContainer>
           <StyledSpan>
             <StyledBuildTimeInfo>🕜 {buildTime.buildTimeDisplay}</StyledBuildTimeInfo>
@@ -103,7 +103,7 @@ const StyledSection = styled.section`
   color: white;
 `;
 
-const StyledHeaderDiv = styled.div`
+const StyledWrapper = styled.div`
   border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -115,6 +115,7 @@ const StyledTitle = styled.h1`
   font-size: xx-large;
   margin: 0;
 `;
+
 
 const StyledDescription = styled.p`
   min-height: 40px;
@@ -167,7 +168,7 @@ const StyledDiv = styled.div`
   width: 100%;
 `;
 
-const StyledDivHeader = styled.div`
+const StyledHeadSpan = styled.span`
   border: 1px solid black;
   width: 100%;
   display: flex;

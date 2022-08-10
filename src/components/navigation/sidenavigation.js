@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 import Images from '../../images';
 import {Icon} from '@iconify/react';
-
 import {bindActionCreators} from 'redux';
 import {useDispatch} from 'react-redux';
 import {actionCreators} from '../../state';
 
-export default function Sidenavigation({sideNavigationStatus}) {
+export default function SideNavigation({sideNavigationStatus}) {
   const {setOpenSideNavigation, setOpenManual} = bindActionCreators(actionCreators, useDispatch());
 
   return (

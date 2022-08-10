@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import {useSelector} from 'react-redux';
 import {gameBuildingsTypes} from '../../util/gamedatas/gameBuildingsTypes';
-import BuildingManualNextLevelTable from './buildingmanualnextleveltable';
+import BuildingManualNextLevelTable from './BuildingManualNextLevelTable';
 import Images from '../../images';
 import {Icon} from '@iconify/react';
-
 import {bindActionCreators} from 'redux';
 import {useDispatch} from 'react-redux';
 import {actionCreators} from '../../state';
@@ -13,7 +12,6 @@ export default function ManualModul() {
   const openManualStatus = useSelector(state => state.openManual);
   const currentUserBuildings = useSelector(state => state.currentUserBuildings);
   const {setOpenManual} = bindActionCreators(actionCreators, useDispatch());
-
   let currentBuilding, gameBuildingsType;
 
   if (openManualStatus.status) {
@@ -49,7 +47,7 @@ export default function ManualModul() {
       <StyledSection openManualStatus={openManualStatus.status} imageBackground={Images.background.imageBackgroundMain}>
         <StyledArticleTitle>
           {openManualStatus.backTo !== '' ? (
-            <StyledBackButton
+            <StyledBackButton aria-label={'Back To ' + openManualStatus.backTo}
               onClick={() => {
                 setOpenManual(
                   true,
@@ -65,49 +63,50 @@ export default function ManualModul() {
             ''
           )}
           <StyledH1>{titleName}</StyledH1>
-          <StyledCloseButton onClick={() => setOpenManual(false)}>X</StyledCloseButton>
+          <StyledCloseButton aria-label={'Close Manual'} onClick={() => setOpenManual(false)}>X</StyledCloseButton>
         </StyledArticleTitle>
 
         {globalManual ? (
-          <StyledArticleInfomation>
+          <StyledArticle>
             <StyledButton onClick={() => setOpenManual(true, 'Buildings', '', 'All')}>Buildings</StyledButton>
-          </StyledArticleInfomation>
+          </StyledArticle>
         ) : (
           ''
         )}
 
         {buildingsManual ? (
-          <StyledArticleInfomation>
+          <StyledArticle>
             {gameBuildingsTypes.map(gameBuildingsType => {
               return (
-                <span key={gameBuildingsType.id}>
-                  <StyledButton onClick={() => setOpenManual(true, 'Building', gameBuildingsType.id, 'Buildings')}>
-                    {gameBuildingsType.name}
-                  </StyledButton>
-                </span>
+                <StyledButton
+                  key={gameBuildingsType.id}
+                  onClick={() => setOpenManual(true, 'Building', gameBuildingsType.id, 'Buildings')}
+                >
+                  {gameBuildingsType.name}
+                </StyledButton>
               );
             })}
-          </StyledArticleInfomation>
+          </StyledArticle>
         ) : (
           ''
         )}
 
         {buildingManual ? (
           <>
-            <StyledArticleInfomation>
+            <StyledArticle>
               <StyledH2>{gameBuildingsType.name}</StyledH2>
               <StyledImg src={Images.image[gameBuildingsType.image]} alt={gameBuildingsType.name}></StyledImg>
-            </StyledArticleInfomation>
-            <StyledArticleDescription>
+            </StyledArticle>
+            <StyledSectionDescription>
               <StyledH2>Description</StyledH2>
-              <StyledP>{gameBuildingsType.description}</StyledP>
-            </StyledArticleDescription>
-            <StyledArticleNextLevel>
+              <StyledParagraph>{gameBuildingsType.description}</StyledParagraph>
+            </StyledSectionDescription>
+            <StyledDivNextLevel>
               <BuildingManualNextLevelTable
                 buildId={openManualStatus.buildId}
                 currentBuildLevel={currentBuilding.level}
               />
-            </StyledArticleNextLevel>
+            </StyledDivNextLevel>
           </>
         ) : (
           ''
@@ -172,7 +171,7 @@ const StyledBackButton = styled.button`
   border: none;
 `;
 
-const StyledArticleInfomation = styled.article`
+const StyledArticle = styled.article`
   position: relative;
   height: 200px;
   padding: 10px;
@@ -186,24 +185,22 @@ const StyledH2 = styled.h2`
 `;
 
 const StyledImg = styled.img`
-  min-width: 134px;
-  max-width: 134px;
-  min-height: 134px;
-  max-height: 134px;
+  width: 134px;
+  height: 134px;
 `;
 
-const StyledArticleDescription = styled.article`
+const StyledSectionDescription = styled.section`
   position: relative;
   height: 200px;
   padding: 10px;
   margin: 0;
 `;
 
-const StyledP = styled.p`
+const StyledParagraph = styled.p`
   padding: 5px;
 `;
 
-const StyledArticleNextLevel = styled.article`
+const StyledDivNextLevel = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;

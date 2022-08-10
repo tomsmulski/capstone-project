@@ -18,6 +18,7 @@ const StyledSpan = styled.span`
   font-size: large;
 `;
 
+
 const StyledDiv = styled.div`
   border: 16px solid #f3f3f3;
   border-radius: 50%;

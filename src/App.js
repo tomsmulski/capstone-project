@@ -1,17 +1,17 @@
 import {useEffect} from 'react';
 import {ResourcesOverview} from './components/resources/ResourcesOverview';
-import {Building} from './components/building/building';
-import {Buildingnav} from './components/building/buildingnav';
+import {Building} from './components/building/Building';
+import {BuildingNavigation} from './components/building/BuildingNavigation';
 import {productionResources} from './util/ResourcenProduction';
 import {getUserCitys} from './services/usercitys';
 import {useSelector, useDispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators} from './state/index';
-import Loading from './components/loading/loading';
+import Loading from './components/loading/Loading';
 import styled from 'styled-components';
-import Header from './components/header/header';
-import Sidenavigation from './components/navigation/sidenavigation';
-import ManualModul from './components/manual/manualmodul';
+import Header from './components/header/Header';
+import SideNavigation from './components/navigation/SideNavigation';
+import ManualModul from './components/manual/ManualModul';
 
 export default function App() {
   const {
@@ -122,9 +122,9 @@ export default function App() {
         <StyledMain>
           <ResourcesOverview />
           <Building selectedBuilding={selectedBuilding} />
-          <Buildingnav currentUserBuildings={currentUserBuildings} selectedBuilding={selectedBuilding} />
+          <BuildingNavigation currentUserBuildings={currentUserBuildings} selectedBuilding={selectedBuilding} />
         </StyledMain>
-        <Sidenavigation sideNavigationStatus={sideNavigationStatus} />
+        <SideNavigation sideNavigationStatus={sideNavigationStatus} />
         <ManualModul />
       </>
     );

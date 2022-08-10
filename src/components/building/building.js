@@ -1,6 +1,6 @@
 import {buildingPrice} from '../../util/BuildingPrice';
 import {buildingTime} from '../../util/BuildingTime';
-import Buildingcard from './buildingcard';
+import Buildingcard from './BuildingCard';
 import {bindActionCreators} from 'redux';
 import {useSelector, useDispatch} from 'react-redux';
 import {actionCreators} from '../../state';
@@ -70,7 +70,6 @@ export const Building = ({selectedBuilding}) => {
   );
 
   const buildInProgressButtonDisable = currentUserBuildingInProgress.length === 0 ? false : true;
-
   const checkEnoughRescource = checkRescource(gameBuildingType, currentUserResources, nextLevel);
 
   return (
