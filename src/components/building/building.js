@@ -55,7 +55,6 @@ export const Building = ({selectedBuilding}) => {
   }
 
   buttonText = currentUserBuilding.level > 0 && buttonText !== 'in Progress' ? 'Upgrade' : buttonText;
-
   const nextLevel = currentUserBuilding.level + 1;
 
   let buildPrice = [];
