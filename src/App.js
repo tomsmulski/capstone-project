@@ -1,17 +1,17 @@
 import {useEffect} from 'react';
-import {ResourcesOverview} from './components/resources/ResourcesOverviews';
-import {Building} from './components/building/Buildings';
-import {BuildingNavigation} from './components/building/BuildingNavigations';
+import {ResourcesOverview} from './components/resources/ResourcesOverview';
+import {Building} from './components/building/Building';
+import {BuildingNavigation} from './components/building/BuildingNavigation';
 import {productionResources} from './util/ResourcenProduction';
 import {getUserCitys} from './services/usercitys';
 import {useSelector, useDispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators} from './state/index';
-import Loading from './components/loading/Loadings';
+import Loading from './components/loading/Loading';
 import styled from 'styled-components';
-import Header from './components/header/Headers';
-import SideNavigation from './components/navigation/SideNavigations';
-import ManualModul from './components/manual/ManualModuls';
+import Header from './components/header/Header';
+import SideNavigation from './components/navigation/SideNavigation';
+import ManualModul from './components/manual/ManualModul';
 
 export default function App() {
   const {

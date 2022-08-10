@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Button from '../button/Buttons';
-import {Resource} from '../resources/Resources';
+import Button from '../button/Button';
+import {Resource} from '../resources/Resource';
 import {displayLevelUpResourcesProduction} from '../../util/ResourcenProduction';
 import {buildingPrice} from '../../util/BuildingPrice';
 
@@ -8,7 +8,7 @@ import {bindActionCreators} from 'redux';
 import {useDispatch} from 'react-redux';
 import {actionCreators} from '../../state';
 
-export default function Buildingcard({
+export default function BuildingCard({
   buildType,
   buildId,
   buildName,

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import {Resource} from './Resources';
+import {Resource} from './Resource';
 import {nanoid} from '@reduxjs/toolkit';
 import {useSelector, useDispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators} from '../../state';
-import ResourcesView from '../tooltip/ResourcesViews';
+import ResourcesView from '../tooltip/ResourcesView';
 
 
 export const ResourcesOverview = () => {

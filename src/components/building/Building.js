@@ -1,6 +1,6 @@
 import {buildingPrice} from '../../util/BuildingPrice';
 import {buildingTime} from '../../util/BuildingTime';
-import Buildingcard from './BuildingCards';
+import BuildingCard from './BuildingCard';
 import {bindActionCreators} from 'redux';
 import {useSelector, useDispatch} from 'react-redux';
 import {actionCreators} from '../../state';
@@ -75,7 +75,7 @@ export function Building({ selectedBuilding }) {
 
   return (
     <article>
-      <Buildingcard
+      <BuildingCard
         buildType={0}
         buildId={gameBuildingType.id}
         buildName={gameBuildingType.name}
