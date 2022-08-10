@@ -34,7 +34,7 @@ export default function SideNavigation({sideNavigationStatus}) {
 const StyledNavigation = styled.nav`
   position: fixed;
   display: ${props => (props.isOpen ? 'block' : 'none')};
-  width: 40%;
+  width: 150px;
   height: 100%;
   background: url(${props => props.imageBackground});
   top: 0;
@@ -51,9 +51,15 @@ const StyledNavigation = styled.nav`
       opacity: 1;
     }
   }
-  @media screen and (min-width: 500px) {
-    width: 20%;
-    height: 70%;
+  @media screen and (min-width: 800px) and (max-width: 1099px) {
+    display: absolute;
+    left: 0;
+  }
+  @media screen and (min-width: 1100px) {
+    position: absolute;
+    display: flex;
+    left: 0;
+    background: transparent;
   }
 `;
 
@@ -68,6 +74,10 @@ const StyledCloseButton = styled.button`
   &:active {
     color: red;
   }
+
+  @media screen and (min-width: 1100px) {
+    display: none;
+  }
 `;
 
 const StyledDiv = styled.div`
@@ -81,8 +91,16 @@ const StyledManualButton = styled.button`
   background: transparent;
   border: none;
   font-weight: bold;
+
+  @media screen and (min-width: 1100px) {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+    padding: 3px;
+    font-size: 18px;
+    display: flex;
+  }
 `;
 
 const StyledSpan = styled.span`
-  font-size: 20px;
+  font-size: 26px;
 `;

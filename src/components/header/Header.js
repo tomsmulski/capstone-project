@@ -37,8 +37,10 @@ const StyledButton = styled.button`
   height: 30px;
   background: transparent;
   border: none;
-
   &:active {
     color: red;
+  }
+  @media screen and (min-width: 1100px) {
+    display: none;
   }
 `;

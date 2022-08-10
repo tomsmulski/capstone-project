@@ -136,6 +136,8 @@ const StyledSection = styled.section`
   background-size: cover;
   background-attachment: fixed;
   width: 100%;
+  overflow:hidden;
+  overflow-y: scroll;
 `;
 
 const StyledArticleTitle = styled.article`
