@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Button from '../button/Button';
-import {Resource} from '../resources/Resource';
+import Button from '../button/Buttons';
+import {Resource} from '../resources/Resources';
 import {displayLevelUpResourcesProduction} from '../../util/ResourcenProduction';
 import {buildingPrice} from '../../util/BuildingPrice';
 

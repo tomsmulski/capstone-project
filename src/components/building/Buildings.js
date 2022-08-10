@@ -1,6 +1,6 @@
 import {buildingPrice} from '../../util/BuildingPrice';
 import {buildingTime} from '../../util/BuildingTime';
-import Buildingcard from './BuildingCard';
+import Buildingcard from './BuildingCards';
 import {bindActionCreators} from 'redux';
 import {useSelector, useDispatch} from 'react-redux';
 import {actionCreators} from '../../state';
