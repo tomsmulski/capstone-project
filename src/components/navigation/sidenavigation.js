@@ -4,23 +4,29 @@ import {Icon} from '@iconify/react';
 
 import {bindActionCreators} from 'redux';
 import {useDispatch} from 'react-redux';
-import { actionCreators } from '../../state';
-
-
+import {actionCreators} from '../../state';
 
 export default function Sidenavigation({sideNavigationStatus}) {
-
-  const {setOpenSideNavigation} = bindActionCreators(actionCreators, useDispatch());
-
-
+  const {setOpenSideNavigation, setOpenManual} = bindActionCreators(actionCreators, useDispatch());
 
   return (
     <StyledNavigation isOpen={sideNavigationStatus} imageBackground={Images.background.imageBackgroundManual}>
-      <StyledCloseButton onClick={()=>{setOpenSideNavigation(false)}} >
-        <Icon icon="akar-icons:arrow-back-thick-fill" fontSize={'30px'} />
+      <StyledCloseButton
+        onClick={() => {
+          setOpenSideNavigation(false);
+        }}
+      >
+        <Icon icon="akar-icons:arrow-left-thick" fontSize={'34px'} />
       </StyledCloseButton>
       <StyledDiv>
-        <StyledManualButton onClick={() => console.log(this)}>📖 Global Manual</StyledManualButton>
+        <StyledManualButton
+          onClick={() => {
+            setOpenManual(true);
+            setOpenSideNavigation(false);
+          }}
+        >
+          <StyledSpan>📖</StyledSpan> Global Manual
+        </StyledManualButton>
       </StyledDiv>
     </StyledNavigation>
   );
@@ -28,7 +34,7 @@ export default function Sidenavigation({sideNavigationStatus}) {
 
 const StyledNavigation = styled.nav`
   position: fixed;
-  display: ${props => props.isOpen ? 'block' : 'none'};
+  display: ${props => (props.isOpen ? 'block' : 'none')};
   width: 40%;
   height: 100%;
   background: url(${props => props.imageBackground});
@@ -76,4 +82,8 @@ const StyledManualButton = styled.button`
   background: transparent;
   border: none;
   font-weight: bold;
+`;
+
+const StyledSpan = styled.span`
+  font-size: 20px;
 `;

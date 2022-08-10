@@ -11,6 +11,7 @@ import Loading from './components/loading/loading';
 import styled from 'styled-components';
 import Header from './components/header/header';
 import Sidenavigation from './components/navigation/sidenavigation';
+import ManualModul from './components/manual/manualmodul';
 
 export default function App() {
   const {
@@ -99,7 +100,7 @@ export default function App() {
 
       const buildingDiffTime = endBuildTime - timeNow;
 
-      if (buildingDiffTime < 0) {
+      if (buildingDiffTime < -1000) {
         addBuildings(currentUserBuildingInProgress[0].buildingId);
         setResources('energy', productionResources('energy', currentUserBuildings));
         removeBuildingToBuild(currentUserBuildingInProgress[0].cityId, currentUserBuildingInProgress[0].buildingId);
@@ -117,13 +118,14 @@ export default function App() {
   if (!loadingStatus.status) {
     return (
       <>
-        <Header/>
+        <Header />
         <StyledMain>
           <ResourcesOverview />
           <Building selectedBuilding={selectedBuilding} />
           <Buildingnav currentUserBuildings={currentUserBuildings} selectedBuilding={selectedBuilding} />
         </StyledMain>
-        <Sidenavigation sideNavigationStatus={sideNavigationStatus}/>
+        <Sidenavigation sideNavigationStatus={sideNavigationStatus} />
+        <ManualModul />
       </>
     );
   } else {

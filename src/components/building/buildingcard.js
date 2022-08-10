@@ -3,7 +3,6 @@ import Button from '../button/button';
 import {Resource} from '../resources/Resource';
 import {displayLevelUpResourcesProduction} from '../../util/ResourcenProduction';
 import {buildingPrice} from '../../util/BuildingPrice';
-import BuildingManual from '../manual/buildingmanual';
 
 import {bindActionCreators} from 'redux';
 import {useDispatch} from 'react-redux';
@@ -33,7 +32,7 @@ export default function Buildingcard({
             <StyledTitle>
               {buildName} ({currentBuildLevel})
             </StyledTitle>
-            <StyledManualButton onClick={() => setOpenManual(true)}>📖</StyledManualButton>
+            <StyledManualButton onClick={() => setOpenManual(true, 'Building', buildId)}>📖</StyledManualButton>
           </StyledDivHeader>
           <StyledDescription>{buildDescription}</StyledDescription>
         </StyledHeaderDiv>
@@ -92,11 +91,6 @@ export default function Buildingcard({
           </StyledButtonContainer>
         </StyledBuildInfoContainer>
       </StyledSection>
-      <BuildingManual
-        buildId={buildId}
-        currentBuildLevel={currentBuildLevel}
-        setOpenManual={setOpenManual}
-      ></BuildingManual>
     </>
   );
 }

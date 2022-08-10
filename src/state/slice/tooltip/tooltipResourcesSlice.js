@@ -18,7 +18,7 @@ export const tooltipResourcesSlice = createSlice({
         }
       }
       state.currentResources = currentResources;
-    },
+    }
   },
 });
 

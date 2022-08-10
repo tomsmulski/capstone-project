@@ -12,7 +12,7 @@ export default function Header() {
   return (
     <StyledHeader>
       <StyledButton onClick={()=>{setOpenSideNavigation(true)}}>
-        <Icon icon="dashicons:menu-alt3" fontSize={'26px'} />
+        <Icon icon="dashicons:menu-alt3" fontSize={'30px'} />
         
       </StyledButton>
     </StyledHeader>
@@ -32,11 +32,10 @@ const StyledButton = styled.button`
   position: absolute;
   top: 20px;
   left: 10%;
-  width: 30px;
+  width: 36px;
   height: 30px;
   background: transparent;
-  border: 2px solid red;
-  border-radius: 5px;
+  border: none;
 
   &:active {
     color: red;
