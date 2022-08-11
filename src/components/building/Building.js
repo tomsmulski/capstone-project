@@ -1,20 +1,20 @@
 import {buildingPrice} from '../../util/BuildingPrice';
 import {buildingTime} from '../../util/BuildingTime';
-import Buildingcard from './buildingcard';
+import BuildingCard from './BuildingCard';
 import {bindActionCreators} from 'redux';
 import {useSelector, useDispatch} from 'react-redux';
 import {actionCreators} from '../../state';
 import {gameBuildingsTypes} from '../../util/gamedatas/gameBuildingsTypes';
 import {checkRescource} from '../../util/checkResources';
 
-export const Building = ({selectedBuilding}) => {
-  const {removeResources, addBuildingToBuild} = bindActionCreators(actionCreators, useDispatch());
+export function Building({ selectedBuilding }) {
+  const { removeResources, addBuildingToBuild } = bindActionCreators(actionCreators, useDispatch());
 
   const currentUserResources = useSelector(state => state.currentUserResources);
   const currentUserBuildings = useSelector(state => state.currentUserBuildings);
   const currentUserBuildingInProgress = useSelector(state => state.currentUserBuildingInProgress);
 
-  function onHandleClickUpgrade(buildingId,buildingBuildTime) {
+  function onHandleClickUpgrade(buildingId, buildingBuildTime) {
 
     if (currentUserBuildingInProgress.length === 0) {
       const currentBuilding = currentUserBuildings.find(currentBuilding => currentBuilding.buildingId === buildingId);
@@ -75,7 +75,7 @@ export const Building = ({selectedBuilding}) => {
 
   return (
     <article>
-      <Buildingcard
+      <BuildingCard
         buildType={0}
         buildId={gameBuildingType.id}
         buildName={gameBuildingType.name}
@@ -88,8 +88,7 @@ export const Building = ({selectedBuilding}) => {
         buttonText={buttonText}
         buttonDisabled={checkEnoughRescource.notEnoughResourceButtonDisable || buildInProgressButtonDisable}
         onActionButtonClick={onHandleClickUpgrade}
-        currentUserBuildings={currentUserBuildings}
-      />
+        currentUserBuildings={currentUserBuildings} />
     </article>
   );
-};
+}

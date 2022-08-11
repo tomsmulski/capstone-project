@@ -91,15 +91,18 @@ export const removeBuildingToBuild = createAction('buildingsInBuild/remove', fun
   };
 });
 
-export const setTooltipResources = createAction('tooltipresources/set', function prepare(status, keyRess, currentResources) {
-  return {
-    payload: {
-      status: status,
-      keyRess: keyRess,
-      currentResources: currentResources,
-    },
-  };
-});
+export const setTooltipResources = createAction(
+  'tooltipresources/set',
+  function prepare(status, keyRess, currentResources) {
+    return {
+      payload: {
+        status: status,
+        keyRess: keyRess,
+        currentResources: currentResources,
+      },
+    };
+  }
+);
 
 export const setSelectedBuilding = createAction('selectedBuilding/set', function prepare(buildingId) {
   return {
@@ -109,12 +112,24 @@ export const setSelectedBuilding = createAction('selectedBuilding/set', function
   };
 });
 
+export const setOpenManual = createAction(
+  'manual/set',
+  function prepare(status, category = 'All', buildId = '62e0e777663a9f95727518dd', backTo = '') {
+    return {
+      payload: {
+        status: status,
+        category: category,
+        buildId: buildId,
+        backTo: backTo,
+      },
+    };
+  }
+);
 
-export const setOpenManual = createAction('manual/set', function prepare(status) {
+export const setOpenSideNavigation = createAction('sideNavigation/set', function prepare(status) {
   return {
     payload: {
       status: status,
     },
   };
 });
-

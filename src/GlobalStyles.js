@@ -8,7 +8,6 @@ export default styled.createGlobalStyle`
     padding: 0;
     max-width: 800px;
     margin: 0 auto;
-    
   }
 
   body {
@@ -17,6 +16,5 @@ export default styled.createGlobalStyle`
     background-image: url(${props => props.imageBackground});
     background-size: cover;
     background-attachment: fixed;
-
   }
 `;

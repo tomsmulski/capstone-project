@@ -14,6 +14,7 @@ export const Resource = ({currentResources, displayValuePosition, iconSize, colo
   );
 };
 
+
 const StyledResourceSection = styled.section`
   position: relative;
   display: flex;

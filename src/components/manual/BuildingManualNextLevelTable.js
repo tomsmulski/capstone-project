@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 import {gameBuildingsTypes} from '../../util/gamedatas/gameBuildingsTypes';
 import {displayLevelUpResourcesProduction} from '../../util/ResourcenProduction';
 

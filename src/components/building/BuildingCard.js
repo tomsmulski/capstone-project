@@ -1,15 +1,14 @@
 import styled from 'styled-components';
-import Button from '../button/button';
+import Button from '../button/Button';
 import {Resource} from '../resources/Resource';
 import {displayLevelUpResourcesProduction} from '../../util/ResourcenProduction';
 import {buildingPrice} from '../../util/BuildingPrice';
-import BuildingManual from '../manual/buildingmanual';
 
 import {bindActionCreators} from 'redux';
 import {useDispatch} from 'react-redux';
 import {actionCreators} from '../../state';
 
-export default function Buildingcard({
+export default function BuildingCard({
   buildType,
   buildId,
   buildName,
@@ -28,15 +27,15 @@ export default function Buildingcard({
   return (
     <>
       <StyledSection>
-        <StyledHeader>
-          <StyledDivHeader>
+        <StyledWrapper>
+          <StyledHeadSpan>
             <StyledTitle>
               {buildName} ({currentBuildLevel})
             </StyledTitle>
-            <StyledManualButton onClick={() => setOpenManual(true)}>📖</StyledManualButton>
-          </StyledDivHeader>
+            <StyledManualButton onClick={() => setOpenManual(true, 'Building', buildId)}>📖</StyledManualButton>
+          </StyledHeadSpan>
           <StyledDescription>{buildDescription}</StyledDescription>
-        </StyledHeader>
+        </StyledWrapper>
         <StyledBuildInfoContainer>
           <StyledSpan>
             <StyledBuildTimeInfo>🕜 {buildTime.buildTimeDisplay}</StyledBuildTimeInfo>
@@ -92,11 +91,6 @@ export default function Buildingcard({
           </StyledButtonContainer>
         </StyledBuildInfoContainer>
       </StyledSection>
-      <BuildingManual
-        buildId={buildId}
-        currentBuildLevel={currentBuildLevel}
-        setOpenManual={setOpenManual}
-      ></BuildingManual>
     </>
   );
 }
@@ -109,7 +103,7 @@ const StyledSection = styled.section`
   color: white;
 `;
 
-const StyledHeader = styled.header`
+const StyledWrapper = styled.div`
   border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -121,6 +115,7 @@ const StyledTitle = styled.h1`
   font-size: xx-large;
   margin: 0;
 `;
+
 
 const StyledDescription = styled.p`
   min-height: 40px;
@@ -173,7 +168,7 @@ const StyledDiv = styled.div`
   width: 100%;
 `;
 
-const StyledDivHeader = styled.div`
+const StyledHeadSpan = styled.span`
   border: 1px solid black;
   width: 100%;
   display: flex;

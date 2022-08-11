@@ -1,14 +1,17 @@
 import {useEffect} from 'react';
 import {ResourcesOverview} from './components/resources/ResourcesOverview';
-import {Building} from './components/building/building';
-import {Buildingnav} from './components/building/buildingnav';
+import {Building} from './components/building/Building';
+import {BuildingNavigation} from './components/building/BuildingNavigation';
 import {productionResources} from './util/ResourcenProduction';
 import {getUserCitys} from './services/usercitys';
 import {useSelector, useDispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators} from './state/index';
-import Loading from './components/loading/loading';
+import Loading from './components/loading/Loading';
 import styled from 'styled-components';
+import Header from './components/header/Header';
+import SideNavigation from './components/navigation/SideNavigation';
+import ManualModul from './components/manual/ManualModul';
 
 export default function App() {
   const {
@@ -26,6 +29,7 @@ export default function App() {
   const loadingStatus = useSelector(state => state.loadingStatus);
   const currentUserBuildingInProgress = useSelector(state => state.currentUserBuildingInProgress);
   const selectedBuilding = useSelector(state => state.selectedBuilding);
+  const sideNavigationStatus = useSelector(state => state.sideNavigation.status);
 
   useEffect(() => {
     loadingUserCitys();
@@ -80,7 +84,14 @@ export default function App() {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUserResources, loadingStatus, addResources, setResources,currentUserBuildings,currentUserBuildingInProgress]);
+  }, [
+    currentUserResources,
+    loadingStatus,
+    addResources,
+    setResources,
+    currentUserBuildings,
+    currentUserBuildingInProgress,
+  ]);
 
   useEffect(() => {
     if (currentUserBuildingInProgress.length > 0) {
@@ -89,11 +100,10 @@ export default function App() {
 
       const buildingDiffTime = endBuildTime - timeNow;
 
-      if (buildingDiffTime < 0) {
+      if (buildingDiffTime < -1000) {
         addBuildings(currentUserBuildingInProgress[0].buildingId);
         setResources('energy', productionResources('energy', currentUserBuildings));
         removeBuildingToBuild(currentUserBuildingInProgress[0].cityId, currentUserBuildingInProgress[0].buildingId);
-
       } else {
         updateBuildingToBuild(
           currentUserBuildingInProgress[0].cityId,
@@ -107,11 +117,16 @@ export default function App() {
 
   if (!loadingStatus.status) {
     return (
-      <StyledMain>
-        <ResourcesOverview />
-        <Building selectedBuilding={selectedBuilding} />
-        <Buildingnav currentUserBuildings={currentUserBuildings} selectedBuilding={selectedBuilding} />
-      </StyledMain>
+      <>
+        <Header />
+        <StyledMain>
+          <ResourcesOverview />
+          <Building selectedBuilding={selectedBuilding} />
+          <BuildingNavigation currentUserBuildings={currentUserBuildings} selectedBuilding={selectedBuilding} />
+        </StyledMain>
+        <SideNavigation sideNavigationStatus={sideNavigationStatus} />
+        <ManualModul />
+      </>
     );
   } else {
     return <Loading />;

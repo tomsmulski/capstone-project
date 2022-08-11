@@ -7,7 +7,7 @@ import {gameBuildingsTypes} from '../../util/gamedatas/gameBuildingsTypes';
 import {timeBuilder} from '../../util/BuildingTime';
 import Images from '../../images';
 
-export const Buildingnav = ({currentUserBuildings, selectedBuilding}) => {
+export const BuildingNavigation = ({currentUserBuildings, selectedBuilding}) => {
   const {setSelectedBuilding} = bindActionCreators(actionCreators, useDispatch());
   const currentUserResources = useSelector(state => state.currentUserResources);
   const currentUserBuildingInProgress = useSelector(state => state.currentUserBuildingInProgress);

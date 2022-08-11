@@ -4,7 +4,8 @@ import {nanoid} from '@reduxjs/toolkit';
 import {useSelector, useDispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators} from '../../state';
-import ResourcesView from '../tooltip/resourcesview';
+import ResourcesView from '../tooltip/ResourcesView';
+
 
 export const ResourcesOverview = () => {
   const currentUserResources = useSelector(state => state.currentUserResources);
@@ -42,7 +43,6 @@ export const ResourcesOverview = () => {
 
 const StyledResourcesContainer = styled.div`
   position: relative;
-  margin-top: 60px;
   border: 1px solid black;
   display: flex;
   flex-direction: row;
