@@ -124,6 +124,7 @@ const StyledButton = styled.button`
   background: rgba(0, 0, 0, 0.6);
   border: 1px solid black;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const StyledSection = styled.section`
@@ -161,6 +162,7 @@ const StyledCloseButton = styled.button`
   border: none;
   font-size: x-large;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 const StyledBackButton = styled.button`
@@ -171,6 +173,7 @@ const StyledBackButton = styled.button`
   height: 30px;
   background: transparent;
   border: none;
+  cursor: pointer;
 `;
 
 const StyledArticle = styled.article`

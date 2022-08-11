@@ -26,7 +26,7 @@ export const ResourcesOverview = () => {
     <StyledResourcesContainer>
       {currentResources.map(currentResource => {
         return (
-          <section key={currentResource.id}>
+          <StyledSection key={currentResource.id}>
             <div onClick={() => handleClick(currentResource)}>
               <Resource displayValue={true} currentResources={currentResource} color={'white'}></Resource>
             </div>
@@ -34,7 +34,7 @@ export const ResourcesOverview = () => {
               isOpen={tooltipResourcesView.status[currentResource.name]}
               currentResource={currentResource}
             ></ResourcesView>
-          </section>
+          </StyledSection>
         );
       })}
     </StyledResourcesContainer>
@@ -48,4 +48,9 @@ const StyledResourcesContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
+`;
+
+
+const StyledSection = styled.section`
+  cursor: pointer;
 `;

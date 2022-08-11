@@ -38,6 +38,7 @@ const StyledButton = styled.button`
   height: 30px;
   background: transparent;
   border: none;
+  cursor: pointer;
   &:active {
     color: red;
   }

@@ -87,6 +87,7 @@ const StyledUl = styled.ul`
   min-width: 140px;
   max-width: 140px;
   list-style: none;
+  cursor: pointer;
   ${props =>
     props.notEnoughRescource === 'red'
       ? `background:repeating-linear-gradient(-55deg,#000, #000 10px,  #FF0000 10px,  #FF0000 20px); color:white;`

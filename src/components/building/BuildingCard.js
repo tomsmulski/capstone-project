@@ -155,9 +155,12 @@ const StyledBuildNextLevelText = styled.span`
   width: 100%;
 `;
 
-const StyledManualButton = styled.span`
+const StyledManualButton = styled.button`
   font-size: 25px;
   margin: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 `;
 
 const StyledDiv = styled.div`

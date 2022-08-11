@@ -73,6 +73,7 @@ const StyledCloseButton = styled.button`
   height: 30px;
   background: transparent;
   border: none;
+  cursor: pointer;
   &:active {
     color: red;
   }
@@ -93,7 +94,7 @@ const StyledManualButton = styled.button`
   background: transparent;
   border: none;
   font-weight: bold;
-
+  cursor: pointer;
   @media screen and (min-width: 1100px) {
     background: rgba(0, 0, 0, 0.6);
     border-radius: 5px;
