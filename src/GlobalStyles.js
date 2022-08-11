@@ -13,8 +13,6 @@ export default styled.createGlobalStyle`
   body {
     display: block;
     height: 100%;
-    background-image: url(${props => props.imageBackground});
-    background-size: cover;
-    background-attachment: fixed;
+    background: beige;
   }
 `;

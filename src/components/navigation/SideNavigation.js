@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Images from '../../images';
 import {Icon} from '@iconify/react';
 import {bindActionCreators} from 'redux';
 import {useDispatch} from 'react-redux';
@@ -9,7 +8,7 @@ export default function SideNavigation({sideNavigationStatus}) {
   const {setOpenSideNavigation, setOpenManual} = bindActionCreators(actionCreators, useDispatch());
 
   return (
-    <StyledNavigation isOpen={sideNavigationStatus} imageBackground={Images.background.imageBackgroundManual}>
+    <StyledNavigation isOpen={sideNavigationStatus}>
       <StyledCloseButton
         aria-label={'Close Side Navigation'}
         onClick={() => {
@@ -38,11 +37,11 @@ const StyledNavigation = styled.nav`
   display: ${props => (props.isOpen ? 'block' : 'none')};
   width: 150px;
   height: 100%;
-  background: url(${props => props.imageBackground});
+  background: #5f4940;
   top: 0;
   z-index: 99;
   border-radius: 0 20px 20px 0;
-  animation: animateright 1.4s;
+  animation: animateright 0.9s;
   @keyframes animateright {
     from {
       left: -300px;
