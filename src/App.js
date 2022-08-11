@@ -21,7 +21,7 @@ export default function App() {
     addBuildings,
     setLoading,
     updateBuildingToBuild,
-    removeBuildingToBuild
+    removeBuildingToBuild,
   } = bindActionCreators(actionCreators, useDispatch());
 
   const currentUserResources = useSelector(state => state.currentUserResources);
@@ -30,9 +30,6 @@ export default function App() {
   const currentUserBuildingInProgress = useSelector(state => state.currentUserBuildingInProgress);
   const selectedBuilding = useSelector(state => state.selectedBuilding);
   const sideNavigationStatus = useSelector(state => state.sideNavigation);
-
-
-
 
   useEffect(() => {
     loadingUserCitys();

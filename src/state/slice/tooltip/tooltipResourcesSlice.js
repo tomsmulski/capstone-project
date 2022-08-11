@@ -23,7 +23,7 @@ export const tooltipResourcesSlice = createSlice({
     },
     clear: (state, action) => {
       const {status} = action.payload;
-      state.status = {money: false, iron: false, fuel: false, gold: false, energy: false};
+      state.status = {money: status, iron: status, fuel: status, gold: status, energy: status};
       state.click = '';
       state.currentResources = {name: '', value: 0};
     },
