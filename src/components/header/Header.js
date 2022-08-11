@@ -10,6 +10,7 @@ export default function Header() {
   return (
     <StyledHeader>
       <StyledButton
+        aria-label={'Side Navigation'}
         onClick={() => {
           setOpenSideNavigation(true);
         }}

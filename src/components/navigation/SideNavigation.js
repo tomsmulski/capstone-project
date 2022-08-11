@@ -11,6 +11,7 @@ export default function SideNavigation({sideNavigationStatus}) {
   return (
     <StyledNavigation isOpen={sideNavigationStatus} imageBackground={Images.background.imageBackgroundManual}>
       <StyledCloseButton
+        aria-label={'Close Side Navigation'}
         onClick={() => {
           setOpenSideNavigation(false);
         }}
@@ -19,6 +20,7 @@ export default function SideNavigation({sideNavigationStatus}) {
       </StyledCloseButton>
       <StyledDiv>
         <StyledManualButton
+          aria-label={'Global Manual'}
           onClick={() => {
             setOpenManual(true);
             setOpenSideNavigation(false);
