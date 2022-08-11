@@ -23,10 +23,8 @@ export default function Header() {
     event.stopPropagation();
     if (sideNavigationStatus.status && sideNavigationStatus.click) {
       setOpenSideNavigation(true);
-      return;
     } else {
       setOpenSideNavigation(false);
-      return;
     }
   }
 

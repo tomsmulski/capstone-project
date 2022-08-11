@@ -22,7 +22,6 @@ export default function SideNavigation({sideNavigationStatus}) {
           aria-label={'Global Manual'}
           onClick={() => {
             setOpenManual(true);
-            setOpenSideNavigation(false);
           }}
         >
           <StyledSpan>📖</StyledSpan> Global Manual
