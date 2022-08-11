@@ -6,7 +6,6 @@ import {bindActionCreators} from 'redux';
 import {actionCreators} from '../../state';
 import ResourcesView from '../tooltip/ResourcesView';
 
-
 export const ResourcesOverview = () => {
   const currentUserResources = useSelector(state => state.currentUserResources);
   const {setTooltipResources} = bindActionCreators(actionCreators, useDispatch());
@@ -49,7 +48,6 @@ const StyledResourcesContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
 `;
-
 
 const StyledSection = styled.section`
   cursor: pointer;

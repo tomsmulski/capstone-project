@@ -126,10 +126,11 @@ export const setOpenManual = createAction(
   }
 );
 
-export const setOpenSideNavigation = createAction('sideNavigation/set', function prepare(status) {
+export const setOpenSideNavigation = createAction('sideNavigation/set', function prepare(status,click = false) {
   return {
     payload: {
       status: status,
+      click: click,
     },
   };
 });

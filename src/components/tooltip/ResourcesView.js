@@ -35,9 +35,7 @@ export default function ResourcesView({isOpen, currentResource}) {
       <StyledDiv2>
         <StyledDiv>
           <StyledSpan>You have</StyledSpan>
-          <StyledSpan>
-            {Math.floor(currentResource.value)}
-          </StyledSpan>
+          <StyledSpan>{Math.floor(currentResource.value)}</StyledSpan>
         </StyledDiv>
         <StyledDiv>
           <StyledSpan>{currentResource.name === 'energy' ? 'Current Production' : 'Current /h Production'}</StyledSpan>
@@ -66,7 +64,6 @@ const StyledSection = styled.section`
   left: 25%;
   z-index: 1;
 `;
-
 
 const StyledDiv2 = styled.div`
   position: relative;

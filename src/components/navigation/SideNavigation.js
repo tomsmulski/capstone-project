@@ -8,7 +8,7 @@ export default function SideNavigation({sideNavigationStatus}) {
   const {setOpenSideNavigation, setOpenManual} = bindActionCreators(actionCreators, useDispatch());
 
   return (
-    <StyledNavigation isOpen={sideNavigationStatus}>
+    <StyledNavigation isOpen={sideNavigationStatus.status}>
       <StyledCloseButton
         aria-label={'Close Side Navigation'}
         onClick={() => {
