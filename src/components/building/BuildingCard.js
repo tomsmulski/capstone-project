@@ -106,8 +106,9 @@ const StyledSection = styled.section`
   display: flex;
   flex-direction: column;
   color: white;
-  height: 290px;
+  height: 260px;
   background: var(--background-front);
+  padding: 15px;
 `;
 
 const StyledWrapper = styled.div`
@@ -118,7 +119,8 @@ const StyledWrapper = styled.div`
 
 const StyledTitle = styled.h1`
   display: flex;
-  font-size: 22px;
+  font-size: 24px;
+  font-family: var(--font-family-primary);
   margin: 0;
   color: orange;
   padding-top: 10px;
@@ -130,6 +132,7 @@ const StyledDescription = styled.p`
   max-height: 40px;
   text-overflow: ellipsis;
   overflow: hidden;
+  font-family: var(--font-family-third);
   padding-left: 10px;
   padding-top: 6px;
   display: -webkit-box; /* stylelint-disable-line value-no-vendor-prefix  */
@@ -154,7 +157,8 @@ const StyledSpan = styled.span`
 const StyledBuildTimeInfo = styled.p`
   width: 200px;
   padding: 5px;
-  font-size: large;
+  font-size: 14px;
+  font-family: var(--font-family-third);
 `;
 
 const StyledBuildNextLevelText = styled.span`
@@ -162,6 +166,8 @@ const StyledBuildNextLevelText = styled.span`
   text-align: right;
   padding: 5px;
   width: 100%;
+  font-size: 14px;
+  font-family: var(--font-family-third);
 `;
 
 const StyledManualButton = styled.button`
@@ -212,7 +218,6 @@ const StyledButtonContainer = styled.div`
   display: flex;
   justify-content: end;
   position: relative;
-  margin-top: 40px;
 `;
 
 const StyledHr = styled.hr`

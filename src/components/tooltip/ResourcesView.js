@@ -30,7 +30,7 @@ export default function ResourcesView({isOpen, currentResource}) {
 
   return (
     <StyledSection isOpen={isOpen}>
-      <h3>{resNameUpperCase}</h3>
+      <StyledH3>{resNameUpperCase}</StyledH3>
       <hr />
       <StyledDiv2>
         <StyledDiv>
@@ -49,6 +49,10 @@ export default function ResourcesView({isOpen, currentResource}) {
     </StyledSection>
   );
 }
+
+const StyledH3 = styled.h3`
+  font-family: var(--font-family-secondary);
+`;
 
 const StyledSection = styled.section`
   position: absolute;
@@ -83,5 +87,6 @@ const StyledDiv = styled.div`
 `;
 
 const StyledSpan = styled.span`
+  font-family: var(--font-family-third);
   margin: 0;
 `;

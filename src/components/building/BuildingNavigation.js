@@ -60,7 +60,7 @@ export const BuildingNavigation = ({currentUserBuildings, selectedBuilding}) => 
               {timeLeft.length > 0 ? <StyledTimeLeft>{timeLeft}</StyledTimeLeft> : ''}
             </li>
 
-            <StyledLiLevel notEnoughRescource={notEnoughRescource}>Level: {currentUserBuilding.level}</StyledLiLevel>
+            <StyledLiLevel notEnoughRescource={notEnoughRescource}>{currentUserBuilding.level}</StyledLiLevel>
           </StyledUl>
         );
       })}
@@ -73,6 +73,7 @@ const StyledSection = styled.section`
   display: flex;
   flex-direction: row;
   max-width: 100%;
+  max-height: 160px;
   overflow: hidden;
   overflow-x: scroll;
 
@@ -98,26 +99,28 @@ const StyledLiName = styled.li`
   color: white;
   text-align: right;
   font-size: 14px;
+  font-family: var(--font-family-primary);
 `;
 
 const StyledLiLevel = styled.li`
-  background-color: black;
+  position: relative;
+  border: 1px solid black;
+  border-radius: 50%;
   font-size: 14px;
-  bottom: 0;
-  width: 100%;
-  max-width: 140px;
+  bottom: 130px;
+  left: 50px;
+  width: 30px;
+  height: 30px;
   text-align: center;
   color: ${props => (props.notEnoughRescource === 'red' ? 'red' : 'white')};
-  padding-bottom: 3px;
+  padding: 3px;
   font-weight: bold;
+  font-family: var(--font-family-third);
 `;
 
 const StyledImg = styled.img`
   position: relative;
-  min-width: 134px;
-  max-width: 134px;
-  min-height: 80px;
-  max-height: 80px;
+
 `;
 
 const StyledTimeLeft = styled.span`

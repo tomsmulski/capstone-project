@@ -16,7 +16,8 @@ export default function Button({disabled, buildId, buildTime, onHandleClick, but
 const StyledButton = styled.button`
   width: 120px;
   height: 30px;
-  font-size: larger;
+  font-size: 18px;
   margin: 0;
   cursor: pointer;
+  font-family: var(--font-family-secondary);
 `;

@@ -94,10 +94,11 @@ const StyledDiv = styled.div`
 
 const StyledManualButton = styled.button`
   padding-left: 10px;
-  font-size: 14px;
+  font-size: 16px;
   background: transparent;
   border: none;
   font-weight: bold;
+  font-family: var(--font-family-third);
   color: #969ca9;
   cursor: pointer;
   @media screen and (min-width: 1100px) {

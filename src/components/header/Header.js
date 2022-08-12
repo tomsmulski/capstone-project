@@ -10,20 +10,17 @@ export default function Header() {
   const sideNavigation = useSelector(state => state.sideNavigation);
   useEffect(() => {
     if (sideNavigation.status) {
-      window.addEventListener('click', handleClick, false);
+      window.addEventListener('click', handleClick, true);
 
       return () => {
-        window.removeEventListener('click', handleClick, false);
+        window.removeEventListener('click', handleClick, true);
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sideNavigation]);
 
-  function handleClick(event) {
-    event.stopPropagation();
-    if (sideNavigation.status && sideNavigation.click) {
-      setOpenSideNavigation(true);
-    } else {
+  function handleClick() {
+    if (sideNavigation.status) {
       setOpenSideNavigation(false);
     }
   }
@@ -33,7 +30,7 @@ export default function Header() {
       <StyledButton
         aria-label={'Side Navigation'}
         onClick={() => {
-          setOpenSideNavigation(true, true);
+          setOpenSideNavigation(true);
         }}
       >
         <Icon icon="dashicons:menu-alt3" fontSize={'30px'} />

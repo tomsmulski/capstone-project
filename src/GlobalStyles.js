@@ -13,17 +13,13 @@ export default styled.createGlobalStyle`
   body {
     display: block;
     height: 100%;
-   /* background: var(--background-main); */
+    background: var(--background-main);
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(180deg, #A14533 0%, #936037 100%);
-
   }
 
-
-
   :root {
-    --background-main: #A14533;
-    --background-header: #A14533;
+    --background-main: #A14E33;
+    --background-header: #A14E33;
     --background-resources: #936037;
     --background-tooltip: #025a7c;
     --background-sidenavigation: #025a7c;
@@ -31,10 +27,10 @@ export default styled.createGlobalStyle`
     --background-footer: #025a7c;
     --color-primary: #025a7c;
     --color-secondary: #ffb400;
+    --font-family-primary : 'Playfair Display', serif;
+    --font-family-secondary : 'Roboto Condensed', sans-serif;
+    --font-family-third : 'Assistant', sans-serif;
   }
-
-
 `;
-
 
 

@@ -27,6 +27,7 @@ const StyledResourceSpanNumber = styled.span`
   font-size: 14px;
   color: ${props => props.color};
   padding: 5px;
+  font-family: var(--font-family-third);
 `;
 
 const StyledResourceIcon = styled.img`
