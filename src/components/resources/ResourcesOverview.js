@@ -74,11 +74,11 @@ export const ResourcesOverview = () => {
 
 const StyledResourcesContainer = styled.div`
   position: relative;
-  border: 1px solid black;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
+  background: var(--background-resources);
 `;
 
 const StyledSection = styled.section`

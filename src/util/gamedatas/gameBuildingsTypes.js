@@ -106,6 +106,14 @@ export const gameBuildingsTypes = [
           pow: 1.5,
         },
       },
+      {
+        id: '62e0e366663a9f95727518be',
+        resourceType: 'fuel',
+        calculation: {
+          value: 10,
+          pow: 1.5,
+        },
+      }
     ],
     productionMaterials: [
       {

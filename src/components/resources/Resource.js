@@ -14,7 +14,6 @@ export const Resource = ({currentResources, displayValuePosition, iconSize, colo
   );
 };
 
-
 const StyledResourceSection = styled.section`
   position: relative;
   display: flex;
@@ -25,12 +24,13 @@ const StyledResourceSection = styled.section`
 `;
 
 const StyledResourceSpanNumber = styled.span`
-  font-size: large;
+  font-size: 14px;
   color: ${props => props.color};
   padding: 5px;
 `;
 
 const StyledResourceIcon = styled.img`
-  width: ${props => (props.iconSize === 'small' ? '25px' : '34px')};
-  height: ${props => (props.iconSize === 'small' ? '25px' : '34px')};
+  width: ${props => (props.iconSize === 'small' ? '25px' : '32px')};
+  height: ${props => (props.iconSize === 'small' ? '25px' : '32px')};
+  margin-top: 10px;
 `;

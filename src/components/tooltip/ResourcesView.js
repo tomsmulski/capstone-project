@@ -53,7 +53,7 @@ export default function ResourcesView({isOpen, currentResource}) {
 const StyledSection = styled.section`
   position: absolute;
   top: 65px;
-  background: black;
+  background: var(--background-tooltip);
   color: white;
   width: 220px;
   height: 100px;

@@ -4,11 +4,11 @@ import {bindActionCreators} from 'redux';
 import {useDispatch} from 'react-redux';
 import {actionCreators} from '../../state';
 
-export default function SideNavigation({sideNavigationStatus}) {
+export default function SideNavigation({sideNavigation}) {
   const {setOpenSideNavigation, setOpenManual} = bindActionCreators(actionCreators, useDispatch());
 
   return (
-    <StyledNavigation isOpen={sideNavigationStatus.status}>
+    <StyledNavigation isOpen={sideNavigation.status}>
       <StyledCloseButton
         aria-label={'Close Side Navigation'}
         onClick={() => {
@@ -24,7 +24,10 @@ export default function SideNavigation({sideNavigationStatus}) {
             setOpenManual(true);
           }}
         >
-          <StyledSpan>📖</StyledSpan> Global Manual
+          <StyledSpan>
+            <Icon icon="bi:book-fill" />
+          </StyledSpan>{' '}
+          Global Manual
         </StyledManualButton>
       </StyledDiv>
     </StyledNavigation>
@@ -34,12 +37,12 @@ export default function SideNavigation({sideNavigationStatus}) {
 const StyledNavigation = styled.nav`
   position: fixed;
   display: ${props => (props.isOpen ? 'block' : 'none')};
-  width: 150px;
+  width: 250px;
   height: 100%;
-  background: #5f4940;
+  background: var(--background-sidenavigation);
   top: 0;
   z-index: 99;
-  border-radius: 0 20px 20px 0;
+  border-right: 0.5px solid #80848b;
   animation: animateright 0.9s;
   @keyframes animateright {
     from {
@@ -60,6 +63,7 @@ const StyledNavigation = styled.nav`
     display: flex;
     left: 0;
     background: transparent;
+    border: none;
   }
 `;
 
@@ -71,6 +75,7 @@ const StyledCloseButton = styled.button`
   height: 30px;
   background: transparent;
   border: none;
+  color: white;
   cursor: pointer;
   &:active {
     color: red;
@@ -88,10 +93,12 @@ const StyledDiv = styled.div`
 `;
 
 const StyledManualButton = styled.button`
+  padding-left: 10px;
   font-size: 14px;
   background: transparent;
   border: none;
   font-weight: bold;
+  color: #969ca9;
   cursor: pointer;
   @media screen and (min-width: 1100px) {
     background: rgba(0, 0, 0, 0.6);
@@ -104,4 +111,7 @@ const StyledManualButton = styled.button`
 
 const StyledSpan = styled.span`
   font-size: 26px;
+  border: 0.5px solid #424149;
+  background: #121212;
+  padding: 6px 6px 0 6px;
 `;

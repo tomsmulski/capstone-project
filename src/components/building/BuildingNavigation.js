@@ -75,7 +75,6 @@ const StyledSection = styled.section`
   max-width: 100%;
   overflow: hidden;
   overflow-x: scroll;
-  background-color: rgba(0, 0, 0, 0.6);
 
   @media screen and (min-width: 600px) {
     overflow-x: hidden;
@@ -98,10 +97,12 @@ const StyledLiName = styled.li`
   background-color: black;
   color: white;
   text-align: right;
+  font-size: 14px;
 `;
 
 const StyledLiLevel = styled.li`
   background-color: black;
+  font-size: 14px;
   bottom: 0;
   width: 100%;
   max-width: 140px;
@@ -115,8 +116,8 @@ const StyledImg = styled.img`
   position: relative;
   min-width: 134px;
   max-width: 134px;
-  min-height: 100px;
-  max-height: 100px;
+  min-height: 80px;
+  max-height: 80px;
 `;
 
 const StyledTimeLeft = styled.span`

@@ -47,7 +47,8 @@ export default function ManualModul() {
       <StyledSection openManualStatus={openManualStatus.status} imageBackground={Images.background.imageBackgroundMain}>
         <StyledArticleTitle>
           {openManualStatus.backTo !== '' ? (
-            <StyledBackButton aria-label={'Back To ' + openManualStatus.backTo}
+            <StyledBackButton
+              aria-label={'Back To ' + openManualStatus.backTo}
               onClick={() => {
                 setOpenManual(
                   true,
@@ -63,7 +64,9 @@ export default function ManualModul() {
             ''
           )}
           <StyledH1>{titleName}</StyledH1>
-          <StyledCloseButton aria-label={'Close Manual'} onClick={() => setOpenManual(false)}>X</StyledCloseButton>
+          <StyledCloseButton aria-label={'Close Manual'} onClick={() => setOpenManual(false)}>
+            X
+          </StyledCloseButton>
         </StyledArticleTitle>
 
         {globalManual ? (
@@ -133,12 +136,14 @@ const StyledSection = styled.section`
   top: 0;
   height: 100%;
   z-index: 1;
-  background-image: url(${props => props.imageBackground});
-  background-size: cover;
-  background-attachment: fixed;
+  background: var(--background-main);
   width: 100%;
-  overflow:hidden;
+  overflow: hidden;
   overflow-y: scroll;
+
+  @media screen and (min-width: 800px) {
+    overflow-y: hidden;
+  }
 `;
 
 const StyledArticleTitle = styled.article`

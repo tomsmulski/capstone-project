@@ -7,9 +7,9 @@ import {useEffect} from 'react';
 
 export default function Header() {
   const {setOpenSideNavigation} = bindActionCreators(actionCreators, useDispatch());
-  const sideNavigationStatus = useSelector(state => state.sideNavigation);
+  const sideNavigation = useSelector(state => state.sideNavigation);
   useEffect(() => {
-    if (sideNavigationStatus.status) {
+    if (sideNavigation.status) {
       window.addEventListener('click', handleClick, false);
 
       return () => {
@@ -17,11 +17,11 @@ export default function Header() {
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sideNavigationStatus]);
+  }, [sideNavigation]);
 
   function handleClick(event) {
     event.stopPropagation();
-    if (sideNavigationStatus.status && sideNavigationStatus.click) {
+    if (sideNavigation.status && sideNavigation.click) {
       setOpenSideNavigation(true);
     } else {
       setOpenSideNavigation(false);
@@ -46,19 +46,20 @@ const StyledHeader = styled.header`
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid black;
-  height: 70px;
+  height: 80px;
   width: 100%;
+  background: var(--background-header);
 `;
 
 const StyledButton = styled.button`
   position: absolute;
-  top: 20px;
-  left: 10%;
+  top: 35px;
+  left: 5%;
   width: 36px;
   height: 30px;
   background: transparent;
   border: none;
+  color: white;
   cursor: pointer;
   &:active {
     color: red;
