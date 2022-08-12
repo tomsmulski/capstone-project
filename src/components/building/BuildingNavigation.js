@@ -60,7 +60,7 @@ export const BuildingNavigation = ({currentUserBuildings, selectedBuilding}) => 
               {timeLeft.length > 0 ? <StyledTimeLeft>{timeLeft}</StyledTimeLeft> : ''}
             </li>
 
-            <StyledLiLevel notEnoughRescource={notEnoughRescource}>Level: {currentUserBuilding.level}</StyledLiLevel>
+            <StyledLiLevel notEnoughRescource={notEnoughRescource}>{currentUserBuilding.level}</StyledLiLevel>
           </StyledUl>
         );
       })}
@@ -73,9 +73,9 @@ const StyledSection = styled.section`
   display: flex;
   flex-direction: row;
   max-width: 100%;
+  max-height: 160px;
   overflow: hidden;
   overflow-x: scroll;
-  background-color: rgba(0, 0, 0, 0.6);
 
   @media screen and (min-width: 600px) {
     overflow-x: hidden;
@@ -87,6 +87,7 @@ const StyledUl = styled.ul`
   min-width: 140px;
   max-width: 140px;
   list-style: none;
+  cursor: pointer;
   ${props =>
     props.notEnoughRescource === 'red'
       ? `background:repeating-linear-gradient(-55deg,#000, #000 10px,  #FF0000 10px,  #FF0000 20px); color:white;`
@@ -97,25 +98,29 @@ const StyledLiName = styled.li`
   background-color: black;
   color: white;
   text-align: right;
+  font-size: 14px;
+  font-family: var(--font-family-primary);
 `;
 
 const StyledLiLevel = styled.li`
-  background-color: black;
-  bottom: 0;
-  width: 100%;
-  max-width: 140px;
+  position: relative;
+  border: 1px solid black;
+  border-radius: 50%;
+  font-size: 14px;
+  bottom: 130px;
+  left: 50px;
+  width: 30px;
+  height: 30px;
   text-align: center;
   color: ${props => (props.notEnoughRescource === 'red' ? 'red' : 'white')};
-  padding-bottom: 3px;
+  padding: 3px;
   font-weight: bold;
+  font-family: var(--font-family-third);
 `;
 
 const StyledImg = styled.img`
   position: relative;
-  min-width: 134px;
-  max-width: 134px;
-  min-height: 100px;
-  max-height: 100px;
+
 `;
 
 const StyledTimeLeft = styled.span`

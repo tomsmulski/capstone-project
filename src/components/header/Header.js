@@ -1,11 +1,29 @@
 import styled from 'styled-components';
 import {Icon} from '@iconify/react';
 import {bindActionCreators} from 'redux';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {actionCreators} from '../../state';
+import {useEffect} from 'react';
 
 export default function Header() {
   const {setOpenSideNavigation} = bindActionCreators(actionCreators, useDispatch());
+  const sideNavigation = useSelector(state => state.sideNavigation);
+  useEffect(() => {
+    if (sideNavigation.status) {
+      window.addEventListener('click', handleClick, true);
+
+      return () => {
+        window.removeEventListener('click', handleClick, true);
+      };
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sideNavigation]);
+
+  function handleClick() {
+    if (sideNavigation.status) {
+      setOpenSideNavigation(false);
+    }
+  }
 
   return (
     <StyledHeader>
@@ -25,19 +43,21 @@ const StyledHeader = styled.header`
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid black;
-  height: 70px;
+  height: 80px;
   width: 100%;
+  background: var(--background-header);
 `;
 
 const StyledButton = styled.button`
   position: absolute;
-  top: 20px;
-  left: 10%;
+  top: 35px;
+  left: 5%;
   width: 36px;
   height: 30px;
   background: transparent;
   border: none;
+  color: white;
+  cursor: pointer;
   &:active {
     color: red;
   }

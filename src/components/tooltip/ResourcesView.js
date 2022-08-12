@@ -30,14 +30,12 @@ export default function ResourcesView({isOpen, currentResource}) {
 
   return (
     <StyledSection isOpen={isOpen}>
-      <h3>{resNameUpperCase}</h3>
+      <StyledH3>{resNameUpperCase}</StyledH3>
       <hr />
       <StyledDiv2>
         <StyledDiv>
           <StyledSpan>You have</StyledSpan>
-          <StyledSpan>
-            {Math.floor(currentResource.value)}
-          </StyledSpan>
+          <StyledSpan>{Math.floor(currentResource.value)}</StyledSpan>
         </StyledDiv>
         <StyledDiv>
           <StyledSpan>{currentResource.name === 'energy' ? 'Current Production' : 'Current /h Production'}</StyledSpan>
@@ -52,10 +50,14 @@ export default function ResourcesView({isOpen, currentResource}) {
   );
 }
 
+const StyledH3 = styled.h3`
+  font-family: var(--font-family-secondary);
+`;
+
 const StyledSection = styled.section`
   position: absolute;
   top: 65px;
-  background: black;
+  background: var(--background-tooltip);
   color: white;
   width: 220px;
   height: 100px;
@@ -66,7 +68,6 @@ const StyledSection = styled.section`
   left: 25%;
   z-index: 1;
 `;
-
 
 const StyledDiv2 = styled.div`
   position: relative;
@@ -86,5 +87,6 @@ const StyledDiv = styled.div`
 `;
 
 const StyledSpan = styled.span`
+  font-family: var(--font-family-third);
   margin: 0;
 `;

@@ -93,16 +93,25 @@ export const removeBuildingToBuild = createAction('buildingsInBuild/remove', fun
 
 export const setTooltipResources = createAction(
   'tooltipresources/set',
-  function prepare(status, keyRess, currentResources) {
+  function prepare(status, keyRess, currentResources, click) {
     return {
       payload: {
         status: status,
         keyRess: keyRess,
         currentResources: currentResources,
+        click: click,
       },
     };
   }
 );
+
+export const clearTooltipResources = createAction('tooltipresources/clear', function prepare(status) {
+  return {
+    payload: {
+      status: status,
+    },
+  };
+});
 
 export const setSelectedBuilding = createAction('selectedBuilding/set', function prepare(buildingId) {
   return {
@@ -126,10 +135,11 @@ export const setOpenManual = createAction(
   }
 );
 
-export const setOpenSideNavigation = createAction('sideNavigation/set', function prepare(status) {
+export const setOpenSideNavigation = createAction('sideNavigation/set', function prepare(status, click = false) {
   return {
     payload: {
       status: status,
+      click: click,
     },
   };
 });

@@ -29,7 +29,7 @@ export default function App() {
   const loadingStatus = useSelector(state => state.loadingStatus);
   const currentUserBuildingInProgress = useSelector(state => state.currentUserBuildingInProgress);
   const selectedBuilding = useSelector(state => state.selectedBuilding);
-  const sideNavigationStatus = useSelector(state => state.sideNavigation.status);
+  const sideNavigation = useSelector(state => state.sideNavigation);
 
   useEffect(() => {
     loadingUserCitys();
@@ -124,7 +124,7 @@ export default function App() {
           <Building selectedBuilding={selectedBuilding} />
           <BuildingNavigation currentUserBuildings={currentUserBuildings} selectedBuilding={selectedBuilding} />
         </StyledMain>
-        <SideNavigation sideNavigationStatus={sideNavigationStatus} />
+        <SideNavigation sideNavigation={sideNavigation} />
         <ManualModul />
       </>
     );
@@ -135,5 +135,4 @@ export default function App() {
 
 const StyledMain = styled.main`
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
 `;

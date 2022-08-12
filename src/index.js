@@ -5,12 +5,11 @@ import GlobalStyles from './GlobalStyles.js';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
 import {store} from './state/store';
-import Images from './images';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <GlobalStyles imageBackground={Images.background.imageBackgroundMain}/>
+    <GlobalStyles />
     <Provider store={store}>
       <App />
     </Provider>

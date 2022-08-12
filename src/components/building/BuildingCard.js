@@ -3,7 +3,7 @@ import Button from '../button/Button';
 import {Resource} from '../resources/Resource';
 import {displayLevelUpResourcesProduction} from '../../util/ResourcenProduction';
 import {buildingPrice} from '../../util/BuildingPrice';
-
+import {Icon} from '@iconify/react';
 import {bindActionCreators} from 'redux';
 import {useDispatch} from 'react-redux';
 import {actionCreators} from '../../state';
@@ -32,13 +32,18 @@ export default function BuildingCard({
             <StyledTitle>
               {buildName} ({currentBuildLevel})
             </StyledTitle>
-            <StyledManualButton onClick={() => setOpenManual(true, 'Building', buildId)}>📖</StyledManualButton>
+            <StyledManualButton onClick={() => setOpenManual(true, 'Building', buildId)}>
+              <Icon icon="bi:book-fill" />
+            </StyledManualButton>
           </StyledHeadSpan>
           <StyledDescription>{buildDescription}</StyledDescription>
         </StyledWrapper>
+        <StyledHr />
         <StyledBuildInfoContainer>
           <StyledSpan>
-            <StyledBuildTimeInfo>🕜 {buildTime.buildTimeDisplay}</StyledBuildTimeInfo>
+            <StyledBuildTimeInfo>
+              <Icon icon="entypo:clock" /> {buildTime.buildTimeDisplay}
+            </StyledBuildTimeInfo>
             <StyledBuildNextLevelText>To upgrade to level {currentBuildLevel + 1} you need</StyledBuildNextLevelText>
           </StyledSpan>
 
@@ -96,15 +101,17 @@ export default function BuildingCard({
 }
 
 const StyledSection = styled.section`
-  margin-top: 60px;
+  margin-top: 40px;
   position: relative;
   display: flex;
   flex-direction: column;
   color: white;
+  height: 260px;
+  background: var(--background-front);
+  padding: 15px;
 `;
 
 const StyledWrapper = styled.div`
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
   padding: 5px;
@@ -112,24 +119,29 @@ const StyledWrapper = styled.div`
 
 const StyledTitle = styled.h1`
   display: flex;
-  font-size: xx-large;
+  font-size: 24px;
+  font-family: var(--font-family-primary);
   margin: 0;
+  color: orange;
+  padding-top: 10px;
+  padding-left: 10px;
 `;
-
 
 const StyledDescription = styled.p`
   min-height: 40px;
   max-height: 40px;
   text-overflow: ellipsis;
   overflow: hidden;
-  padding: 5px;
+  font-family: var(--font-family-third);
+  padding-left: 10px;
+  padding-top: 6px;
   display: -webkit-box; /* stylelint-disable-line value-no-vendor-prefix  */
   -webkit-line-clamp: 2; /* stylelint-disable-line property-no-vendor-prefix */
   -webkit-box-orient: vertical; /* stylelint-disable-line property-no-vendor-prefix */
+  font-size: 14px;
 `;
 
 const StyledBuildInfoContainer = styled.article`
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
   min-height: 158px;
@@ -145,7 +157,8 @@ const StyledSpan = styled.span`
 const StyledBuildTimeInfo = styled.p`
   width: 200px;
   padding: 5px;
-  font-size: large;
+  font-size: 14px;
+  font-family: var(--font-family-third);
 `;
 
 const StyledBuildNextLevelText = styled.span`
@@ -153,11 +166,17 @@ const StyledBuildNextLevelText = styled.span`
   text-align: right;
   padding: 5px;
   width: 100%;
+  font-size: 14px;
+  font-family: var(--font-family-third);
 `;
 
-const StyledManualButton = styled.span`
-  font-size: 25px;
+const StyledManualButton = styled.button`
+  font-size: 26px;
   margin: 0;
+  background: transparent;
+  border: 1px solid black;
+  cursor: pointer;
+  padding: 6px 6px 0 6px;
 `;
 
 const StyledDiv = styled.div`
@@ -169,7 +188,6 @@ const StyledDiv = styled.div`
 `;
 
 const StyledHeadSpan = styled.span`
-  border: 1px solid black;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -200,4 +218,10 @@ const StyledButtonContainer = styled.div`
   display: flex;
   justify-content: end;
   position: relative;
+`;
+
+const StyledHr = styled.hr`
+  border: 0.5px solid white;
+  margin: 0 auto;
+  width: 90%;
 `;
