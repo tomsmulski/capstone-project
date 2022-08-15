@@ -11,7 +11,7 @@ function checkRescource(gameBuildingType, currentUserResources, nextLevel) {
         const neededResource = buildingPrice(nextLevel, gameBuildingType.id, key);
         const enoughRescource = currentResource >= neededResource;
 
-        const textColor = enoughRescource ? 'white' : 'red';
+        const textColor = enoughRescource ? 'var(--color-primary)' : 'red';
         if (!enoughRescource) {
           notEnoughResourceButtonDisable = true;
         }

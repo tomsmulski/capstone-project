@@ -59,7 +59,11 @@ export const ResourcesOverview = () => {
         return (
           <StyledSection key={currentResource.id}>
             <div onClick={() => handleClickOpenResourcenView(currentResource)}>
-              <Resource displayValue={true} currentResources={currentResource} color={'white'}></Resource>
+              <Resource
+                displayValue={true}
+                currentResources={currentResource}
+                color={'var(--color-primary)'}
+              ></Resource>
             </div>
             <ResourcesView
               isOpen={tooltipResourcesView.status[currentResource.name]}

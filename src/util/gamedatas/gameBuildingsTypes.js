@@ -39,8 +39,10 @@ export const gameBuildingsTypes = [
         },
       },
     ],
-    description:
-      'With the upswing in trade as well as the rising value of individual transactions, increasingly larger quantities of coins were needed. Due to the relatively high risk of counterfeiting, coins could not be issued with arbitrarily high denominations. ',
+    description:{
+      short: 'With the upswing in trade as well as the rising value of individual transactions',
+      long: 'With the upswing in trade as well as the rising value of individual transactions, increasingly larger quantities of coins were needed. Due to the relatively high risk of counterfeiting, coins could not be issued with arbitrarily high denominations. ',
+    },      
   },
   {
     id: '62e7dbadcefed5e153f6bb86',
@@ -82,8 +84,10 @@ export const gameBuildingsTypes = [
         },
       },
     ],
-    description:
-      'Casting of metals and alloys is a manufacturing process in which workpieces are produced from liquid metal - the melt.',
+    description:{
+      short: 'Casting of metals',
+      long: 'Casting of metals and alloys is a manufacturing process in which workpieces are produced from liquid metal - the melt.',
+    },      
   },
   {
     id: '62e7dbb2cefed5e153f6bb87',
@@ -133,8 +137,11 @@ export const gameBuildingsTypes = [
         },
       },
     ],
-    description:
-      'An oil refinery is an industrial plant that converts the raw material crude oil into fractions with a defined boiling range by purification and distillation under normal pressure and under vacuum.',
+    description:{
+      short: 'An oil refinery is an industrial plant that converts the raw material crude oil',
+      long: 'An oil refinery is an industrial plant that converts the raw material crude oil into fractions with a defined boiling range by purification and distillation under normal pressure and under vacuum.',
+    },
+      
   },
   {
     id: '62e7dbb7cefed5e153f6bb88',
@@ -168,7 +175,9 @@ export const gameBuildingsTypes = [
         },
       },
     ],
-    description:
-      'A Windpower plant converts the kinetic energy of the wind into electrical energy and feeds it into an electricity grid. Colloquially, the terms wind power plant or simply wind turbine are also used.',
+    description:{
+      short: 'A Windpower plant converts the kinetic energy.',
+      long: 'A Windpower plant converts the kinetic energy of the wind into electrical energy and feeds it into an electricity grid. Colloquially, the terms wind power plant or simply wind turbine are also used.',
+    },      
   },
 ];

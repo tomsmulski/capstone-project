@@ -21,7 +21,7 @@ export const BuildingNavigation = ({currentUserBuildings, selectedBuilding}) => 
           currentUserBuildings => currentUserBuildings.buildingId === gameBuildingType.id
         );
 
-        const borderColor = gameBuildingType.id === selectedBuildID ? 'green' : 'black';
+        const borderColor = gameBuildingType.id === selectedBuildID ? 'var(--color-buildingname)' : 'black';
 
         const checkEnoughRescource = checkRescource(
           gameBuildingType,
@@ -60,7 +60,7 @@ export const BuildingNavigation = ({currentUserBuildings, selectedBuilding}) => 
               {timeLeft.length > 0 ? <StyledTimeLeft>{timeLeft}</StyledTimeLeft> : ''}
             </li>
 
-            <StyledLiLevel notEnoughRescource={notEnoughRescource}>{currentUserBuilding.level}</StyledLiLevel>
+            <StyledLiLevel notEnoughRescource={notEnoughRescource}>Level : {currentUserBuilding.level}</StyledLiLevel>
           </StyledUl>
         );
       })}
@@ -73,24 +73,26 @@ const StyledSection = styled.section`
   display: flex;
   flex-direction: row;
   max-width: 100%;
-  max-height: 160px;
+  max-height: 138px;
   overflow: hidden;
   overflow-x: scroll;
-
+  background: var(--background-buildingnav);
   @media screen and (min-width: 600px) {
     overflow-x: hidden;
   }
 `;
 
 const StyledUl = styled.ul`
-  border: 3px solid ${props => props.borderColor ?? props.borderColor};
+  border: 2px solid ${props => props.borderColor ?? props.borderColor};
   min-width: 140px;
   max-width: 140px;
   list-style: none;
   cursor: pointer;
   ${props =>
     props.notEnoughRescource === 'red'
-      ? `background:repeating-linear-gradient(-55deg,#000, #000 10px,  #FF0000 10px,  #FF0000 20px); color:white;`
+      ? `background-size: auto auto;
+background-color: rgba(255, 0, 0, 0.8);
+background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 0, 0, 1) 10px, rgba(0, 0, 0, 1) 20px ); color:white;`
       : ''};
 `;
 
@@ -98,19 +100,17 @@ const StyledLiName = styled.li`
   background-color: black;
   color: white;
   text-align: right;
-  font-size: 14px;
+  font-size: 12px;
   font-family: var(--font-family-primary);
+  padding: 2px;
 `;
 
 const StyledLiLevel = styled.li`
+  background: rgba(0, 0, 0, 0.8);
   position: relative;
-  border: 1px solid black;
-  border-radius: 50%;
   font-size: 14px;
-  bottom: 130px;
-  left: 50px;
-  width: 30px;
-  height: 30px;
+  bottom: 22px;
+  width: 100%;
   text-align: center;
   color: ${props => (props.notEnoughRescource === 'red' ? 'red' : 'white')};
   padding: 3px;
@@ -120,13 +120,14 @@ const StyledLiLevel = styled.li`
 
 const StyledImg = styled.img`
   position: relative;
-
+  width: 108px;
+  margin: 0 14px;
 `;
 
 const StyledTimeLeft = styled.span`
   position: absolute;
   text-align: center;
-  bottom: 80px;
+  bottom: 70px;
   display: inline;
   color: black;
   font-weight: bold;
@@ -138,9 +139,9 @@ const StyledButton = styled.div`
   border: none;
   ${props =>
     props.calcuTimeDifference > 0
-      ? 'background: linear-gradient(#777, #777 ' +
+      ? 'background: linear-gradient(#222, #222 ' +
         props.calcuTimeDifference +
-        '%, #e2c28b ' +
+        '%, var(--background-buildingnav) ' +
         props.calcuTimeDifference +
         '% );'
       : 0}

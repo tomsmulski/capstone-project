@@ -58,21 +58,26 @@ export default function ManualModul() {
                 );
               }}
             >
-              <Icon icon="akar-icons:arrow-left-thick" fontSize={'34px'} />
+              <Icon icon="ant-design:arrow-left-outlined" fontSize={'26px'} />
             </StyledBackButton>
           ) : (
             ''
           )}
           <StyledH1>{titleName}</StyledH1>
           <StyledCloseButton aria-label={'Close Manual'} onClick={() => setOpenManual(false)}>
-            X
+            <Icon icon="bi:x" fontSize={'26px'} />
           </StyledCloseButton>
         </StyledArticleTitle>
 
         {globalManual ? (
-          <StyledArticle>
-            <StyledButton onClick={() => setOpenManual(true, 'Buildings', '', 'All')}>Buildings</StyledButton>
-          </StyledArticle>
+          <StyledArticleGlobal>
+            <StyledArticleGlobalSpan>
+              <Icon icon="codicon:triangle-right" color="#478106" />
+              <StyledButtonGlobal onClick={() => setOpenManual(true, 'Buildings', '', 'All')}>
+                Buildings
+              </StyledButtonGlobal>
+            </StyledArticleGlobalSpan>
+          </StyledArticleGlobal>
         ) : (
           ''
         )}
@@ -85,7 +90,8 @@ export default function ManualModul() {
                   key={gameBuildingsType.id}
                   onClick={() => setOpenManual(true, 'Building', gameBuildingsType.id, 'Buildings')}
                 >
-                  {gameBuildingsType.name}
+                  <StyledImgBuilding src={Images.image[gameBuildingsType.image]} alt={gameBuildingsType.name} />
+                  <StyledBuildingName>{gameBuildingsType.name}</StyledBuildingName>
                 </StyledButton>
               );
             })}
@@ -95,14 +101,13 @@ export default function ManualModul() {
         )}
 
         {buildingManual ? (
-          <>
-            <StyledArticle>
-              <StyledH2>{gameBuildingsType.name}</StyledH2>
-              <StyledImg src={Images.image[gameBuildingsType.image]} alt={gameBuildingsType.name}></StyledImg>
-            </StyledArticle>
+          <StyledManualContainer>
+            <StyledH2>{gameBuildingsType.name}</StyledH2>
+            <StyledImg src={Images.image[gameBuildingsType.image]} alt={gameBuildingsType.name}></StyledImg>
             <StyledSectionDescription>
-              <StyledH2>Description</StyledH2>
-              <StyledParagraph>{gameBuildingsType.description}</StyledParagraph>
+              <StyledH3>Description</StyledH3>
+              <StyledHr />
+              <StyledParagraph>{gameBuildingsType.description.long}</StyledParagraph>
             </StyledSectionDescription>
             <StyledDivNextLevel>
               <BuildingManualNextLevelTable
@@ -110,7 +115,7 @@ export default function ManualModul() {
                 currentBuildLevel={currentBuilding.level}
               />
             </StyledDivNextLevel>
-          </>
+          </StyledManualContainer>
         ) : (
           ''
         )}
@@ -119,24 +124,13 @@ export default function ManualModul() {
   }
 }
 
-const StyledButton = styled.button`
-  font-size: x-large;
-  margin-top: 5px;
-  padding: 5px;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  border: 1px solid black;
-  border-radius: 5px;
-  cursor: pointer;
-`;
-
 const StyledSection = styled.section`
   position: fixed;
   display: ${props => (props.openManualStatus ? 'block' : 'none')};
   top: 0;
   height: 100%;
   z-index: 1;
-  background: var(--background-main);
+  background: var(--background-front);
   width: 100%;
   overflow: hidden;
   overflow-y: scroll;
@@ -148,66 +142,130 @@ const StyledSection = styled.section`
 
 const StyledArticleTitle = styled.article`
   position: relative;
-  height: 50px;
+  height: 70px;
+  display: flex;
+  align-items: center;
   text-align: center;
+  background: var(--background-header);
+  color: white;
 `;
 
 const StyledH1 = styled.h1`
-  font-size: xx-large;
-  margin-top: 5px;
+  font-size: 26px;
 `;
 
 const StyledCloseButton = styled.button`
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 10px;
+  top: 10px;
   width: 30px;
   height: 30px;
   background: transparent;
   border: none;
-  font-size: x-large;
+  font-size: 22px;
   font-weight: bold;
   cursor: pointer;
+  color: white;
 `;
 
 const StyledBackButton = styled.button`
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 10px;
+  top: 10px;
   width: 30px;
   height: 30px;
   background: transparent;
   border: none;
   cursor: pointer;
+  color: white;
+`;
+
+const StyledArticleGlobal = styled.article`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const StyledArticleGlobalSpan = styled.span`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  padding: 10px;
+  margin: 0;
+  background: #0e0f14;
+  border-bottom: 0.5px solid #2b3036;
+`;
+
+const StyledButtonGlobal = styled.button`
+  color: #d0ced2;
+  font-size: x-large;
+  margin-left: 10px;
+  padding: 5px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
 `;
 
 const StyledArticle = styled.article`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
-  height: 200px;
   padding: 10px;
   margin: 0;
+  width: 100%;
 `;
 
-const StyledH2 = styled.h2`
-  font-size: x-large;
-  margin-top: 5px;
-  padding: 5px;
+const StyledImgBuilding = styled.img`
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 1px solid gold;
+  border-radius: 5px;
 `;
 
-const StyledImg = styled.img`
-  width: 134px;
-  height: 134px;
+const StyledButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #d0ced2;
+  font-size: 20px;
+  margin-bottom: 5px;
+  padding: 5px 0 5px 20px;
+  width: 100%;
+  height: 70px;
+  background: var(--background-manual);
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+`;
+
+const StyledBuildingName = styled.span`
+  position: absolute;
+  margin-left: 80px;
+`;
+
+const StyledManualContainer = styled.div`
+  width: 100%;
+  padding: 10px 15px 0 15px;
 `;
 
 const StyledSectionDescription = styled.section`
+  display: flex;
+  flex-direction: column;
   position: relative;
-  height: 200px;
-  padding: 10px;
+  max-height: 230px;
   margin: 0;
 `;
 
 const StyledParagraph = styled.p`
-  padding: 5px;
+  font-family: var(--font-family-third);
+  color: var(--color-primary);
+  overflow: hidden;
+  overflow-x: scroll;
 `;
 
 const StyledDivNextLevel = styled.div`
@@ -215,4 +273,31 @@ const StyledDivNextLevel = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+const StyledH2 = styled.h2`
+  font-size: 22px;
+  margin: 14px 0;
+  color: var(--color-buildingname);
+  font-family: var(--font-family-primary);
+`;
+
+const StyledH3 = styled.h3`
+  font-size: 16px;
+  margin: 5px 0;
+  font-family: var(--font-family-primary);
+  color: var(--color-primary);
+`;
+
+const StyledImg = styled.img`
+  width: 180px;
+  height: 180px;
+  border: 1px solid var(--color-buildingname);
+  border-radius: 5px;
+  margin-bottom: 20px;
+`;
+
+const StyledHr = styled.hr`
+  border-bottom: 0.5px solid var(--color-primary);
+  margin: 5px 0 10px 0;
 `;

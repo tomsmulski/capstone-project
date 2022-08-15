@@ -13,24 +13,30 @@ export default styled.createGlobalStyle`
   body {
     display: block;
     height: 100%;
-    background: var(--background-main);
+    background: var(--background-body);
     font-family: 'Roboto', sans-serif;
   }
 
   :root {
-    --background-main: #A14E33;
-    --background-header: #A14E33;
-    --background-resources: #936037;
+    --background-main: #a14e33;
+    --background-body: #1c252c;
+    --background-header: #122836;
+    --background-resources: #15141e;
+    --background-buildingnav: #15141e;
+    --background-manual: #1d1f28;
     --background-tooltip: #025a7c;
-    --background-sidenavigation: #025a7c;
-    --background-front: #936037;
+    --background-sidenavigation: #1c252c;
+    --background-front-title: #15141e;
+    --background-card: #030614;
+    --background-front: #13151c;
     --background-footer: #025a7c;
-    --color-primary: #025a7c;
-    --color-secondary: #ffb400;
-    --font-family-primary : 'Playfair Display', serif;
-    --font-family-secondary : 'Roboto Condensed', sans-serif;
-    --font-family-third : 'Assistant', sans-serif;
+    --color-primary: #d4d2d4;
+    --color-secondary: #57575c;
+    --color-buildingname: #ec9044;
+    --color-green: #478106;
+    --color-gray: #6f6e6f;
+    --font-family-primary: 'Playfair Display', serif;
+    --font-family-secondary: 'Roboto Condensed', sans-serif;
+    --font-family-third: 'Assistant', sans-serif;
   }
 `;
-
-

@@ -7,15 +7,14 @@ import {actionCreators} from '../../state';
 import {gameBuildingsTypes} from '../../util/gamedatas/gameBuildingsTypes';
 import {checkRescource} from '../../util/checkResources';
 
-export function Building({ selectedBuilding }) {
-  const { removeResources, addBuildingToBuild } = bindActionCreators(actionCreators, useDispatch());
+export function Building({selectedBuilding}) {
+  const {removeResources, addBuildingToBuild} = bindActionCreators(actionCreators, useDispatch());
 
   const currentUserResources = useSelector(state => state.currentUserResources);
   const currentUserBuildings = useSelector(state => state.currentUserBuildings);
   const currentUserBuildingInProgress = useSelector(state => state.currentUserBuildingInProgress);
 
   function onHandleClickUpgrade(buildingId, buildingBuildTime) {
-
     if (currentUserBuildingInProgress.length === 0) {
       const currentBuilding = currentUserBuildings.find(currentBuilding => currentBuilding.buildingId === buildingId);
       const nextBuildingLevel = currentBuilding.level + 1;
@@ -51,10 +50,10 @@ export function Building({ selectedBuilding }) {
 
   if (currentUserBuildingInProgress.length > 0) {
     const inProgressId = currentUserBuildingInProgress[0].buildingId;
-    buttonText = inProgressId === gameBuildingType.id ? 'in Progress' : buttonText;
+    buttonText = inProgressId === gameBuildingType.id ? 'In Progress' : buttonText;
   }
 
-  buttonText = currentUserBuilding.level > 0 && buttonText !== 'in Progress' ? 'Upgrade' : buttonText;
+  buttonText = currentUserBuilding.level > 0 && buttonText !== 'In Progress' ? 'Upgrade' : buttonText;
 
   const nextLevel = currentUserBuilding.level + 1;
 
@@ -88,8 +87,8 @@ export function Building({ selectedBuilding }) {
         buttonText={buttonText}
         buttonDisabled={checkEnoughRescource.notEnoughResourceButtonDisable || buildInProgressButtonDisable}
         onActionButtonClick={onHandleClickUpgrade}
-        currentUserBuildings={currentUserBuildings} />
+        currentUserBuildings={currentUserBuildings}
+      />
     </article>
   );
 }
-
