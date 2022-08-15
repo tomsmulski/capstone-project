@@ -33,16 +33,16 @@ export default function BuildingCard({
               {buildName} ({currentBuildLevel})
             </StyledTitle>
             <StyledManualButton onClick={() => setOpenManual(true, 'Building', buildId)}>
-              <Icon icon="bi:book-fill" />
+              <Icon icon="bi:book" />
             </StyledManualButton>
           </StyledHeadSpan>
-          <StyledDescription>{buildDescription}</StyledDescription>
+          <StyledDescription>{buildDescription.short}</StyledDescription>
         </StyledWrapper>
         <StyledHr />
         <StyledBuildInfoContainer>
           <StyledSpan>
             <StyledBuildTimeInfo>
-              <Icon icon="entypo:clock" /> {buildTime.buildTimeDisplay}
+              <Icon icon="entypo:clock" /> <StyledBuildTimeDisplay>{buildTime.buildTimeDisplay}</StyledBuildTimeDisplay>
             </StyledBuildTimeInfo>
             <StyledBuildNextLevelText>To upgrade to level {currentBuildLevel + 1} you need</StyledBuildNextLevelText>
           </StyledSpan>
@@ -50,21 +50,22 @@ export default function BuildingCard({
           <StyledDiv>
             <StyledBuildYieldInfo>
               {buildYield.map(productionMaterial => {
-                return (
-                  <Resource
-                    key={productionMaterial.id}
-                    iconSize="small"
-                    displayValuePosition="right"
-                    currentResources={{
-                      name: productionMaterial.resourceType,
-                      value: displayLevelUpResourcesProduction(
-                        productionMaterial.resourceType,
-                        currentBuildLevel,
-                        buildId
-                      ),
-                    }}
-                  />
-                );
+                if (productionMaterial.resourceType === 'energy') {
+                  return (
+                    <Resource
+                      key={productionMaterial.id}
+                      displayValuePosition="right"
+                      currentResources={{
+                        name: productionMaterial.resourceType,
+                        value: displayLevelUpResourcesProduction(
+                          productionMaterial.resourceType,
+                          currentBuildLevel,
+                          buildId
+                        ),
+                      }}
+                    />
+                  );
+                }
               })}
             </StyledBuildYieldInfo>
 
@@ -73,7 +74,6 @@ export default function BuildingCard({
                 return (
                   <Resource
                     key={buildMaterial.id}
-                    iconSize="small"
                     color={buildPriceTextColor[index]}
                     currentResources={{
                       name: buildMaterial.resourceType,
@@ -84,7 +84,7 @@ export default function BuildingCard({
               })}
             </StyledBuildPriceInfo>
           </StyledDiv>
-
+          <StyledHr />
           <StyledButtonContainer>
             <Button
               disabled={buttonDisabled}
@@ -106,39 +106,38 @@ const StyledSection = styled.section`
   display: flex;
   flex-direction: column;
   color: white;
-  height: 260px;
-  background: var(--background-front);
-  padding: 15px;
+  height: 300px;
+  background: var(--background-card);
 `;
 
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 5px;
+  width: 100%;
 `;
 
 const StyledTitle = styled.h1`
   display: flex;
-  font-size: 24px;
+  font-size: 22px;
   font-family: var(--font-family-primary);
-  margin: 0;
-  color: orange;
-  padding-top: 10px;
-  padding-left: 10px;
+  margin: 6px 0 0 0;
+  color: var(--color-buildingname);
+  padding: 10px 15px 0 15px;
 `;
 
 const StyledDescription = styled.p`
-  min-height: 40px;
-  max-height: 40px;
+  min-height: 60px;
+  max-height: 60px;
   text-overflow: ellipsis;
   overflow: hidden;
   font-family: var(--font-family-third);
-  padding-left: 10px;
-  padding-top: 6px;
+  padding: 10px 15px;
   display: -webkit-box; /* stylelint-disable-line value-no-vendor-prefix  */
   -webkit-line-clamp: 2; /* stylelint-disable-line property-no-vendor-prefix */
   -webkit-box-orient: vertical; /* stylelint-disable-line property-no-vendor-prefix */
-  font-size: 14px;
+  font-size: 16px;
+  width: 100%;
+  color: var(--color-primary);
 `;
 
 const StyledBuildInfoContainer = styled.article`
@@ -156,25 +155,28 @@ const StyledSpan = styled.span`
 
 const StyledBuildTimeInfo = styled.p`
   width: 200px;
-  padding: 5px;
-  font-size: 14px;
+  padding: 10px 15px 0 15px;
+  font-size: 16px;
   font-family: var(--font-family-third);
 `;
 
 const StyledBuildNextLevelText = styled.span`
   float: right;
   text-align: right;
-  padding: 5px;
+  padding: 8px 15px 0 0;
   width: 100%;
-  font-size: 14px;
+  font-size: 16px;
   font-family: var(--font-family-third);
+  color: var(--color-primary);
 `;
 
 const StyledManualButton = styled.button`
-  font-size: 26px;
-  margin: 0;
-  background: transparent;
-  border: 1px solid black;
+  font-size: 22px;
+  border: 0.5px solid #ec9044;
+  border-radius: 5px;
+  background: #121212;
+  margin: 6px;
+  color: #ec9044;
   cursor: pointer;
   padding: 6px 6px 0 6px;
 `;
@@ -192,7 +194,7 @@ const StyledHeadSpan = styled.span`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 5px;
+  background: var(--background-front-title);
 `;
 
 const StyledBuildYieldInfo = styled.span`
@@ -204,15 +206,15 @@ const StyledBuildYieldInfo = styled.span`
 `;
 
 const StyledBuildPriceInfo = styled.span`
-  width: 30%;
+  width: 198px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: end;
   position: relative;
-  margin: 0;
+  margin: 0 10px 0 0;
 `;
 
 const StyledButtonContainer = styled.div`
-  margin: 0;
+  margin: 35px 0 0 0;
   padding: 5px;
   width: 100%;
   display: flex;
@@ -221,7 +223,11 @@ const StyledButtonContainer = styled.div`
 `;
 
 const StyledHr = styled.hr`
-  border: 0.5px solid white;
+  border-bottom: 0.5px solid var(--color-primary);
   margin: 0 auto;
   width: 90%;
+`;
+
+const StyledBuildTimeDisplay = styled.span`
+  padding-left: 5px;
 `;

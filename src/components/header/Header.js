@@ -43,14 +43,14 @@ const StyledHeader = styled.header`
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  height: 80px;
+  height: 70px;
   width: 100%;
   background: var(--background-header);
 `;
 
 const StyledButton = styled.button`
   position: absolute;
-  top: 35px;
+  top: 20px;
   left: 5%;
   width: 36px;
   height: 30px;

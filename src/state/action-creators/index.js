@@ -135,11 +135,10 @@ export const setOpenManual = createAction(
   }
 );
 
-export const setOpenSideNavigation = createAction('sideNavigation/set', function prepare(status, click = false) {
+export const setOpenSideNavigation = createAction('sideNavigation/set', function prepare(status) {
   return {
     payload: {
       status: status,
-      click: click,
     },
   };
 });

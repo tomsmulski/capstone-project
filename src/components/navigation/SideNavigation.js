@@ -15,7 +15,7 @@ export default function SideNavigation({sideNavigation}) {
           setOpenSideNavigation(false);
         }}
       >
-        <Icon icon="akar-icons:arrow-left-thick" fontSize={'34px'} />
+        <Icon icon="ant-design:arrow-left-outlined" fontSize={'30px'} />
       </StyledCloseButton>
       <StyledDiv>
         <StyledManualButton
@@ -25,9 +25,9 @@ export default function SideNavigation({sideNavigation}) {
           }}
         >
           <StyledSpan>
-            <Icon icon="bi:book-fill" />
-          </StyledSpan>{' '}
-          Global Manual
+            <Icon icon="bi:book" />
+          </StyledSpan>
+          <StyledNameSpan>Global Manual</StyledNameSpan>
         </StyledManualButton>
       </StyledDiv>
     </StyledNavigation>
@@ -93,8 +93,11 @@ const StyledDiv = styled.div`
 `;
 
 const StyledManualButton = styled.button`
+  display: flex;
+  align-items: center;
   padding-left: 10px;
   font-size: 16px;
+  height: 42px;
   background: transparent;
   border: none;
   font-weight: bold;
@@ -115,4 +118,9 @@ const StyledSpan = styled.span`
   border: 0.5px solid #424149;
   background: #121212;
   padding: 6px 6px 0 6px;
+`;
+
+const StyledNameSpan = styled.span`
+  font-size: 18px;
+  padding-left: 10px;
 `;

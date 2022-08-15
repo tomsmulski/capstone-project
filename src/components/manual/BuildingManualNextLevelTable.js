@@ -49,6 +49,7 @@ export default function BuildingManualNextLevelTable({buildId, currentBuildLevel
 }
 
 const StyledTable = styled.table`
+  margin-top: 20px;
   width: 100%;
   font-weight: bold;
 `;
@@ -58,6 +59,7 @@ const StyledTableHeaderRow = styled.tr`
   flex-direction: row;
   justify-content: space-between;
   padding: 5px;
+  color: var(--color-primary);
 `;
 
 const StyledTableRow = styled.tr`
@@ -65,5 +67,7 @@ const StyledTableRow = styled.tr`
   flex-direction: row;
   justify-content: space-between;
   padding: 5px;
-  color: white;
+  color: var(--color-green);
+  margin-bottom: 5px;
+  background: var(--background-body);
 `;
