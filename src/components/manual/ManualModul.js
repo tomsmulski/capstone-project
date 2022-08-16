@@ -152,6 +152,7 @@ const StyledArticleTitle = styled.article`
 
 const StyledH1 = styled.h1`
   font-size: 26px;
+  font-family: var(--font-family-primary);
 `;
 
 const StyledCloseButton = styled.button`

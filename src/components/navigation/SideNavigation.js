@@ -102,7 +102,7 @@ const StyledManualButton = styled.button`
   border: none;
   font-weight: bold;
   font-family: var(--font-family-third);
-  color: #969ca9;
+  color: var(--color-primary);
   cursor: pointer;
   @media screen and (min-width: 1100px) {
     background: rgba(0, 0, 0, 0.6);
@@ -115,7 +115,8 @@ const StyledManualButton = styled.button`
 
 const StyledSpan = styled.span`
   font-size: 26px;
-  border: 0.5px solid #424149;
+  border: 0.5px solid var(--color-primary);
+  border-radius: 5px;
   background: #121212;
   padding: 6px 6px 0 6px;
 `;

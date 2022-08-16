@@ -51,6 +51,7 @@ export default function ResourcesView({isOpen, currentResource}) {
 }
 
 const StyledH3 = styled.h3`
+  color: var(--color-primary);
   font-family: var(--font-family-secondary);
 `;
 
@@ -58,7 +59,7 @@ const StyledSection = styled.section`
   position: absolute;
   top: 65px;
   background: var(--background-tooltip);
-  color: white;
+  color: var(--color-primary);
   width: 220px;
   height: 100px;
   border-radius: 7px;
@@ -67,6 +68,7 @@ const StyledSection = styled.section`
   font-size: 14px;
   left: 25%;
   z-index: 1;
+  border: 0.5px solid var(--color-primary);
 `;
 
 const StyledDiv2 = styled.div`
