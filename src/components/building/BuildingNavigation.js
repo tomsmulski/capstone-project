@@ -128,10 +128,11 @@ const StyledTimeLeft = styled.span`
   position: absolute;
   text-align: center;
   bottom: 70px;
-  display: inline;
-  color: black;
-  font-weight: bold;
-  width: 134px;
+  width:134px;
+  color: white;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+  font-family: var(--font-family-third);
 `;
 
 const StyledButton = styled.div`
@@ -139,7 +140,7 @@ const StyledButton = styled.div`
   border: none;
   ${props =>
     props.calcuTimeDifference > 0
-      ? 'background: linear-gradient(#222, #222 ' +
+      ? 'background: linear-gradient(#444, #444 ' +
         props.calcuTimeDifference +
         '%, var(--background-buildingnav) ' +
         props.calcuTimeDifference +

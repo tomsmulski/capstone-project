@@ -18,18 +18,18 @@ export default styled.createGlobalStyle`
   }
 
   :root {
-    --background-main: #a14e33;
+    --background-main: #1c252c;
     --background-body: #1c252c;
     --background-header: #122836;
     --background-resources: #15141e;
     --background-buildingnav: #15141e;
     --background-manual: #1d1f28;
-    --background-tooltip: #025a7c;
+    --background-tooltip: #1c252c;
     --background-sidenavigation: #1c252c;
     --background-front-title: #15141e;
     --background-card: #030614;
     --background-front: #13151c;
-    --background-footer: #025a7c;
+    --background-footer: #122836;
     --color-primary: #d4d2d4;
     --color-secondary: #57575c;
     --color-buildingname: #ec9044;

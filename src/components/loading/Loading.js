@@ -11,11 +11,13 @@ export default function Loading() {
 
 const StyledSpan = styled.span`
   position: fixed;
-  top: 57%;
+  top: 59%;
   left: 50%;
   margin-top: -130px;
   margin-left: -30px;
   font-size: large;
+  font-family: var(--font-family-primary);
+  color: var(--color-primary);
 `;
 
 
